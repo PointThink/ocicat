@@ -1,6 +1,6 @@
 ﻿using ocicat;
 using ocicat.Graphics;
-
+using ocicat.Graphics.Rendering;
 using OpenTK.Graphics.OpenGL;
 
 namespace TestGame;
@@ -73,6 +73,8 @@ class Program
 		Logging.Log(LogLevel.Info, "Hello");
 		Logging.Log(LogLevel.Warning, "Hello");
 		Logging.Log(LogLevel.Error, "Hello");
+
+		Renderer renderer = new Renderer(RenderingApi.OpenGl);
 		
 		GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		
@@ -92,11 +94,7 @@ class Program
 		GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
 		GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
 		
-		int VertexBufferObject;
-		VertexBufferObject = GL.GenBuffer();
-
-		GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
-		GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+		VertexBuffer vertexBuffer = VertexBuffer.Create(renderer, vertices);
 
 		string vertShader = @"#version 330 core
 layout (location = 0) in vec3 aPosition;
@@ -121,14 +119,11 @@ void main()
 		
 		GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
 		GL.EnableVertexAttribArray(0);
-
-		GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
-		GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
-
+		
 		GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
 		GL.EnableVertexAttribArray(0);
 
-		GL.BindBuffer(BufferTarget.ArrayBuffer, VertexBufferObject);
+		vertexBuffer.Bind();
 		GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
 		
 		shader.Use();
@@ -144,6 +139,5 @@ void main()
 		}
 		
 		GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-		GL.DeleteBuffer(VertexBufferObject);
 	}
 }
