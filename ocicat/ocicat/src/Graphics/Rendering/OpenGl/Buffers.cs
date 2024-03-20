@@ -28,3 +28,30 @@ public class VertexBuffer : Rendering.VertexBuffer
 		GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 	}
 }
+
+public class IndexBuffer : Rendering.IndexBuffer
+{
+	private int _handle;
+	
+	public IndexBuffer(uint[] data)
+	{
+		_handle = GL.GenBuffer();
+		GL.BindBuffer(BufferTarget.ElementArrayBuffer, _handle);
+		GL.BufferData(BufferTarget.ElementArrayBuffer, data.Length * sizeof(uint), data, BufferUsageHint.StaticDraw);
+	}
+
+	~IndexBuffer()
+	{
+		GL.DeleteBuffer(_handle);
+	}
+	
+	public override void Bind()
+	{
+		GL.BindBuffer(BufferTarget.ElementArrayBuffer, _handle);
+	}
+
+	public override void Unbind()
+	{
+		GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
+	}
+}

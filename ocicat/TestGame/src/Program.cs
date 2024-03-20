@@ -88,13 +88,9 @@ class Program
 		{
 			0, 1, 2, 3
 		};
-
-		int ElementBufferObject;
-		ElementBufferObject = GL.GenBuffer();
-		GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
-		GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, BufferUsageHint.StaticDraw);
 		
 		VertexBuffer vertexBuffer = VertexBuffer.Create(renderer, vertices);
+		IndexBuffer indexBuffer = IndexBuffer.Create(renderer, indices);
 
 		string vertShader = @"#version 330 core
 layout (location = 0) in vec3 aPosition;
@@ -124,7 +120,7 @@ void main()
 		GL.EnableVertexAttribArray(0);
 
 		vertexBuffer.Bind();
-		GL.BindBuffer(BufferTarget.ElementArrayBuffer, ElementBufferObject);
+		indexBuffer.Bind();
 		
 		shader.Use();
 		
@@ -137,7 +133,5 @@ void main()
 			
 			window.SwapBuffers();
 		}
-		
-		GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 	}
 }

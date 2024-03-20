@@ -19,3 +19,23 @@ public abstract class VertexBuffer
 		return null;
 	}
 }
+
+public abstract class IndexBuffer
+{
+	protected IndexBuffer() {}
+
+	public abstract void Bind();
+	public abstract void Unbind();
+	
+	public static IndexBuffer? Create(Renderer renderer, uint[] data)
+	{
+		switch (renderer.RenderingApi)
+		{
+			case RenderingApi.OpenGl:
+				return new OpenGl.IndexBuffer(data);
+				break;
+		}
+
+		return null;
+	}
+}
