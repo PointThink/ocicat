@@ -7,62 +7,6 @@ namespace TestGame;
 
 class Program
 {
-	public class Shader
-	{
-		int Handle;
-
-		public Shader(string vertex, string fragment)
-		{
-			int vertexShader;
-			int fragmentShader;
-			
-			vertexShader = GL.CreateShader(ShaderType.VertexShader);
-			GL.ShaderSource(vertexShader, vertex);
-
-			fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
-			GL.ShaderSource(fragmentShader, fragment);
-			
-		
-			GL.CompileShader(vertexShader);
-		
-			GL.GetShader(vertexShader, ShaderParameter.CompileStatus, out int success1);
-			if (success1 == 0)
-			{
-				string infoLog = GL.GetShaderInfoLog(vertexShader);
-				Console.WriteLine(infoLog);
-			}
-		
-			GL.CompileShader(fragmentShader);
-
-			GL.GetShader(fragmentShader, ShaderParameter.CompileStatus, out int success2);
-			if (success2 == 0)
-			{
-				string infoLog = GL.GetShaderInfoLog(fragmentShader);
-				Console.WriteLine(infoLog);
-			}
-		
-		
-			Handle = GL.CreateProgram();
-
-			GL.AttachShader(Handle, vertexShader);
-			GL.AttachShader(Handle, fragmentShader);
-
-			GL.LinkProgram(Handle);
-
-			GL.GetProgram(Handle, GetProgramParameterName.LinkStatus, out int success3);
-			if (success3 == 0)
-			{
-				string infoLog = GL.GetProgramInfoLog(Handle);
-				Console.WriteLine(infoLog);
-			}
-		}
-		
-		public void Use()
-		{
-			GL.UseProgram(Handle);
-		}
-	}
-	
 	static void Main(string[] args)
 	{
 		Window window = new Window("Hello", 800, 600);
@@ -108,13 +52,10 @@ void main()
     FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
 }";
 
-		Shader shader = new Shader(vertShader, fragShader);
+		Shader shader = Shader.Create(renderer, vertShader, fragShader);
 		
 		int VertexArrayObject = GL.GenVertexArray();
 		GL.BindVertexArray(VertexArrayObject);
-		
-		GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
-		GL.EnableVertexAttribArray(0);
 		
 		GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
 		GL.EnableVertexAttribArray(0);
