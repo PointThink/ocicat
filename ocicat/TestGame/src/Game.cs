@@ -6,35 +6,36 @@ namespace TestGame;
 
 class Player
 {
-	private Vector2 position;
-	private Vector2 motion;
+	private Vector2 _position;
+	private Vector2 _motion;
 	
 	public void Update(float deltaTime)
 	{
-		motion.Y -= 800 * deltaTime;
+		_motion.Y -= 800 * deltaTime;
 		
-		if ((Game.Window.IsKeyDown(Key.Space) || Game.Window.IsMouseButtonDown(0)) && position.Y <= 0)
-			motion.Y += 600;
+		if ((Game.Window.IsKeyDown(Key.Space) || Game.Window.IsMouseButtonDown(0)) && _position.Y <= 0)
+			_motion.Y += 600;
 
 		if (Game.Window.IsKeyDown(Key.A))
-			motion.X = -400;
+			_motion.X = -400;
 		if (Game.Window.IsKeyDown(Key.D))
-			motion.X = 400;
+			_motion.X = 400;
 		
-		position.X += motion.X * deltaTime;
-		position.Y += motion.Y * deltaTime;
+		_position.X += _motion.X * deltaTime;
+		_position.Y += _motion.Y * deltaTime;
 
-		if (position.Y < 0)
+		_motion.X = 0;
+		
+		if (_position.Y < 0)
 		{
-			motion.Y = 0;
-			motion.X = 0;
-			position.Y = 0;
+			_motion.Y = 0;
+			_position.Y = 0;
 		}
 	}
 
 	public void Draw()
 	{
-		Game.Renderer.DrawRectTextured(position, new Vector2(64, 64), Game.texture);
+		Game.Renderer.DrawRectTextured(_position, new Vector2(64, 64), Game.texture);
 	}
 }
 
@@ -47,10 +48,12 @@ class Game
 	
 	static void Main(string[] args)
 	{
-		Window = new Window("Hello", 1024, 768);
+		Window = new Window("Hello", 1280, 720);
 
-		Renderer = new Renderer(RenderingApi.OpenGl);
+		Renderer = new Renderer(Window, RenderingApi.OpenGl);
 		Renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
+
+		((OrthographicCamera)Renderer.Camera).Offset = new Vector2(0, 720 / 4);
 		
 		texture = Texture.Create(Game.Renderer, "image.jpg");
 		

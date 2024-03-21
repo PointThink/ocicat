@@ -11,6 +11,9 @@ public class Window
 	
 	public float DeltaTime { get; private set; }
 	private DateTime frameBeginTime;
+
+	public int Width { get; private set; }
+	public int Height { get; private set; }
 	
 	public Window(string title, int width, int height, bool fullscreen = false, bool resizable = false)
 	{
@@ -30,6 +33,9 @@ public class Window
 			nativeWindowSettings.WindowState = WindowState.Fullscreen;
 		
 		_tkWindow = new GameWindow(gameWindowSettings, nativeWindowSettings);
+
+		Width = width;
+		Height = height;
 		
 		DeltaTime = 0;
 	}

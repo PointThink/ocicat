@@ -11,26 +11,36 @@ public enum RenderingApi
 
 public class Renderer
 {
+	private Window _window;
+	
 	public RenderingApi RenderingApi { get; private set; } 
 	public RenderCommands RenderCommands { get; private set; }
-	public Primitives Primitives { get; private set; }
 	
-	public Renderer(RenderingApi renderingApi)
+	public Primitives Primitives { get; private set; }
+
+	public Camera Camera { get; private set; }
+	
+	public Renderer(Window window, RenderingApi renderingApi)
 	{
+		_window = window;
+		
 		RenderingApi = renderingApi;
 		RenderCommands = RenderCommands.Create(this);
 		RenderCommands.Init();
 
 		Primitives = new Primitives(this);
+
+		Camera = new OrthographicCamera(window.Width, window.Height);
 	}
 
 	public void DrawRect(Vector2 position, Vector2 size, Color color)
 	{
-		Matrix4 projection = Matrix4.CreateOrthographicOffCenter(0, 800, 0, 600, 0f, 1f);
+		Matrix4 projection = Camera.CalculateProjection();
+		Matrix4 view = Camera.CalculateView();
 		Matrix4 transform = Matrix4.CreateTranslation(position.X, position.Y, 0);
 		Matrix4 scale = Matrix4.CreateScale(size.X, size.Y, 1);
 
-		// transform *= scale;
+		transform *= view;
 		
 		Primitives.UntexturedRectShader.Use();
 		Primitives.UntexturedRectShader.UniformMat4("transform", transform);
@@ -46,10 +56,13 @@ public class Renderer
 		if (tint == null)
 			tint = Color.CreateFloat(1, 1, 1, 1);
 		
-		Matrix4 projection = Matrix4.CreateOrthographicOffCenter(0, 800, 0, 600, 0f, 1f);
+		Matrix4 projection = Camera.CalculateProjection();
+		Matrix4 view = Camera.CalculateView();
 		Matrix4 transform = Matrix4.CreateTranslation(position.X, position.Y, 0);
 		Matrix4 scale = Matrix4.CreateScale(size.X, size.Y, 1);
 
+		transform *= view;
+		
 		Primitives.TexturedRectShader.Use();
 		Primitives.TexturedRectShader.UniformMat4("transform", transform);
 		Primitives.TexturedRectShader.UniformMat4("projection", projection);
