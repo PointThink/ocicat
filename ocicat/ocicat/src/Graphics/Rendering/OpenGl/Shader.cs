@@ -40,7 +40,7 @@ public class Shader : Rendering.Shader
 
 		for (int i = 0; i < uniforms; i++)
 		{
-			GL.GetActiveUniform(_handle, i, 32, out int lenght, out int size, out ActiveUniformType uniformType, out string name);
+			GL.GetActiveUniform(_handle, i, 64, out int lenght, out int size, out ActiveUniformType uniformType, out string name);
 			_uniformLocations.Add(name, i);
 		}
 	}

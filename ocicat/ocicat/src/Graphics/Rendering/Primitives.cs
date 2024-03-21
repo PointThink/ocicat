@@ -3,7 +3,8 @@ namespace ocicat.Graphics.Rendering;
 public class Primitives
 {
 	public Mesh RectangleMesh;
-	public Shader RectShader;
+	public Shader UntexturedRectShader;
+	public Shader TexturedRectShader;
 	
 	public Primitives(Renderer renderer)
 	{
@@ -27,7 +28,7 @@ public class Primitives
 			])
 		);
 		
-		string vertShader = @"#version 330 core
+		string untexturedVertShader = @"#version 330 core
 layout (location = 0) in vec3 aPosition;
 
 uniform mat4 projection;
@@ -39,7 +40,7 @@ void main()
     gl_Position = vec4(aPosition, 1.0) * scale * transform * projection;
 }";
 
-		string fragShader = @"#version 330 core
+		string untexturedFragShader = @"#version 330 core
 out vec4 FragColor;
 uniform vec4 color;
 
@@ -48,6 +49,36 @@ void main()
     FragColor = color;
 }";
 		
-		RectShader = Shader.Create(renderer, vertShader, fragShader);
+		string texturedVertShader = @"#version 330 core
+layout (location = 0) in vec2 aPosition;
+layout (location = 1) in vec2 texCoords;
+
+uniform mat4 projection;
+uniform mat4 transform;
+uniform mat4 scale;
+
+out vec2 vTexCoords;
+
+void main()
+{
+    gl_Position = vec4(aPosition, 0.0, 1.0) * scale * transform * projection;
+	vTexCoords = texCoords;
+}";
+
+		string texturedFragShader = @"#version 330 core
+out vec4 FragColor;
+
+uniform sampler2D textureSampler;
+uniform vec4 tint;
+
+in vec2 vTexCoords;
+
+void main()
+{
+    FragColor = texture(textureSampler, vTexCoords) * tint;
+}";
+		
+		UntexturedRectShader = Shader.Create(renderer, untexturedVertShader, untexturedFragShader);
+		TexturedRectShader = Shader.Create(renderer, texturedVertShader, texturedFragShader);
 	}
 }
