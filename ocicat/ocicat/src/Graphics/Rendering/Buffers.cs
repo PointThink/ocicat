@@ -28,6 +28,8 @@ public abstract class IndexBuffer
 
 	public abstract void Bind();
 	public abstract void Unbind();
+
+	public abstract uint GetIndexCount();
 	
 	public static IndexBuffer? Create(Renderer renderer, uint[] data)
 	{

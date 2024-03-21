@@ -61,6 +61,16 @@ public class VertexArray : Rendering.VertexArray
 		_indexBuffer = indexBuffer;
 	}
 
+	public override Rendering.VertexBuffer GetVertexBuffer()
+	{
+		return _vertexBuffer;
+	}
+
+	public override Rendering.IndexBuffer GetIndexBuffer()
+	{
+		return _indexBuffer;
+	}
+
 	private VertexAttribPointerType ShaderTypeToGLEnum(ShaderDataType shaderDataType)
 	{
 		switch (shaderDataType)

@@ -93,6 +93,9 @@ public abstract class VertexArray
 	
 	public abstract void SetVertexBuffer(VertexBuffer vertexBuffer);
 	public abstract void SetIndexBuffer(IndexBuffer indexBuffer);
+
+	public abstract VertexBuffer GetVertexBuffer();
+	public abstract IndexBuffer GetIndexBuffer();
 	
 	public static VertexArray? Create(Renderer renderer)
 	{

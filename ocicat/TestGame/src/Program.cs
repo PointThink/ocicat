@@ -1,7 +1,6 @@
 ﻿using ocicat;
 using ocicat.Graphics;
 using ocicat.Graphics.Rendering;
-using OpenTK.Graphics.OpenGL;
 
 namespace TestGame;
 
@@ -19,8 +18,6 @@ class Program
 		Logging.Log(LogLevel.Error, "Hello");
 
 		Renderer renderer = new Renderer(RenderingApi.OpenGl);
-		
-		GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		
 		float[] vertices = {
 			-0.5f, -0.5f, 0.0f, //Bottom-left vertex
@@ -68,12 +65,14 @@ void main()
 		
 		shader.Use();
 		
+		renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
+		
 		while (!window.ShouldClose())
 		{
 			window.HandleEvents();
 			
-			GL.Clear(ClearBufferMask.ColorBufferBit);
-			GL.DrawElements(PrimitiveType.Triangles, indices.Length, DrawElementsType.UnsignedInt, 0);			
+			renderer.RenderCommands.ClearScreen();
+			renderer.RenderCommands.DrawIndexed(vertexArray);
 			
 			window.SwapBuffers();
 		}

@@ -32,10 +32,12 @@ public class VertexBuffer : Rendering.VertexBuffer
 public class IndexBuffer : Rendering.IndexBuffer
 {
 	private int _handle;
+	private uint _indexCount;
 	
 	public IndexBuffer(uint[] data)
 	{
 		_handle = GL.GenBuffer();
+		_indexCount = (uint) data.Length;
 		GL.BindBuffer(BufferTarget.ElementArrayBuffer, _handle);
 		GL.BufferData(BufferTarget.ElementArrayBuffer, data.Length * sizeof(uint), data, BufferUsageHint.StaticDraw);
 	}
@@ -53,5 +55,10 @@ public class IndexBuffer : Rendering.IndexBuffer
 	public override void Unbind()
 	{
 		GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
+	}
+
+	public override uint GetIndexCount()
+	{
+		return _indexCount;
 	}
 }
