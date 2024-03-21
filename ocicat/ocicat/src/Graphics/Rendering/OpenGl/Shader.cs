@@ -1,4 +1,5 @@
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 
 namespace ocicat.Graphics.Rendering.OpenGl;
 
@@ -76,6 +77,11 @@ public class Shader : Rendering.Shader
 		GL.Uniform3(_uniformLocations[name], i1, i2, i3);
 	}
 
+	public override void Uniform4i(string name, int i1, int i2, int i3, int i4)
+	{
+		GL.Uniform4(_uniformLocations[name], i1, i2, i3, i4);
+	}
+
 	public override void Uniform1f(string name, float f1)
 	{
 		GL.Uniform1(_uniformLocations[name], f1);
@@ -89,5 +95,15 @@ public class Shader : Rendering.Shader
 	public override void Uniform3f(string name, float f1, float f2, float f3)
 	{
 		GL.Uniform3(_uniformLocations[name], f1, f2, f3);
+	}
+
+	public override void Uniform4f(string name, float f1, float f2, float f3, float f4)
+	{
+		GL.Uniform4(_uniformLocations[name], f1, f2, f3, f4);
+	}
+
+	public override void UniformMat4(string name, Matrix4 matrix4)
+	{
+		GL.UniformMatrix4(_uniformLocations[name], true, ref matrix4);
 	}
 }
