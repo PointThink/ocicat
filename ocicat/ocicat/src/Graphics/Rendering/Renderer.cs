@@ -14,5 +14,6 @@ public class Renderer
 	{
 		RenderingApi = renderingApi;
 		RenderCommands = RenderCommands.Create(this);
+		RenderCommands.Init();
 	}
 }

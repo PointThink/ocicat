@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="OpenTK" Version="4.8.2" />
+      <Folder Include="res\" />
     </ItemGroup>
 
 </Project>

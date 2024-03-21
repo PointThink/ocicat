@@ -20,50 +20,53 @@ class Program
 		Renderer renderer = new Renderer(RenderingApi.OpenGl);
 		
 		float[] vertices = {
-			-0.5f, -0.5f, 0.0f, //Bottom-left vertex
-			0.5f, -0.5f, 0.0f, //Bottom-right vertex
-			0.0f,  0.5f, 0.0f  //Top vertex
+			-.5f, -.5f, 0, 0,
+			.5f, -.5f, 1, 0,
+			.5f, .5f, 1, 1,
+			-.5f, .5f, 0, 1
 		};
 
 		uint[] indices =
 		{
-			0, 1, 2, 3
+			0, 1, 2, 2, 3, 0
 		};
-		
-		VertexBuffer vertexBuffer = VertexBuffer.Create(renderer, vertices);
-		vertexBuffer.Layout = new BufferLayout([
-			new BufferElement("position", ShaderDataType.Float3)
-		]);
 
-		IndexBuffer indexBuffer = IndexBuffer.Create(renderer, indices);
+		Mesh mesh = new Mesh(
+			renderer, vertices, indices,
+			new BufferLayout([
+				new BufferElement("position", ShaderDataType.Float2),
+				new BufferElement("uv", ShaderDataType.Float2)
+			])
+		);
 
 		string vertShader = @"#version 330 core
 layout (location = 0) in vec3 aPosition;
+layout (location = 1) in vec2 uv;
+out vec2 texUv;
 
 void main()
 {
     gl_Position = vec4(aPosition, 1.0);
+	texUv = uv;
 }";
 
 		string fragShader = @"#version 330 core
 out vec4 FragColor;
+in vec2 texUv;
+uniform sampler2D textureId;
 
 void main()
 {
-    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+    FragColor = texture(textureId, texUv);
 }";
 
 		Shader shader = Shader.Create(renderer, vertShader, fragShader);
 		
-		VertexArray vertexArray = VertexArray.Create(renderer);
-		
-		vertexArray.SetVertexBuffer(vertexBuffer);
-		vertexArray.SetIndexBuffer(indexBuffer);
-		
-		vertexBuffer.Bind();
-		indexBuffer.Bind();
-		
 		shader.Use();
+
+		Texture texture = Texture.Create(renderer, "image.jpg");
+		texture.Bind(0);
+		shader.Uniform1i("textureId", 0);
 		
 		renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
 		
@@ -72,7 +75,7 @@ void main()
 			window.HandleEvents();
 			
 			renderer.RenderCommands.ClearScreen();
-			renderer.RenderCommands.DrawIndexed(vertexArray);
+			renderer.RenderCommands.DrawIndexed(mesh.VertexArray);
 			
 			window.SwapBuffers();
 		}
