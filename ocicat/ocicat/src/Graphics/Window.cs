@@ -8,6 +8,9 @@ public class Window
 {
 	private GameWindow _tkWindow;
 	
+	public float DeltaTime { get; private set; }
+	private DateTime frameBeginTime;
+	
 	public Window(string title, int width, int height, bool fullscreen = false, bool resizable = false)
 	{
 		NativeWindowSettings nativeWindowSettings = NativeWindowSettings.Default;
@@ -26,16 +29,20 @@ public class Window
 			nativeWindowSettings.WindowState = WindowState.Fullscreen;
 		
 		_tkWindow = new GameWindow(gameWindowSettings, nativeWindowSettings);
+		
+		DeltaTime = 0;
 	}
-
+	
 	public void HandleEvents()
 	{
+		frameBeginTime = DateTime.Now;
 		_tkWindow.ProcessEvents(0);
 	}
 
-	public void SwapBuffers()
+	public void Present()
 	{
 		_tkWindow.SwapBuffers();
+		DeltaTime = ( (float) (DateTime.Now - frameBeginTime).TotalMilliseconds ) / 1000;
 	}
 	
 	public bool ShouldClose()
