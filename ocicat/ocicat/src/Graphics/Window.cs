@@ -55,4 +55,19 @@ public class Window
 	{
 		return _tkWindow.IsKeyDown((Keys) key);
 	}
+	
+	public bool IsKeyPressed(Key key)
+	{
+		return _tkWindow.IsKeyPressed((Keys) key);
+	}
+	
+	public bool IsMouseButtonDown(int button)
+	{
+		return _tkWindow.IsMouseButtonDown(MouseButton.Button1 + button);
+	}
+	
+	public bool IsMouseButtonPressed(int button)
+	{
+		return _tkWindow.IsMouseButtonPressed(MouseButton.Button1 + button);
+	}
 }

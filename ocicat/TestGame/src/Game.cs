@@ -13,7 +13,7 @@ class Player
 	{
 		motion.Y -= 800 * deltaTime;
 		
-		if (Game.Window.IsKeyDown(Key.Space) && position.Y <= 0)
+		if ((Game.Window.IsKeyDown(Key.Space) || Game.Window.IsMouseButtonDown(0)) && position.Y <= 0)
 			motion.Y += 600;
 
 		if (Game.Window.IsKeyDown(Key.A))
