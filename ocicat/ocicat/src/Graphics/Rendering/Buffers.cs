@@ -2,6 +2,8 @@ namespace ocicat.Graphics.Rendering;
 
 public abstract class VertexBuffer
 {
+	public BufferLayout? Layout = null;
+	
 	protected VertexBuffer() {}
 
 	public abstract void Bind();

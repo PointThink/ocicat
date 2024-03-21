@@ -34,6 +34,10 @@ class Program
 		};
 		
 		VertexBuffer vertexBuffer = VertexBuffer.Create(renderer, vertices);
+		vertexBuffer.Layout = new BufferLayout([
+			new BufferElement("position", ShaderDataType.Float3)
+		]);
+
 		IndexBuffer indexBuffer = IndexBuffer.Create(renderer, indices);
 
 		string vertShader = @"#version 330 core
@@ -54,12 +58,11 @@ void main()
 
 		Shader shader = Shader.Create(renderer, vertShader, fragShader);
 		
-		int VertexArrayObject = GL.GenVertexArray();
-		GL.BindVertexArray(VertexArrayObject);
+		VertexArray vertexArray = VertexArray.Create(renderer);
 		
-		GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
-		GL.EnableVertexAttribArray(0);
-
+		vertexArray.SetVertexBuffer(vertexBuffer);
+		vertexArray.SetIndexBuffer(indexBuffer);
+		
 		vertexBuffer.Bind();
 		indexBuffer.Bind();
 		
