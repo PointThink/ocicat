@@ -1,6 +1,7 @@
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace ocicat.Graphics;
 
@@ -48,5 +49,10 @@ public class Window
 	public bool ShouldClose()
 	{
 		return _tkWindow.IsExiting;
+	}
+
+	public bool IsKeyDown(Key key)
+	{
+		return _tkWindow.IsKeyDown((Keys) key);
 	}
 }

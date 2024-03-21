@@ -1,37 +1,49 @@
-﻿using System.Diagnostics;
-using System.Numerics;
+﻿using System.Numerics;
 using ocicat;
 using ocicat.Graphics;
 using ocicat.Graphics.Rendering;
-using Color = ocicat.Graphics.Color;
-
 namespace TestGame;
 
 class Player
 {
-	Texture texture = Texture.Create(Program.Renderer, "image.jpg");
-
 	private Vector2 position;
-	private Vector2 motion = new Vector2(20, 20);
+	private Vector2 motion;
 	
 	public void Update(float deltaTime)
 	{
+		motion.Y -= 800 * deltaTime;
+		
+		if (Game.Window.IsKeyDown(Key.Space) && position.Y <= 0)
+			motion.Y += 600;
+
+		if (Game.Window.IsKeyDown(Key.A))
+			motion.X = -400;
+		if (Game.Window.IsKeyDown(Key.D))
+			motion.X = 400;
+		
 		position.X += motion.X * deltaTime;
 		position.Y += motion.Y * deltaTime;
-		
-		// Logging.Log(LogLevel.Info, $"{deltaTime}");
+
+		if (position.Y < 0)
+		{
+			motion.Y = 0;
+			motion.X = 0;
+			position.Y = 0;
+		}
 	}
 
 	public void Draw()
 	{
-		Program.Renderer.DrawRectTextured(position, new Vector2(64, 64), texture);
+		Game.Renderer.DrawRectTextured(position, new Vector2(64, 64), Game.texture);
 	}
 }
 
-class Program
+class Game
 {
 	public static Window Window;
 	public static Renderer Renderer;
+
+	public static Texture texture;
 	
 	static void Main(string[] args)
 	{
@@ -39,7 +51,9 @@ class Program
 
 		Renderer = new Renderer(RenderingApi.OpenGl);
 		Renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
-
+		
+		texture = Texture.Create(Game.Renderer, "image.jpg");
+		
 		Player player = new Player();
 		
 		while (!Window.ShouldClose())
