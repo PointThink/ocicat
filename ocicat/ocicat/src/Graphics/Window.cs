@@ -1,80 +1,42 @@
-using OpenTK.Mathematics;
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.Desktop;
-using OpenTK.Windowing.GraphicsLibraryFramework;
+using ocicat.Graphics.Rendering;
 
 namespace ocicat.Graphics;
-using ocicat.Input;
 
-public class Window
+public abstract class Window
 {
-	private GameWindow _tkWindow;
+	public float DeltaTime { get; protected set; }
 	
-	public float DeltaTime { get; private set; }
-	private DateTime frameBeginTime;
+	public RenderingApi RenderingApi { get; private set; }
 
-	public int Width { get; private set; }
-	public int Height { get; private set; }
+	public int Width { get; protected set; }
+	public int Height { get; protected set; }
 	
-	public Window(string title, int width, int height, bool fullscreen = false, bool resizable = false)
+	public abstract void HandleEvents();
+	public abstract void Present();
+	public abstract bool ShouldClose();
+
+	public abstract bool IsKeyDown(Input.Key key);
+	public abstract bool IsKeyPressed(Input.Key key);
+	public abstract bool IsMouseButtonDown(int button);
+	public abstract bool IsMouseButtonPressed(int button);
+
+	
+	public static Window? Create(string title, int width, int height, bool fullscreen = false, bool resizable = false,  RenderingApi? api = null)
 	{
-		NativeWindowSettings nativeWindowSettings = NativeWindowSettings.Default;
-		GameWindowSettings gameWindowSettings = new GameWindowSettings();
+		if (api == null)
+			api = RenderingApi.OpenGl;
 
-		nativeWindowSettings.Title = title;
-		nativeWindowSettings.ClientSize = new Vector2i(width, height);
+		Window? window = null;
 		
-		if (!resizable)
+		switch (api)
 		{
-			nativeWindowSettings.MinimumClientSize = new Vector2i(width, height);
-			nativeWindowSettings.MaximumClientSize = new Vector2i(width, height);
+			case RenderingApi.OpenGl:
+				window = new OpenTKWindow(title, width, height, fullscreen, resizable);
+				break;
 		}
-		
-		if (fullscreen)
-			nativeWindowSettings.WindowState = WindowState.Fullscreen;
-		
-		_tkWindow = new GameWindow(gameWindowSettings, nativeWindowSettings);
 
-		Width = width;
-		Height = height;
-		
-		DeltaTime = 0;
-	}
-	
-	public void HandleEvents()
-	{
-		frameBeginTime = DateTime.Now;
-		_tkWindow.ProcessEvents(0);
-	}
+		window.RenderingApi = api.Value;
 
-	public void Present()
-	{
-		_tkWindow.SwapBuffers();
-		DeltaTime = ( (float) (DateTime.Now - frameBeginTime).TotalMilliseconds ) / 1000;
-	}
-	
-	public bool ShouldClose()
-	{
-		return _tkWindow.IsExiting;
-	}
-
-	public bool IsKeyDown(Key key)
-	{
-		return _tkWindow.IsKeyDown((Keys) key);
-	}
-	
-	public bool IsKeyPressed(Key key)
-	{
-		return _tkWindow.IsKeyPressed((Keys) key);
-	}
-	
-	public bool IsMouseButtonDown(int button)
-	{
-		return _tkWindow.IsMouseButtonDown(MouseButton.Button1 + button);
-	}
-	
-	public bool IsMouseButtonPressed(int button)
-	{
-		return _tkWindow.IsMouseButtonPressed(MouseButton.Button1 + button);
+		return window;
 	}
 }

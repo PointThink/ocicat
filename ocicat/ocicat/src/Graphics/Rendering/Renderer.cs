@@ -20,11 +20,11 @@ public class Renderer
 
 	public Camera Camera { get; private set; }
 	
-	public Renderer(Window window, RenderingApi renderingApi)
+	public Renderer(Window window)
 	{
 		_window = window;
 		
-		RenderingApi = renderingApi;
+		RenderingApi = window.RenderingApi;
 		RenderCommands = RenderCommands.Create(this);
 		RenderCommands.Init();
 

@@ -51,9 +51,9 @@ class Game
 	
 	static void Main(string[] args)
 	{
-		Window = new Window("Hello", 1280, 720);
+		Window = Window.Create("Hello", 1280, 720);
 
-		Renderer = new Renderer(Window, RenderingApi.OpenGl);
+		Renderer = new Renderer(Window);
 		Renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
 		
 		((OrthographicCamera)Renderer.Camera).Offset = new Vector2(0, 720 / 4);
