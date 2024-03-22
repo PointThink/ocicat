@@ -2,6 +2,8 @@
 using ocicat;
 using ocicat.Graphics;
 using ocicat.Graphics.Rendering;
+using ocicat.Input;
+
 namespace TestGame;
 
 class Player
@@ -13,7 +15,7 @@ class Player
 	{
 		_motion.Y -= 800 * deltaTime;
 		
-		if ((Game.Window.IsKeyDown(Key.Space) || Game.Window.IsMouseButtonDown(0)) && _position.Y <= 0)
+		if (Game.Bindings.IsPressed("jump") && _position.Y <= 0)
 			_motion.Y += 600;
 
 		if (Game.Window.IsKeyDown(Key.A))
@@ -35,7 +37,7 @@ class Player
 
 	public void Draw()
 	{
-		Game.Renderer.DrawRectTextured(_position, new Vector2(64, 64), Game.texture);
+		Game.Renderer.DrawRectTextured(_position, new Vector2(64, 64), Game.Texture);
 	}
 }
 
@@ -43,8 +45,9 @@ class Game
 {
 	public static Window Window;
 	public static Renderer Renderer;
+	public static Bindings Bindings;
 
-	public static Texture texture;
+	public static Texture Texture;
 	
 	static void Main(string[] args)
 	{
@@ -52,10 +55,14 @@ class Game
 
 		Renderer = new Renderer(Window, RenderingApi.OpenGl);
 		Renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
-
-		((OrthographicCamera)Renderer.Camera).Offset = new Vector2(0, 720 / 4);
 		
-		texture = Texture.Create(Game.Renderer, "image.jpg");
+		((OrthographicCamera)Renderer.Camera).Offset = new Vector2(0, 720 / 4);
+
+		Bindings = new Bindings(Window);
+		
+		Bindings.AddBinding("jump", new KeyboardBind(Key.Space));
+		
+		Texture = Texture.Create(Game.Renderer, "image.jpg");
 		
 		Player player = new Player();
 		

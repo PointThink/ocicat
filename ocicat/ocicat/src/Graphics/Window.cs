@@ -4,6 +4,7 @@ using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace ocicat.Graphics;
+using ocicat.Input;
 
 public class Window
 {

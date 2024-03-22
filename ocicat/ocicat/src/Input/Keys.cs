@@ -1,4 +1,4 @@
-namespace ocicat;
+namespace ocicat.Input;
 
 public enum Key
 {
