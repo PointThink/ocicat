@@ -3,6 +3,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using Vector2 = System.Numerics.Vector2;
 
 namespace ocicat.Graphics;
 using ocicat.Input;
@@ -72,5 +73,10 @@ public class OpenTKWindow : Window
 	public override bool IsMouseButtonPressed(int button)
 	{
 		return _tkWindow.IsMouseButtonPressed(MouseButton.Button1 + button);
+	}
+
+	public override Vector2 GetMouseMotion()
+	{
+		return new Vector2(_tkWindow.MouseState.X, Height - _tkWindow.MouseState.Y);
 	}
 }

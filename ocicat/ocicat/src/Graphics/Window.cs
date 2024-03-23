@@ -1,3 +1,4 @@
+using System.Numerics;
 using ocicat.Graphics.Rendering;
 
 namespace ocicat.Graphics;
@@ -20,6 +21,7 @@ public abstract class Window
 	public abstract bool IsMouseButtonDown(int button);
 	public abstract bool IsMouseButtonPressed(int button);
 
+	public abstract Vector2 GetMouseMotion();
 	
 	public static Window? Create(string title, int width, int height, bool fullscreen = false, bool resizable = false,  RenderingApi? api = null)
 	{

@@ -55,8 +55,6 @@ class Game
 
 		Renderer = new Renderer(Window);
 		Renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
-		
-		((OrthographicCamera)Renderer.Camera).Offset = new Vector2(0, 720 / 4);
 
 		Bindings = new Bindings(Window);
 		
@@ -74,6 +72,7 @@ class Game
 			
 			Renderer.RenderCommands.ClearScreen();
 			player.Draw();
+			Renderer.DrawRect(Window.GetMouseMotion(), new Vector2(3, 3), Color.CreateFloat(255, 255, 255, 255));
 			
 			Window.Present();
 		}
