@@ -12,6 +12,8 @@ public class RenderCommands : Rendering.RenderCommands
 		
 		GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 		GL.Enable(EnableCap.Blend);
+		
+		GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
 	}
 
 	public override void SetClearColor(float r, float g, float b, float a)

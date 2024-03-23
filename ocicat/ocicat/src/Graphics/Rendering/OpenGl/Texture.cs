@@ -14,6 +14,23 @@ public class Texture : Rendering.Texture
 
 		_width = width;
 		_height = height;
+
+		PixelFormat format;
+		
+		switch (colorChannels)
+		{
+			case 1:
+				format = PixelFormat.Red;
+				break;
+			case 3:
+				format = PixelFormat.Rgb;
+				break;
+			case 4:
+				format = PixelFormat.Rgba;
+				break;
+			default:
+				throw new ArgumentException($"Invalid channel count: {colorChannels}");
+		}
 		
 		GL.BindTexture(TextureTarget.Texture2D, _handle);
 		
@@ -23,8 +40,7 @@ public class Texture : Rendering.Texture
 		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.ClampToEdge);
 		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapR, (int) TextureWrapMode.ClampToEdge);
 		
-		GL.TexImage2D(TextureTarget.Texture2D, 0, InternalFormat.Rgba8, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, imageData);
-		
+		GL.TexImage2D(TextureTarget.Texture2D, 0, InternalFormat.Rgba8, width, height, 0, format, PixelType.UnsignedByte, imageData);
 		GL.BindTexture(TextureTarget.Texture2D, 0);
 	}
 

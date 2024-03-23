@@ -48,6 +48,7 @@ class Game
 	public static Bindings Bindings;
 
 	public static Texture Texture;
+	public static Font Font;
 	
 	static void Main(string[] args)
 	{
@@ -61,6 +62,7 @@ class Game
 		Bindings.AddBinding("jump", new KeyboardBind(Key.Space));
 		
 		Texture = Texture.Create(Game.Renderer, "image.jpg");
+		Font = new Font(Renderer, "Roboto-Regular.ttf", 64);
 		
 		Player player = new Player();
 		
@@ -72,7 +74,8 @@ class Game
 			
 			Renderer.RenderCommands.ClearScreen();
 			player.Draw();
-			Renderer.DrawRect(Window.GetMouseMotion(), new Vector2(3, 3), Color.CreateFloat(255, 255, 255, 255));
+			Renderer.DrawRect(Window.GetMouseMotion(), new Vector2(3, 3), Color.CreateFloat(1, 1, 1, 1));
+			Renderer.DrawRectTextured(Vector2.One, new Vector2(64, 64), Font.GetGlyph(61).Texture, Color.CreateFloat(1, 1, 1, 1) );
 			
 			Window.Present();
 		}

@@ -11,8 +11,4 @@
       <ProjectReference Include="..\ocicat\ocicat.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="res\" />
-    </ItemGroup>
-
 </Project>
