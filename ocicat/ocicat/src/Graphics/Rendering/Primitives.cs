@@ -30,7 +30,7 @@ public class Primitives
 		);
 		
 		string untexturedVertShader = @"#version 330 core
-layout (location = 0) in vec3 aPosition;
+layout (location = 0) in vec2 aPosition;
 
 uniform mat4 projection;
 uniform mat4 transform;
@@ -38,7 +38,7 @@ uniform mat4 scale;
 
 void main()
 {
-    gl_Position = vec4(aPosition, 1.0) * scale * transform * projection;
+    gl_Position = vec4(aPosition, 0.0, 1.0) * scale * transform * projection;
 }";
 
 		string untexturedFragShader = @"#version 330 core

@@ -59,9 +59,7 @@ class Game
 
 			if (collisionInfo.HasCollision)
 			{
-				Vector2 depthV = new Vector2(collisionInfo.Depth, collisionInfo.Depth);
-				Renderer.DrawRect(collider.Position - new Vector2(32, 32) - collisionInfo.Normal * depthV, new Vector2(64, 64),
-					Color.CreateFloat(0, 1, 0, 0.5f));
+				
 			}
 			
 			Window.Present();

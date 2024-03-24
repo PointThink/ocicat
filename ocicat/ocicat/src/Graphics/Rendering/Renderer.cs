@@ -120,4 +120,49 @@ public class Renderer
 			}
 		}
 	}
+
+	public void DrawCircle(Vector2 center, float radius, int count, Color color)
+	{
+		List<float> vertecies = new List<float>();
+		
+		// Generate circle mesh
+		for (int i = 0; i < count; i++)
+		{
+			double degrees = (360d / count) * i;
+
+			Vector2 vertex1 = Vector2.Normalize((float) degrees, radius);
+			Vector2 vertex2 = Vector2.Normalize((float) degrees + (360f / count), radius);
+			
+			vertecies.Add(center.X);
+			vertecies.Add(center.Y);
+			vertecies.Add(vertex1.X + center.X);
+			vertecies.Add(vertex1.Y + center.Y);
+			vertecies.Add(vertex2.X + center.X);
+			vertecies.Add(vertex2.Y + center.Y);
+		}
+
+		uint[] indicies = new uint[vertecies.Count / 2];
+
+		for (uint i = 0; i < vertecies.Count / 2; i++)
+		{
+			indicies[i] = i;
+		}
+
+		Mesh mesh = new Mesh(this, vertecies.ToArray(), indicies, new BufferLayout(
+			[new BufferElement("position", ShaderDataType.Float2)]
+		));
+		
+		Matrix4 projection = Camera.CalculateProjection();
+		Matrix4 view = Camera.CalculateView();
+		Matrix4 transform = Matrix4.CreateTranslation(0, 0, 0);
+		Matrix4 scaleMat = Matrix4.CreateScale(1, 1, 1);
+		
+		Primitives.UntexturedRectShader.Use();
+		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
+		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
+		Primitives.UntexturedRectShader.UniformMat4("scale", ref scaleMat);
+		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
+		
+		RenderCommands.DrawIndexed(mesh.VertexArray);
+	}
 }
