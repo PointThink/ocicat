@@ -41,7 +41,7 @@ public class Shader : Rendering.Shader
 		for (int i = 0; i < uniforms; i++)
 		{
 			GL.GetActiveUniform(_handle, i, 64, out int lenght, out int size, out ActiveUniformType uniformType, out string name);
-			_uniformLocations.Add(name, i);
+			_uniformLocations.Add(name, GL.GetUniformLocation(_handle, name));
 		}
 	}
 
@@ -64,46 +64,47 @@ public class Shader : Rendering.Shader
 
 	public override void Uniform1i(string name, int i1)
 	{
-		GL.Uniform1(_uniformLocations[name], i1);
-	}
+        GL.ProgramUniform1(_handle, _uniformLocations[name], i1);
+    }
 
 	public override void Uniform2i(string name, int i1, int i2)
 	{
-		GL.Uniform2(_uniformLocations[name], i1, i2);
-	}
+        GL.ProgramUniform2(_handle, _uniformLocations[name], i1, i2);
+    }
 
 	public override void Uniform3i(string name, int i1, int i2, int i3)
 	{
-		GL.Uniform3(_uniformLocations[name], i1, i2, i3);
-	}
+        GL.ProgramUniform3(_handle, _uniformLocations[name], i1, i2, i3);
+    }
 
 	public override void Uniform4i(string name, int i1, int i2, int i3, int i4)
 	{
-		GL.Uniform4(_uniformLocations[name], i1, i2, i3, i4);
-	}
+        GL.ProgramUniform4(_handle, _uniformLocations[name], i1, i2, i3, i4);
+    }
 
 	public override void Uniform1f(string name, float f1)
 	{
-		GL.Uniform1(_uniformLocations[name], f1);
-	}
+        GL.ProgramUniform1(_handle, _uniformLocations[name], f1);
+    }
 
 	public override void Uniform2f(string name, float f1, float f2)
 	{
-		GL.Uniform2(_uniformLocations[name], f1, f2);
-	}
+
+        GL.ProgramUniform2(_handle, _uniformLocations[name], f1, f2);
+    }
 
 	public override void Uniform3f(string name, float f1, float f2, float f3)
 	{
-		GL.Uniform3(_uniformLocations[name], f1, f2, f3);
-	}
+        GL.ProgramUniform3(_handle, _uniformLocations[name], f1, f2, f3);
+    }
 
 	public override void Uniform4f(string name, float f1, float f2, float f3, float f4)
 	{
-		GL.Uniform4(_uniformLocations[name], f1, f2, f3, f4);
+		GL.ProgramUniform4(_handle, _uniformLocations[name], f1, f2, f3, f4);
 	}
 
-	public override void UniformMat4(string name, Matrix4 matrix4)
+	public override void UniformMat4(string name, ref Matrix4 matrix4)
 	{
-		GL.UniformMatrix4(_uniformLocations[name], true, ref matrix4);
+		GL.ProgramUniformMatrix4(_handle, _uniformLocations[name], true, ref matrix4);
 	}
 }

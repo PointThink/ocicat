@@ -44,9 +44,9 @@ public class Renderer
 		transform *= view;
 		
 		Primitives.UntexturedRectShader.Use();
-		Primitives.UntexturedRectShader.UniformMat4("transform", transform);
-		Primitives.UntexturedRectShader.UniformMat4("projection", projection);
-		Primitives.UntexturedRectShader.UniformMat4("scale", scale);
+		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
+		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
+		Primitives.UntexturedRectShader.UniformMat4("scale", ref scale);
 		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 		
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
@@ -65,9 +65,9 @@ public class Renderer
 		transform *= view;
 		
 		Primitives.TexturedRectShader.Use();
-		Primitives.TexturedRectShader.UniformMat4("transform", transform);
-		Primitives.TexturedRectShader.UniformMat4("projection", projection);
-		Primitives.TexturedRectShader.UniformMat4("scale", scale);
+        Primitives.TexturedRectShader.UniformMat4("transform", ref transform);
+        Primitives.TexturedRectShader.UniformMat4("projection", ref projection);
+        Primitives.TexturedRectShader.UniformMat4("scale", ref scale);
 		Primitives.TexturedRectShader.Uniform4f("tint", tint.R, tint.G, tint.B, tint.A);
 
 		texture.Bind(0);
@@ -86,9 +86,9 @@ public class Renderer
 		transform *= view;
 		
 		Primitives.TextShader.Use();
-		Primitives.TextShader.UniformMat4("transform", transform);
-		Primitives.TextShader.UniformMat4("projection", projection);
-		Primitives.TextShader.UniformMat4("scale", scaleMat);
+		Primitives.TextShader.UniformMat4("transform", ref transform);
+		Primitives.TextShader.UniformMat4("projection", ref projection);
+		Primitives.TextShader.UniformMat4("scale", ref scaleMat);
 		Primitives.TextShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 
 		glyph.Texture.Bind(0);

@@ -7,14 +7,17 @@ public class RenderCommands : Rendering.RenderCommands
 {
 	public override void Init()
 	{
-		// GL.DebugMessageCallback(OnDebugMessage, IntPtr.Zero);
-		// GL.Enable(EnableCap.DebugOutput);
+		GL.DebugMessageCallback(OnDebugMessage, IntPtr.Zero);
+		GL.Enable(EnableCap.DebugOutput);
 		
 		GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 		GL.Enable(EnableCap.Blend);
 		
 		GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
-	}
+
+		Logging.Log(LogLevel.Info, GL.GetString(StringName.Vendor));
+        Logging.Log(LogLevel.Info, GL.GetString(StringName.Version));
+    }
 
 	public override void SetClearColor(float r, float g, float b, float a)
 	{
@@ -32,6 +35,8 @@ public class RenderCommands : Rendering.RenderCommands
 		GL.DrawElements(PrimitiveType.Triangles, (int) vertexArray.GetIndexBuffer().GetIndexCount(), DrawElementsType.UnsignedInt, 0);		
 	}
 	
+	// This is copied from OpenTK docs.
+	// Ignore the comments
 	private static void OnDebugMessage(
 		DebugSource source,     // Source of the debugging message.
 		DebugType type,         // Type of the debugging message.
@@ -57,5 +62,4 @@ public class RenderCommands : Rendering.RenderCommands
 			throw new Exception(message);
 		}
 	}
-
 }

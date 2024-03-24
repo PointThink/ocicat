@@ -16,6 +16,8 @@ public class OpenTKWindow : Window
 	public OpenTKWindow(string title, int width, int height, bool fullscreen = false, bool resizable = false)
 	{
 		NativeWindowSettings nativeWindowSettings = NativeWindowSettings.Default;
+		nativeWindowSettings.APIVersion = new System.Version(4, 6);
+		nativeWindowSettings.API = ContextAPI.OpenGL;
 		GameWindowSettings gameWindowSettings = new GameWindowSettings();
 
 		nativeWindowSettings.Title = title;
