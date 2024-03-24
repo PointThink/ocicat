@@ -5,14 +5,15 @@ public class Primitives
 	public Mesh RectangleMesh;
 	public Shader UntexturedRectShader;
 	public Shader TexturedRectShader;
+	public Shader TextShader;
 	
 	public Primitives(Renderer renderer)
 	{
 		float[] rectVertices = {
-			0, 0, 0, 0,
-			1, 0, 1, 0,
-			1, 1, 1, 1,
-			0, 1, 0, 1
+			0, 0, 0, 1,
+			1, 0, 1, 1,
+			1, 1, 1, 0,
+			0, 1, 0, 0
 		};
 
 		uint[] rectIndices =
@@ -77,8 +78,23 @@ void main()
 {
     FragColor = texture(textureSampler, vTexCoords) * tint;
 }";
+
+		string fontFragShader = @"#version 330 core
+out vec4 FragColor;
+
+uniform sampler2D textureSampler;
+uniform vec4 color;
+
+in vec2 vTexCoords;
+
+void main()
+{
+	vec4 sampled = vec4(1, 1, 1, texture(textureSampler, vTexCoords));
+    FragColor = sampled * color;
+}";
 		
 		UntexturedRectShader = Shader.Create(renderer, untexturedVertShader, untexturedFragShader);
 		TexturedRectShader = Shader.Create(renderer, texturedVertShader, texturedFragShader);
+		TextShader = Shader.Create(renderer, texturedVertShader, fontFragShader);
 	}
 }

@@ -28,9 +28,7 @@ public abstract class Texture
 
 	public static Texture? Create(Renderer renderer, string filePath, TextureFilter textureFilter = TextureFilter.Linear)
 	{
-		StbImage.stbi_set_flip_vertically_on_load(1);
 		ImageResult image = ImageResult.FromStream(File.OpenRead(filePath), ColorComponents.RedGreenBlueAlpha);
-		
         
 		return Create(renderer, image.Data, image.Width, image.Height, textureFilter);
 	}

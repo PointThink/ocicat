@@ -75,8 +75,7 @@ class Game
 			Renderer.RenderCommands.ClearScreen();
 			player.Draw();
 			Renderer.DrawRect(Window.GetMouseMotion(), new Vector2(3, 3), Color.CreateFloat(1, 1, 1, 1));
-			Renderer.DrawRectTextured(Vector2.One, new Vector2(64, 64), Font.GetGlyph(61).Texture, Color.CreateFloat(1, 1, 1, 1) );
-			
+			Renderer.DrawText("Hello world", Font, new Vector2(100, 100));
 			Window.Present();
 		}
 	}
