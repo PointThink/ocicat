@@ -3,6 +3,8 @@ using ocicat;
 using ocicat.Graphics;
 using ocicat.Graphics.Rendering;
 using ocicat.Input;
+using ocicat.Physics;
+using Vector2 = ocicat.Vector2;
 
 namespace TestGame;
 
@@ -62,7 +64,6 @@ class Game
 		Window = Window.Create("Hello", 1280, 720);
 		
 		Window.CursorVisible = false;
-		Window.CursorLocked = true;
 		
 		Renderer = new Renderer(Window);
 		Renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
@@ -81,6 +82,9 @@ class Game
 		Player player = new Player();
 
 		RNG rng = new RNG();
+
+		CircleCollider cCollider = new CircleCollider(30);
+		RectCollider rCollider = new RectCollider(new Vector2(10, 10));
 		
 		while (!Window.ShouldClose())
 		{
@@ -92,6 +96,8 @@ class Game
 			player.Draw();
 			Renderer.DrawRect(Window.GetMouseMotion(), new Vector2(6, 6), Color.CreateFloat(1, 1, 1, 1));
 			Renderer.DrawText("The quick brown fox jumps over the lazy dog 1234567890", Font, new Vector2(100, 100));
+			
+			Console.WriteLine(cCollider.TestCollision((Collider) rCollider).HasCollision);
 			
 			Window.Present();
 		}
