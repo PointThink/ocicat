@@ -1,6 +1,7 @@
 using ocicat.Graphics.Rendering;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using Vector2 = System.Numerics.Vector2;
@@ -44,12 +45,28 @@ public class OpenTKWindow : Window
 	{
 		get
 		{
-			return _tkWindow.CursorState == CursorState.Normal;
+			return _tkWindow.Cursor != MouseCursor.Empty;
 		}
 		set
 		{
-			if (!value)
-				_tkWindow.CursorState = CursorState.Hidden;
+			if (value)
+				_tkWindow.Cursor = MouseCursor.Default;
+			else
+				_tkWindow.Cursor = MouseCursor.Empty;
+		}
+	}
+
+	public override bool CursorLocked
+	{
+		get
+		{
+			return _tkWindow.CursorState != CursorState.Grabbed;
+		}
+
+		set
+		{
+			if (value)
+				_tkWindow.CursorState = CursorState.Grabbed;
 			else
 				_tkWindow.CursorState = CursorState.Normal;
 		}

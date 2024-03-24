@@ -11,6 +11,7 @@ public abstract class Window
 	public RenderingApi RenderingApi { get; private set; }
 
 	public abstract bool CursorVisible { get; set; }
+	public abstract bool CursorLocked { get; set; }
 	
 	public int Width { get; protected set; }
 	public int Height { get; protected set; }

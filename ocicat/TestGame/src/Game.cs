@@ -60,8 +60,10 @@ class Game
 	static void Main(string[] args)
 	{
 		Window = Window.Create("Hello", 1280, 720);
+		
 		Window.CursorVisible = false;
-
+		Window.CursorLocked = true;
+		
 		Renderer = new Renderer(Window);
 		Renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
 
