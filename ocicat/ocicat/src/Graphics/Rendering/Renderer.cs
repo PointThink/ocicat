@@ -80,7 +80,7 @@ public class Renderer
 	{
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 view = Camera.CalculateView();
-		Matrix4 transform = Matrix4.CreateTranslation(position.X, position.Y, 0);
+		Matrix4 transform = Matrix4.CreateTranslation(position.X, position.Y - (glyph.SizeY - glyph.BearingY), 0);
 		Matrix4 scaleMat = Matrix4.CreateScale(glyph.SizeX  * scale, glyph.SizeY * scale, 1);
 
 		transform *= view;
@@ -116,7 +116,7 @@ public class Renderer
 				FontGlyph glyph = font.GetGlyph(character);
 				
 				DrawFontGlyph(glyph, currentPosition, color, scale);
-				currentPosition.X += (glyph.SizeX + glyph.BearingX) * scale;
+				currentPosition.X += glyph.Advance * scale;
 			}
 		}
 	}

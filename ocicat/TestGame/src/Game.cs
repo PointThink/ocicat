@@ -73,7 +73,7 @@ class Game
 			Texture.Create(Renderer, "image2.png")
 		], 1);
 		
-		Font = new Font(Renderer, "Roboto-Regular.ttf", 64);
+		Font = new Font(Renderer, "Roboto-Regular.ttf", 32);
 		
 		Player player = new Player();
 		
@@ -86,7 +86,7 @@ class Game
 			Renderer.RenderCommands.ClearScreen();
 			player.Draw();
 			Renderer.DrawRect(Window.GetMouseMotion(), new Vector2(3, 3), Color.CreateFloat(1, 1, 1, 1));
-			Renderer.DrawText("Hello world", Font, new Vector2(100, 100));
+			Renderer.DrawText("The quick brown fox jumps over the lazy dog 1234567890", Font, new Vector2(100, 100));
 			Window.Present();
 		}
 	}
