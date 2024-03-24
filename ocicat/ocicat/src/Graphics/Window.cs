@@ -1,5 +1,6 @@
 using System.Numerics;
 using ocicat.Graphics.Rendering;
+using OpenTK.Graphics.OpenGL4;
 
 namespace ocicat.Graphics;
 
@@ -9,6 +10,8 @@ public abstract class Window
 	
 	public RenderingApi RenderingApi { get; private set; }
 
+	public abstract bool CursorVisible { get; set; }
+	
 	public int Width { get; protected set; }
 	public int Height { get; protected set; }
 	

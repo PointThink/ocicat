@@ -39,7 +39,22 @@ public class OpenTKWindow : Window
 		
 		DeltaTime = 0;
 	}
-	
+
+	public override bool CursorVisible
+	{
+		get
+		{
+			return _tkWindow.CursorState == CursorState.Normal;
+		}
+		set
+		{
+			if (!value)
+				_tkWindow.CursorState = CursorState.Hidden;
+			else
+				_tkWindow.CursorState = CursorState.Normal;
+		}
+	}
+
 	public override void HandleEvents()
 	{
 		frameBeginTime = DateTime.Now;

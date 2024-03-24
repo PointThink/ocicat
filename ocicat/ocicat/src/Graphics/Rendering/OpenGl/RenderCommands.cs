@@ -7,8 +7,8 @@ public class RenderCommands : Rendering.RenderCommands
 {
 	public override void Init()
 	{
-		GL.DebugMessageCallback(OnDebugMessage, IntPtr.Zero);
-		GL.Enable(EnableCap.DebugOutput);
+		// GL.DebugMessageCallback(OnDebugMessage, IntPtr.Zero);
+		// GL.Enable(EnableCap.DebugOutput);
 		
 		GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 		GL.Enable(EnableCap.Blend);

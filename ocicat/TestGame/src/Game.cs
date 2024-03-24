@@ -60,6 +60,7 @@ class Game
 	static void Main(string[] args)
 	{
 		Window = Window.Create("Hello", 1280, 720);
+		Window.CursorVisible = false;
 
 		Renderer = new Renderer(Window);
 		Renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
@@ -85,7 +86,7 @@ class Game
 			
 			Renderer.RenderCommands.ClearScreen();
 			player.Draw();
-			Renderer.DrawRect(Window.GetMouseMotion(), new Vector2(3, 3), Color.CreateFloat(1, 1, 1, 1));
+			Renderer.DrawRect(Window.GetMouseMotion(), new Vector2(6, 6), Color.CreateFloat(1, 1, 1, 1));
 			Renderer.DrawText("The quick brown fox jumps over the lazy dog 1234567890", Font, new Vector2(100, 100));
 			Window.Present();
 		}

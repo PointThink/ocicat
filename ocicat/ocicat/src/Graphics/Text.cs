@@ -1,10 +1,7 @@
 using System.Runtime.InteropServices;
-using System.Text;
 using FreeTypeSharp.Native;
 using ocicat.Graphics.Rendering;
 using OpenTK.Mathematics;
-using Vector2 = System.Numerics.Vector2;
-
 namespace ocicat.Graphics;
 
 public class FontGlyph
