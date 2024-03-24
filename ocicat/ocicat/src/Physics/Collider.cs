@@ -1,3 +1,6 @@
+using ocicat.Graphics;
+using ocicat.Graphics.Rendering;
+
 namespace ocicat.Physics;
 
 public abstract class Collider
@@ -7,6 +10,8 @@ public abstract class Collider
 	public abstract CollisionInfo TestCollision(Collider collider);
 	public abstract CollisionInfo TestCollision(RectCollider collider);
 	public abstract CollisionInfo TestCollision(CircleCollider collider);
+
+	public abstract void DebugDraw(Renderer renderer, Color color);
 }
 
 public class RectCollider : Collider
@@ -25,12 +30,17 @@ public class RectCollider : Collider
 
 	public override CollisionInfo TestCollision(RectCollider collider)
 	{
-		throw new NotImplementedException();
+		return CollisionAlgo.TestCollisionRectRect(this, collider);
 	}
 
 	public override CollisionInfo TestCollision(CircleCollider collider)
 	{
 		throw new NotImplementedException();
+	}
+
+	public override void DebugDraw(Renderer renderer, Color color)
+	{
+		renderer.DrawRect(Position, Size, color);
 	}
 }
 
@@ -54,6 +64,11 @@ public class CircleCollider : Collider
 	}
 
 	public override CollisionInfo TestCollision(CircleCollider collider)
+	{
+		throw new NotImplementedException();
+	}
+
+	public override void DebugDraw(Renderer renderer, Color color)
 	{
 		throw new NotImplementedException();
 	}
