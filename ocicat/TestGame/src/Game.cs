@@ -79,6 +79,8 @@ class Game
 		Font = new Font(Renderer, "Roboto-Regular.ttf", 32);
 		
 		Player player = new Player();
+
+		RNG rng = new RNG();
 		
 		while (!Window.ShouldClose())
 		{
@@ -90,6 +92,7 @@ class Game
 			player.Draw();
 			Renderer.DrawRect(Window.GetMouseMotion(), new Vector2(6, 6), Color.CreateFloat(1, 1, 1, 1));
 			Renderer.DrawText("The quick brown fox jumps over the lazy dog 1234567890", Font, new Vector2(100, 100));
+			
 			Window.Present();
 		}
 	}
