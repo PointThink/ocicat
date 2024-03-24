@@ -10,6 +10,13 @@ class Player
 {
 	private Vector2 _position;
 	private Vector2 _motion;
+
+	private AnimationController _animation;
+
+	public Player()
+	{
+		_animation = new AnimationController(Game.AnimationTemplate);
+	}
 	
 	public void Update(float deltaTime)
 	{
@@ -37,7 +44,7 @@ class Player
 
 	public void Draw()
 	{
-		Game.Renderer.DrawRectTextured(_position, new Vector2(64, 64), Game.Texture);
+		_animation.Draw(Game.Renderer, _position, new Vector2(64, 64));
 	}
 }
 
@@ -47,7 +54,7 @@ class Game
 	public static Renderer Renderer;
 	public static Bindings Bindings;
 
-	public static Texture Texture;
+	public static AnimationTemplate AnimationTemplate;
 	public static Font Font;
 	
 	static void Main(string[] args)
@@ -60,8 +67,12 @@ class Game
 		Bindings = new Bindings(Window);
 		
 		Bindings.AddBinding("jump", new KeyboardBind(Key.Space));
+
+		AnimationTemplate = new AnimationTemplate([
+			Texture.Create(Renderer, "image.jpg"),
+			Texture.Create(Renderer, "image2.png")
+		], 1);
 		
-		Texture = Texture.Create(Game.Renderer, "image.jpg");
 		Font = new Font(Renderer, "Roboto-Regular.ttf", 64);
 		
 		Player player = new Player();
