@@ -39,28 +39,28 @@ class Game
 
 		RNG rng = new RNG();
 
-		RectCollider rCollider = new RectCollider(new Vector2(64, 64));
-		RectCollider rCollider2 = new RectCollider(new Vector2(128, 256));
+		Collider collider = new CircleCollider(64);
+		Collider collider2 = new CircleCollider(128);
 
-		rCollider2.Position = new Vector2(200, 200);
+		collider2.Position = new Vector2(200, 200);
 		
 		while (!Window.ShouldClose())
 		{
 			Window.HandleEvents();
 
-			rCollider.Position = Window.GetMouseMotion();
+			collider.Position = Window.GetMouseMotion();
 			
 			Renderer.RenderCommands.ClearScreen();
 			
-			rCollider.DebugDraw(Renderer, Color.CreateFloat(1, 0, 0, 0.5f));
-			rCollider2.DebugDraw(Renderer, Color.CreateFloat(0, 0, 1, 0.5f));
+			collider.DebugDraw(Renderer, Color.CreateFloat(1, 0, 0, 0.5f));
+			collider2.DebugDraw(Renderer, Color.CreateFloat(0, 0, 1, 0.5f));
 
-			CollisionInfo collisionInfo = rCollider.TestCollision(rCollider2);
+			CollisionInfo collisionInfo = collider.TestCollision(collider2);
 
 			if (collisionInfo.HasCollision)
 			{
 				Vector2 depthV = new Vector2(collisionInfo.Depth, collisionInfo.Depth);
-				Renderer.DrawRect(rCollider.Position - collisionInfo.Normal * depthV, new Vector2(64, 64),
+				Renderer.DrawRect(collider.Position - new Vector2(32, 32) - collisionInfo.Normal * depthV, new Vector2(64, 64),
 					Color.CreateFloat(0, 1, 0, 0.5f));
 			}
 			

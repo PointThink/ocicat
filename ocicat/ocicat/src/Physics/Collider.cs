@@ -65,11 +65,11 @@ public class CircleCollider : Collider
 
 	public override CollisionInfo TestCollision(CircleCollider collider)
 	{
-		throw new NotImplementedException();
+		return CollisionAlgo.TestCollisionCircleVCircle(this, collider);
 	}
 
 	public override void DebugDraw(Renderer renderer, Color color)
 	{
-		throw new NotImplementedException();
+		renderer.DrawRect(Position - new Vector2(Radius, Radius), new Vector2(Radius, Radius), color);
 	}
 }

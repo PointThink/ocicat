@@ -51,4 +51,20 @@ public class CollisionAlgo
 		
 		return collisionInfo;
 	}
+
+	public static CollisionInfo TestCollisionCircleVCircle(CircleCollider circle1, CircleCollider circle2)
+	{
+		CollisionInfo collisionInfo = new CollisionInfo();
+		float distance = Vector2.GetDistance(circle1.Position, circle2.Position);
+
+		if (distance <= circle1.Radius + circle2.Radius)
+		{
+			collisionInfo.HasCollision = true;
+			collisionInfo.Depth = distance - (circle1.Radius + circle2.Radius);
+			
+			collisionInfo.Normal = Vector2.Normalize(Vector2.GetDirection(circle1.Position, circle2.Position));
+		}
+
+		return collisionInfo;
+	}
 }
