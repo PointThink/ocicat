@@ -34,11 +34,11 @@ layout (location = 0) in vec2 aPosition;
 
 uniform mat4 projection;
 uniform mat4 transform;
-uniform mat4 scale;
+uniform mat4 positionMat;
 
 void main()
 {
-    gl_Position = vec4(aPosition, 0.0, 1.0) * scale * transform * projection;
+    gl_Position = vec4(aPosition, 0.0, 1.0) * transform * positionMat * projection;
 }";
 
 		string untexturedFragShader = @"#version 330 core
@@ -56,13 +56,13 @@ layout (location = 1) in vec2 texCoords;
 
 uniform mat4 projection;
 uniform mat4 transform;
-uniform mat4 scale;
+uniform mat4 positionMat;
 
 out vec2 vTexCoords;
 
 void main()
 {
-    gl_Position = vec4(aPosition, 0.0, 1.0) * scale * transform * projection;
+    gl_Position = vec4(aPosition, 0.0, 1.0) * transform * positionMat * projection;
 	vTexCoords = texCoords;
 }";
 

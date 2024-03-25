@@ -38,16 +38,17 @@ public class Renderer
 	{
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 view = Camera.CalculateView();
-		Matrix4 transform = Matrix4.CreateTranslation(position.X, position.Y, 0);
-		transform *= Matrix4.CreateRotationX(rotation);
+		Matrix4 positionMat = Matrix4.CreateTranslation(position.X, position.Y, 0);
 		Matrix4 scale = Matrix4.CreateScale(size.X, size.Y, 1);
-
-		transform *= view;
+		Matrix4 rotationMat = Matrix4.CreateRotationZ(rotation);
+		
+		Matrix4 transform = view * scale * rotationMat;
 		
 		Primitives.UntexturedRectShader.Use();
+		Primitives.UntexturedRectShader.UniformMat4("positionMat", ref positionMat);
 		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
 		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
-		Primitives.UntexturedRectShader.UniformMat4("scale", ref scale);
+		// Primitives.UntexturedRectShader.UniformMat4("scale", ref scale);
 		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 		
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
@@ -60,15 +61,16 @@ public class Renderer
 		
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 view = Camera.CalculateView();
-		Matrix4 transform = Matrix4.CreateTranslation(position.X, position.Y, 0);
+		Matrix4 positionMat = Matrix4.CreateTranslation(position.X, position.Y, 0);
 		Matrix4 scale = Matrix4.CreateScale(size.X, size.Y, 1);
-
-		transform *= view;
+		Matrix4 rotationMat = Matrix4.CreateRotationZ(rotation);
+		
+		Matrix4 transform = view * scale * rotationMat;
 		
 		Primitives.TexturedRectShader.Use();
         Primitives.TexturedRectShader.UniformMat4("transform", ref transform);
         Primitives.TexturedRectShader.UniformMat4("projection", ref projection);
-        Primitives.TexturedRectShader.UniformMat4("scale", ref scale);
+        Primitives.TexturedRectShader.UniformMat4("positionMat", ref positionMat);
 		Primitives.TexturedRectShader.Uniform4f("tint", tint.R, tint.G, tint.B, tint.A);
 
 		texture.Bind(0);

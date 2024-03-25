@@ -21,8 +21,6 @@ class Game
 	{
 		Window = Window.Create("Hello", 1280, 720);
 		
-		Window.CursorVisible = false;
-		
 		Renderer = new Renderer(Window);
 		Renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
 
@@ -52,6 +50,7 @@ class Game
 			
 			Renderer.RenderCommands.ClearScreen();
 			
+			/*
 			collider.DebugDraw(Renderer, Color.CreateFloat(1, 0, 0, 0.5f));
 			collider2.DebugDraw(Renderer, Color.CreateFloat(0, 0, 1, 0.5f));
 
@@ -61,8 +60,9 @@ class Game
 			{
 				Renderer.DrawCircle(collider.Position - collisionInfo.Normal * new Vector2(collisionInfo.Depth, collisionInfo.Depth), collider.Radius, 10, Color.CreateFloat(0, 1, 0, .5f));
 			}
-			
-			Renderer.DrawRect(new Vector2(0, 0), new Vector2(64, 64), Color.CreateFloat(1, 1, 1, 1), Vector2.GetDirection(new Vector2(0, 0), Window.GetMouseMotion()));
+			*/
+
+			Renderer.DrawRect(new Vector2(200, 200), new Vector2(64, 64), Color.CreateFloat(1, 1, 1, 1), Vector2.GetDirection(new Vector2(200, 200), Window.GetMouseMotion()));
 			
 			Window.Present();
 		}
