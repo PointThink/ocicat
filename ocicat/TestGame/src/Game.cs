@@ -39,8 +39,8 @@ class Game
 
 		RNG rng = new RNG();
 
-		Collider collider = new CircleCollider(64);
-		Collider collider2 = new CircleCollider(128);
+		CircleCollider collider = new CircleCollider(64);
+		CircleCollider collider2 = new CircleCollider(128);
 
 		collider2.Position = new Vector2(200, 200);
 		
@@ -59,8 +59,10 @@ class Game
 
 			if (collisionInfo.HasCollision)
 			{
-				
+				Renderer.DrawCircle(collider.Position - collisionInfo.Normal * new Vector2(collisionInfo.Depth, collisionInfo.Depth), collider.Radius, 10, Color.CreateFloat(0, 1, 0, .5f));
 			}
+			
+			Renderer.DrawRect(new Vector2(0, 0), new Vector2(64, 64), Color.CreateFloat(1, 1, 1, 1), Vector2.GetDirection(new Vector2(0, 0), Window.GetMouseMotion()));
 			
 			Window.Present();
 		}

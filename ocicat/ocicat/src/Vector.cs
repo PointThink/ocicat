@@ -50,18 +50,14 @@ public struct Vector2
 
 	public static float GetDirection(Vector2 v1, Vector2 v2)
 	{
-		Vector2 directionVec = new Vector2(v2.X - v1.X, v2.Y - v1.Y);
-		directionVec.X = -directionVec.X;
-		directionVec.X = -directionVec.Y;
-
-		double direction = Math.Atan2( directionVec.Y, directionVec.X ) * 57.2957795;
+		double direction = Math.Atan2(-(v2.Y - v1.Y), -(v2.Y - v2.Y)) * 57.2957795;
 
 		return (float) direction;
 	}
 
 	public static Vector2 Normalize(float angle, float length = 1)
 	{
-		double tangents = (180 + angle) * 0.0174532925;
+		double tangents = (180 - angle) * 0.0174532925;
 
 		return new Vector2((float) (length * Math.Cos(tangents)), (float) (length * Math.Sin(tangents)));
 	}

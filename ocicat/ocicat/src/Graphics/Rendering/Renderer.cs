@@ -34,11 +34,12 @@ public class Renderer
 		Camera = new OrthographicCamera(window.Width, window.Height);
 	}
 
-	public void DrawRect(Vector2 position, Vector2 size, Color color)
+	public void DrawRect(Vector2 position, Vector2 size, Color color, float rotation = 0)
 	{
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 view = Camera.CalculateView();
 		Matrix4 transform = Matrix4.CreateTranslation(position.X, position.Y, 0);
+		transform *= Matrix4.CreateRotationX(rotation);
 		Matrix4 scale = Matrix4.CreateScale(size.X, size.Y, 1);
 
 		transform *= view;
@@ -52,7 +53,7 @@ public class Renderer
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
 	}
 	
-	public void DrawRectTextured(Vector2 position, Vector2 size, Texture texture, Color? tint = null)
+	public void DrawRectTextured(Vector2 position, Vector2 size, Texture texture, Color? tint = null, float rotation = 0)
 	{
 		if (tint == null)
 			tint = Color.CreateFloat(1, 1, 1, 1);
@@ -128,17 +129,17 @@ public class Renderer
 		// Generate circle mesh
 		for (int i = 0; i < count; i++)
 		{
-			double degrees = (360d / count) * i;
+			double degrees = (360f / count) * i;
 
 			Vector2 vertex1 = Vector2.Normalize((float) degrees, radius);
 			Vector2 vertex2 = Vector2.Normalize((float) degrees + (360f / count), radius);
 			
-			vertecies.Add(center.X);
-			vertecies.Add(center.Y);
-			vertecies.Add(vertex1.X + center.X);
-			vertecies.Add(vertex1.Y + center.Y);
-			vertecies.Add(vertex2.X + center.X);
-			vertecies.Add(vertex2.Y + center.Y);
+			vertecies.Add(0);
+			vertecies.Add(0);
+			vertecies.Add(vertex1.X);
+			vertecies.Add(vertex1.Y);
+			vertecies.Add(vertex2.X);
+			vertecies.Add(vertex2.Y);
 		}
 
 		uint[] indicies = new uint[vertecies.Count / 2];
@@ -154,7 +155,7 @@ public class Renderer
 		
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 view = Camera.CalculateView();
-		Matrix4 transform = Matrix4.CreateTranslation(0, 0, 0);
+		Matrix4 transform = Matrix4.CreateTranslation(center.X, center.Y, 0);
 		Matrix4 scaleMat = Matrix4.CreateScale(1, 1, 1);
 		
 		Primitives.UntexturedRectShader.Use();
