@@ -1,7 +1,5 @@
 using System.Text;
-using OpenTK.Graphics.ES11;
 using OpenTK.Mathematics;
-using Vector2 = System.Numerics.Vector2;
 
 namespace ocicat.Graphics.Rendering;
 
@@ -20,6 +18,7 @@ public class Renderer
 	public Primitives Primitives { get; private set; }
 
 	public Camera Camera { get; private set; }
+	public Framebuffer Framebuffer { get; private set; }
 	
 	public Renderer(Window window)
 	{
@@ -30,8 +29,19 @@ public class Renderer
 		RenderCommands.Init();
 
 		Primitives = new Primitives(this);
-
 		Camera = new OrthographicCamera(window.Width, window.Height);
+		Framebuffer = Framebuffer.Create(this, window.Width, window.Height);
+	}
+
+	public void BeginDrawing()
+	{
+		Framebuffer.Bind();
+	}
+
+	public void EndDrawing()
+	{
+		Framebuffer.Unbind();
+		DrawRectTextured(new Vector2(0, 0), new Vector2(1280, 720), Framebuffer.GetTextureAttachment());
 	}
 
 	public void DrawRect(Vector2 position, Vector2 size, Color color, float rotation = 0)

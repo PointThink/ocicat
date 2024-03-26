@@ -14,6 +14,8 @@ public abstract class Texture
 	
 	public abstract int GetWidth();
 	public abstract int GetHeight(uint slot);
+
+	public abstract int GetTextureID();
 	
 	public static Texture? Create(Renderer renderer, byte[] imageData, int width, int height, TextureFilter textureFilter = TextureFilter.Linear, int colorChannels = 4)
 	{

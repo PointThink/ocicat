@@ -71,4 +71,9 @@ public class Texture : Rendering.Texture
 	{
 		return _height;
 	}
+
+	public override int GetTextureID()
+	{
+		return _handle;
+	}
 }

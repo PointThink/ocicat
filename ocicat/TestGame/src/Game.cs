@@ -45,6 +45,7 @@ class Game
 		while (!Window.ShouldClose())
 		{
 			Window.HandleEvents();
+			// Renderer.BeginDrawing();
 
 			collider.Position = Window.GetMouseMotion();
 			
@@ -64,6 +65,7 @@ class Game
 
 			Renderer.DrawRect(new Vector2(200, 200), new Vector2(64, 64), Color.CreateFloat(1, 1, 1, 1), Vector2.GetDirection(new Vector2(200, 200), Window.GetMouseMotion()));
 			
+			// Renderer.EndDrawing();	
 			Window.Present();
 		}
 	}
