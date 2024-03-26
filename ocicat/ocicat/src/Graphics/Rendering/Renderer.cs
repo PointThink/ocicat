@@ -18,7 +18,16 @@ public class Renderer
 	public Primitives Primitives { get; private set; }
 
 	public Camera Camera { get; private set; }
-	public Framebuffer Framebuffer { get; private set; }
+	
+	public int Width
+	{
+		get { return _window.Width; }
+	}
+	
+	public int Height
+	{
+		get { return _window.Height; }
+	}
 	
 	public Renderer(Window window)
 	{
@@ -30,18 +39,14 @@ public class Renderer
 
 		Primitives = new Primitives(this);
 		Camera = new OrthographicCamera(window.Width, window.Height);
-		Framebuffer = Framebuffer.Create(this, window.Width, window.Height);
 	}
 
 	public void BeginDrawing()
 	{
-		Framebuffer.Bind();
 	}
 
 	public void EndDrawing()
 	{
-		Framebuffer.Unbind();
-		DrawRectTextured(new Vector2(0, 0), new Vector2(1280, 720), Framebuffer.GetTextureAttachment());
 	}
 
 	public void DrawRect(Vector2 position, Vector2 size, Color color, float rotation = 0)
@@ -50,7 +55,7 @@ public class Renderer
 		Matrix4 view = Camera.CalculateView();
 		Matrix4 positionMat = Matrix4.CreateTranslation(position.X, position.Y, 0);
 		Matrix4 scale = Matrix4.CreateScale(size.X, size.Y, 1);
-		Matrix4 rotationMat = Matrix4.CreateRotationZ(rotation);
+		Matrix4 rotationMat = Matrix4.CreateRotationZ(Single.DegreesToRadians(rotation));
 		
 		Matrix4 transform = view * scale * rotationMat;
 		
