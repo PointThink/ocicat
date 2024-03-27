@@ -49,6 +49,12 @@ public class Renderer
 	{
 	}
 
+	public void ClearScreen(Color color)
+	{
+		RenderCommands.SetClearColor(color.R, color.G, color.B, color.A);
+		RenderCommands.ClearScreen();
+	}
+
 	public void DrawRect(Vector2 position, Vector2 size, Color color, float rotation = 0)
 	{
 		Matrix4 projection = Camera.CalculateProjection();

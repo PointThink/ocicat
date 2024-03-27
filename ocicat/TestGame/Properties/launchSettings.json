@@ -2,7 +2,7 @@
   "profiles": {
     "TestGame": {
       "commandName": "Project",
-      "workingDirectory": "C:\\Users\\erykd\\Desktop\\ocicat\\ocicat\\TestGame\\res"
+      "workingDirectory": "res"
     }
   }
 }
