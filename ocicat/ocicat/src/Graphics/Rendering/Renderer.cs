@@ -104,15 +104,15 @@ public class Renderer
 	{
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 view = Camera.CalculateView();
-		Matrix4 transform = Matrix4.CreateTranslation(position.X, position.Y - (glyph.SizeY - glyph.BearingY), 0);
+		Matrix4 positionMat = Matrix4.CreateTranslation(position.X, position.Y - (glyph.SizeY - glyph.BearingY), 0);
 		Matrix4 scaleMat = Matrix4.CreateScale(glyph.SizeX  * scale, glyph.SizeY * scale, 1);
-
-		transform *= view;
+		
+		Matrix4 transform = view * scaleMat;
 		
 		Primitives.TextShader.Use();
 		Primitives.TextShader.UniformMat4("transform", ref transform);
 		Primitives.TextShader.UniformMat4("projection", ref projection);
-		Primitives.TextShader.UniformMat4("scale", ref scaleMat);
+		Primitives.TextShader.UniformMat4("positionMat", ref positionMat);
 		Primitives.TextShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 
 		glyph.Texture.Bind(0);
