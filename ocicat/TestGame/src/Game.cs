@@ -1,46 +1,38 @@
 ﻿using ocicat.Graphics;
 using ocicat.Graphics.Rendering;
-using ocicat.Physics;
 using Vector2 = ocicat.Vector2;
 
 namespace TestGame;
 
-class Game
+static class Game
 {
-	public static Window? Window;
-
-	public static Renderer? Renderer;
-	public static AnimationTemplate? AnimationTemplate;
+	private static Window? _window;
+	private static Renderer? _renderer;
 	
-	static void Main(string[] args)
+	static void Main()
 	{
-		Window = Window.Create("Hello", 1280, 720);
+		_window = Window.Create("Hello", 1280, 720);
 		
-		Renderer = new Renderer(Window);
-		Renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
+		_renderer = new Renderer(_window);
+		_renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
 
-		AnimationTemplate = new AnimationTemplate([
-			Texture.Create(Renderer, "image.jpg"),
-			Texture.Create(Renderer, "image2.png")
+		AnimationTemplate animationTemplate = new AnimationTemplate([
+			Texture.Create(_renderer, "image.jpg"),
+			Texture.Create(_renderer, "image2.png")
 		], 1);
 
-		AnimationController animationController = new AnimationController(AnimationTemplate);
+		AnimationController animationController = new AnimationController(animationTemplate);
 
-		CircleCollider collider = new CircleCollider(64);
-		CircleCollider collider2 = new CircleCollider(128);
-
-		collider2.Position = new Vector2(200, 200);
-		
-		while (!Window.ShouldClose())
+		while (!_window.ShouldClose())
 		{
-			Window.HandleEvents();
-			Renderer.BeginDrawing();
+			_window.HandleEvents();
+			_renderer.BeginDrawing();
 			
-			Renderer.RenderCommands.ClearScreen();
+			_renderer.RenderCommands.ClearScreen();
+			animationController.Draw(_renderer, _window.GetMouseMotion(), new Vector2(64, 64));
 			
-			animationController.Draw(Renderer, Window.GetMouseMotion(), new Vector2(64, 64));
-			Renderer.EndDrawing();	
-			Window.Present();
+			_renderer.EndDrawing();	
+			_window.Present();
 		}
 	}
 }
