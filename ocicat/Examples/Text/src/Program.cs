@@ -18,7 +18,13 @@ class Program {
 			renderer.BeginDrawing();
 			
 			renderer.ClearScreen(Color.CreateRGBA8(25, 25, 25, 255));
-			renderer.DrawText("The quick brown fox jumps over the lazy dog 1234567890", font, new Vector2(30c, 30), Color.CreateFloat(1, 1, 1, 1), 1f);
+			renderer.DrawText(
+				"The quick brown fox jumps over the lazy dog 1234567890",
+				font,
+				new Vector2(30, 30),
+				Color.CreateFloat(1, 1, 1, 1),
+				1f
+			);
 			
 			renderer.EndDrawing();
 			window.Present();
