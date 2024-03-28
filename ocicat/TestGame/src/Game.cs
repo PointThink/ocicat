@@ -1,8 +1,5 @@
-﻿using System.Numerics;
-using ocicat;
-using ocicat.Graphics;
+﻿using ocicat.Graphics;
 using ocicat.Graphics.Rendering;
-using ocicat.Input;
 using ocicat.Physics;
 using Vector2 = ocicat.Vector2;
 
@@ -10,10 +7,10 @@ namespace TestGame;
 
 class Game
 {
-	public static Window Window;
-	public static Renderer Renderer;
+	public static Window? Window;
 
-	public static AnimationTemplate AnimationTemplate;
+	public static Renderer? Renderer;
+	public static AnimationTemplate? AnimationTemplate;
 	
 	static void Main(string[] args)
 	{
@@ -42,7 +39,6 @@ class Game
 			Renderer.RenderCommands.ClearScreen();
 			
 			animationController.Draw(Renderer, Window.GetMouseMotion(), new Vector2(64, 64));
-			
 			Renderer.EndDrawing();	
 			Window.Present();
 		}

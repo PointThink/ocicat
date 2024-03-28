@@ -9,7 +9,7 @@ public abstract class Framebuffer
 
 	public abstract Texture GetTextureAttachment();
 	
-	public static Framebuffer? Create(Renderer renderer, int width, int height)
+	public static Framebuffer Create(Renderer renderer, int width, int height)
 	{
 		switch (renderer.RenderingApi)
 		{
@@ -17,6 +17,6 @@ public abstract class Framebuffer
 				return new OpenGl.Framebuffer(width, height);
 		}
 
-		return null;
+		throw new ArgumentException("Invalid RenderingApi");
 	}
 }

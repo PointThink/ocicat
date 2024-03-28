@@ -17,7 +17,7 @@ public abstract class Texture
 
 	public abstract int GetTextureID();
 	
-	public static Texture? Create(Renderer renderer, byte[] imageData, int width, int height, TextureFilter textureFilter = TextureFilter.Linear, int colorChannels = 4)
+	public static Texture Create(Renderer renderer, byte[] imageData, int width, int height, TextureFilter textureFilter = TextureFilter.Linear, int colorChannels = 4)
 	{
 		switch (renderer.RenderingApi)
 		{
@@ -25,10 +25,10 @@ public abstract class Texture
 				return new OpenGl.Texture(imageData, width, height, textureFilter, colorChannels);
 		}
 
-		return null;
+		throw new ArgumentException("Invalid RenderingApi");
 	}
 
-	public static Texture? Create(Renderer renderer, string filePath, TextureFilter textureFilter = TextureFilter.Linear)
+	public static Texture Create(Renderer renderer, string filePath, TextureFilter textureFilter = TextureFilter.Linear)
 	{
 		ImageResult image = ImageResult.FromStream(File.OpenRead(filePath), ColorComponents.RedGreenBlueAlpha);
         

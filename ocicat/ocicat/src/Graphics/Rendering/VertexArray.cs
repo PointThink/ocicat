@@ -97,7 +97,7 @@ public abstract class VertexArray
 	public abstract VertexBuffer GetVertexBuffer();
 	public abstract IndexBuffer GetIndexBuffer();
 	
-	public static VertexArray? Create(Renderer renderer)
+	public static VertexArray Create(Renderer renderer)
 	{
 		switch (renderer.RenderingApi)
 		{
@@ -105,6 +105,6 @@ public abstract class VertexArray
 				return new OpenGl.VertexArray();
 		}
 
-		return null;
+		throw new ArgumentException("Invalid RenderingApi");
 	}
 }

@@ -9,7 +9,7 @@ public abstract class VertexBuffer
 	public abstract void Bind();
 	public abstract void Unbind();
 	
-	public static VertexBuffer? Create(Renderer renderer, float[] data)
+	public static VertexBuffer Create(Renderer renderer, float[] data)
 	{
 		switch (renderer.RenderingApi)
 		{
@@ -18,7 +18,7 @@ public abstract class VertexBuffer
 				break;
 		}
 
-		return null;
+		throw new ArgumentException("Invalid RenderingApi");
 	}
 }
 
@@ -31,15 +31,14 @@ public abstract class IndexBuffer
 
 	public abstract uint GetIndexCount();
 	
-	public static IndexBuffer? Create(Renderer renderer, uint[] data)
+	public static IndexBuffer Create(Renderer renderer, uint[] data)
 	{
 		switch (renderer.RenderingApi)
 		{
 			case RenderingApi.OpenGl:
 				return new OpenGl.IndexBuffer(data);
-				break;
 		}
 
-		return null;
+		throw new ArgumentException("Invalid RenderingApi");
 	}
 }

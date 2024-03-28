@@ -20,7 +20,7 @@ public abstract class Shader
 
 	public abstract void UniformMat4(string name, ref Matrix4 matrix4);
 
-	public static Shader? Create(Renderer renderer, string vertexSoucre, string fragSource)
+	public static Shader Create(Renderer renderer, string vertexSoucre, string fragSource)
 	{
 		switch (renderer.RenderingApi)
 		{
@@ -28,6 +28,6 @@ public abstract class Shader
 				return new OpenGl.Shader(vertexSoucre, fragSource);
 		}
 
-		return null;
+		throw new ArgumentException("Invalid RenderingApi");
 	}
 }

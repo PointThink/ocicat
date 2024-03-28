@@ -1,3 +1,4 @@
+using System.Data.SqlTypes;
 using System.Numerics;
 using ocicat.Graphics.Rendering;
 using OpenTK.Graphics.OpenGL4;
@@ -27,7 +28,7 @@ public abstract class Window
 
 	public abstract Vector2 GetMouseMotion();
 	
-	public static Window? Create(string title, int width, int height, bool fullscreen = false, bool resizable = false,  RenderingApi? api = null)
+	public static Window Create(string title, int width, int height, bool fullscreen = false, bool resizable = false,  RenderingApi? api = null)
 	{
 		if (api == null)
 			api = RenderingApi.OpenGl;
@@ -39,6 +40,8 @@ public abstract class Window
 			case RenderingApi.OpenGl:
 				window = new OpenTKWindow(title, width, height, fullscreen, resizable);
 				break;
+			default:
+				throw new ArgumentException("Invalid RenderingApi");
 		}
 
 		window.RenderingApi = api.Value;

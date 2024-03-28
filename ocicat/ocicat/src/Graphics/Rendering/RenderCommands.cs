@@ -9,7 +9,7 @@ public abstract class RenderCommands
 
 	public abstract void DrawIndexed(VertexArray vertexArray);
 	
-	public static RenderCommands? Create(Renderer renderer)
+	public static RenderCommands Create(Renderer renderer)
 	{
 		switch (renderer.RenderingApi)
 		{
@@ -17,6 +17,6 @@ public abstract class RenderCommands
 				return new OpenGl.RenderCommands();
 		}
 
-		return null;
+		throw new ArgumentException("Invalid RenderingApi");
 	}
 }
