@@ -32,7 +32,7 @@ static class Game
 			animationController.Draw(_renderer, _window.GetMouseMotion(), new Vector2(64, 64));
 			// _renderer.DrawRect(new Vector2(64, 64), new Vector2(64, 64), Color.CreateFloat(1, 1, 1, 1));
 			
-			_renderer.DrawRoundedRect(new Vector2(64, 64), new Vector2(256, 128), 64);
+			_renderer.DrawRoundedRect(new Vector2(64, 64), new Vector2(256, 128), 32, Color.CreateFloat(1, 0, 1, 0.2f));
 			
 			_renderer.EndDrawing();	
 			_window.Present();

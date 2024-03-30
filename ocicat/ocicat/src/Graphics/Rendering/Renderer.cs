@@ -198,14 +198,21 @@ public class Renderer
 		
 		// Debug rect
 		// DrawRect(position, size, Color.CreateFloat(1, 0, 1, 0.2f));
+		Framebuffer framebuffer = Framebuffer.Create(this, (int) size.X, (int) size.Y);
+		framebuffer.Bind();
 		
-		DrawRect(position + new Vector2(0, radius), size - new Vector2(0, radius * 2), color);
-		DrawRect(position + new Vector2(radius, 0), new Vector2(size.X - radius * 2, radius), color);
-		DrawRect(position + new Vector2(radius, size.Y - radius), new Vector2(size.X - radius * 2, radius), color);
+		Color white = Color.CreateFloat(1, 1, 1, 1);
 		
-		DrawCircle(position + new Vector2(radius, radius), radius, (int) (radius * 0.75f), color);
-		DrawCircle(position + size - new Vector2(radius, radius), radius, (int) (radius * 0.75f), color);
-		DrawCircle(position + new Vector2(size.X - radius, radius), radius, (int) (radius * 0.75f), color);
-		DrawCircle(position + new Vector2(radius, size.Y - radius), radius, (int) (radius * 0.75f), color);
+		DrawRect(new Vector2(0, radius), size - new Vector2(0, radius * 2), white);
+		DrawRect(new Vector2(radius, 0), new Vector2(size.X - radius * 2, radius), white);
+		DrawRect(new Vector2(radius, size.Y - radius), new Vector2(size.X - radius * 2, radius), white);
+		
+		DrawCircle(new Vector2(radius, radius), radius, (int) (radius * 0.75f), white);
+		DrawCircle(size - new Vector2(radius, radius), radius, (int) (radius * 0.75f), white);
+		DrawCircle(new Vector2(size.X - radius, radius), radius, (int) (radius * 0.75f), white);
+		DrawCircle(new Vector2(radius, size.Y - radius), radius, (int) (radius * 0.75f), white);
+		
+		framebuffer.Unbind();
+		DrawRectTextured(position, size, framebuffer.GetTextureAttachment(), color);
 	}
 }
