@@ -197,9 +197,11 @@ public class Renderer
 			color = Color.CreateFloat(1, 1, 1, 1);
 		
 		// Debug rect
-		DrawRect(position, size, Color.CreateFloat(1, 0, 1, 0.2f));
+		// DrawRect(position, size, Color.CreateFloat(1, 0, 1, 0.2f));
 		
-		DrawRect(position + new Vector2(radius, radius), size - new Vector2(radius * 2, radius * 2), color);
+		DrawRect(position + new Vector2(0, radius), size - new Vector2(0, radius * 2), color);
+		DrawRect(position + new Vector2(radius, 0), new Vector2(size.X - radius * 2, radius), color);
+		DrawRect(position + new Vector2(radius, size.Y - radius), new Vector2(size.X - radius * 2, radius), color);
 		
 		DrawCircle(position + new Vector2(radius, radius), radius, (int) (radius * 0.75f), color);
 		DrawCircle(position + size - new Vector2(radius, radius), radius, (int) (radius * 0.75f), color);
