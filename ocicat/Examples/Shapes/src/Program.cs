@@ -12,6 +12,9 @@ class Program
 		Renderer renderer = new Renderer(window);
 		
 		Font font = new Font(renderer, "OpenSans.ttf", 24);
+
+		float fps = 0;
+		double nextFpsUpdate = window.Time;
 		
 		while (!window.ShouldClose())
 		{
@@ -24,8 +27,14 @@ class Program
 			renderer.DrawCircle(new Vector2(600, 100), 64, 32, Color.CreateFloat(1f, 1, 0.2f, 1));
 			renderer.DrawTriangle(new Vector2(50, 50), new Vector2(100, 150), new Vector2(150, 50), Color.CreateFloat(1, 0.2f, 0.2f, 1));
 			renderer.DrawRoundedRect(new Vector2(600, 300), new Vector2(100, 150), 30, Color.CreateFloat(1, 0.2f, 1, 1));
+
+			if (window.Time > nextFpsUpdate)
+			{
+				nextFpsUpdate = window.Time + 1;
+				fps = 1f / window.DeltaTime;
+			}
 			
-			renderer.DrawText($"FPS: {1 / window.DeltaTime}", font, new Vector2(20, 20));
+			renderer.DrawText($"FPS: {fps}", font, new Vector2(20, 20));
 			
 			renderer.EndDrawing();
 			window.Present();

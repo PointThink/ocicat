@@ -82,6 +82,7 @@ public class OpenTKWindow : Window
 	{
 		_tkWindow.SwapBuffers();
 		DeltaTime = ( (float) (DateTime.Now - frameBeginTime).TotalMilliseconds ) / 1000;
+		Time += DeltaTime;
 	}
 	
 	public override bool ShouldClose()

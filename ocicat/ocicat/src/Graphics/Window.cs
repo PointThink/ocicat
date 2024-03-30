@@ -8,6 +8,7 @@ namespace ocicat.Graphics;
 public abstract class Window
 {
 	public float DeltaTime { get; protected set; }
+	public float Time { get; protected set; }
 	
 	public RenderingApi RenderingApi { get; private set; }
 
