@@ -55,18 +55,31 @@ public class Renderer
 		RenderCommands.ClearScreen();
 	}
 
+	private Matrix4 GenTransform(Vector2 position, Vector2 size, float rotation)
+	{
+		Matrix4 view = Camera.CalculateView();
+		
+		/*
+		Matrix4 translation = Matrix4.CreateTranslation(position.X + size.X / 2, position.Y + size.Y / 2, 1) *
+		                      Matrix4.CreateScale(size.X, size.Y, 1) *
+		                      Matrix4.CreateRotationZ(Single.DegreesToRadians(rotation)) *
+		                      Matrix4.CreateTranslation(-size.X / 2, -size.Y / 2, 1);
+		*/
+
+		Matrix4 translation = Matrix4.CreateScale(size.X, size.Y, 1) *
+		                      Matrix4.CreateTranslation(-size.X / 2, -size.Y / 2, 0) *
+		                      Matrix4.CreateRotationZ(Single.DegreesToRadians(rotation)) *
+		                      Matrix4.CreateTranslation(position.X + size.X / 2, position.Y + size.Y / 2, 0);
+		
+		return view * translation;
+	}
+
 	public void DrawRect(Vector2 position, Vector2 size, Color color, float rotation = 0)
 	{
 		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 view = Camera.CalculateView();
-		Matrix4 positionMat = Matrix4.CreateTranslation(position.X, position.Y, 0);
-		Matrix4 scale = Matrix4.CreateScale(size.X, size.Y, 1);
-		Matrix4 rotationMat = Matrix4.CreateRotationZ(Single.DegreesToRadians(rotation));
-		
-		Matrix4 transform = view * scale * rotationMat;
+		Matrix4 transform = GenTransform(position, size, rotation);
 		
 		Primitives.UntexturedRectShader.Use();
-		Primitives.UntexturedRectShader.UniformMat4("positionMat", ref positionMat);
 		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
 		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
 		// Primitives.UntexturedRectShader.UniformMat4("scale", ref scale);
@@ -81,17 +94,11 @@ public class Renderer
 			tint = Color.CreateFloat(1, 1, 1, 1);
 		
 		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 view = Camera.CalculateView();
-		Matrix4 positionMat = Matrix4.CreateTranslation(position.X, position.Y, 0);
-		Matrix4 scale = Matrix4.CreateScale(size.X, size.Y, 1);
-		Matrix4 rotationMat = Matrix4.CreateRotationZ(rotation);
-		
-		Matrix4 transform = view * scale * rotationMat;
+		Matrix4 transform = GenTransform(position, size, rotation);
 		
 		Primitives.TexturedRectShader.Use();
         Primitives.TexturedRectShader.UniformMat4("transform", ref transform);
-        Primitives.TexturedRectShader.UniformMat4("projection", ref projection);
-        Primitives.TexturedRectShader.UniformMat4("positionMat", ref positionMat);
+        Primitives.TexturedRectShader.UniformMat4("projection", ref projection);;
 		Primitives.TexturedRectShader.Uniform4f("tint", tint.R, tint.G, tint.B, tint.A);
 
 		texture.Bind(0);
@@ -103,16 +110,11 @@ public class Renderer
 	public void DrawFontGlyph(FontGlyph glyph, Vector2 position, Color color, float scale = 1)
 	{
 		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 view = Camera.CalculateView();
-		Matrix4 positionMat = Matrix4.CreateTranslation(position.X, position.Y - (glyph.SizeY - glyph.BearingY), 0);
-		Matrix4 scaleMat = Matrix4.CreateScale(glyph.SizeX  * scale, glyph.SizeY * scale, 1);
-		
-		Matrix4 transform = view * scaleMat;
+		Matrix4 transform = GenTransform(new Vector2(position.X, position.Y - (glyph.SizeY - glyph.BearingY)), new Vector2(glyph.SizeX  * scale, glyph.SizeY * scale), 0);
 		
 		Primitives.TextShader.Use();
 		Primitives.TextShader.UniformMat4("transform", ref transform);
 		Primitives.TextShader.UniformMat4("projection", ref projection);
-		Primitives.TextShader.UniformMat4("positionMat", ref positionMat);
 		Primitives.TextShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 
 		glyph.Texture.Bind(0);
@@ -175,14 +177,10 @@ public class Renderer
 		));
 		
 		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 view = Camera.CalculateView();
 		Matrix4 positionMat = Matrix4.CreateTranslation(center.X, center.Y, 0);
-		Matrix4 scale = Matrix4.CreateScale(radius, radius, 1);
-		
-		Matrix4 transform = view * scale;
+		Matrix4 transform = GenTransform(center, new Vector2(radius, radius), 0);
 		
 		Primitives.UntexturedRectShader.Use();
-		Primitives.UntexturedRectShader.UniformMat4("positionMat", ref positionMat);
 		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
 		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
 		// Primitives.UntexturedRectShader.UniformMat4("scale", ref scale);
@@ -191,28 +189,25 @@ public class Renderer
 		RenderCommands.DrawIndexed(mesh.VertexArray);
 	}
 
-	public void DrawRoundedRect(Vector2 position, Vector2 size, float radius, Color? color = null)
+	public void DrawRoundedRect(Vector2 position, Vector2 size, float radius, Color color, float rotation = 0)
 	{
-		if (color == null)
-			color = Color.CreateFloat(1, 1, 1, 1);
-		
 		// Debug rect
 		// DrawRect(position, size, Color.CreateFloat(1, 0, 1, 0.2f));
-		Framebuffer framebuffer = Framebuffer.Create(this, (int) size.X, (int) size.Y);
+		Framebuffer framebuffer = Framebuffer.Create(this, (int)size.X, (int)size.Y);
 		framebuffer.Bind();
-		
+
 		Color white = Color.CreateFloat(1, 1, 1, 1);
-		
+
 		DrawRect(new Vector2(0, radius), size - new Vector2(0, radius * 2), white);
 		DrawRect(new Vector2(radius, 0), new Vector2(size.X - radius * 2, radius), white);
 		DrawRect(new Vector2(radius, size.Y - radius), new Vector2(size.X - radius * 2, radius), white);
-		
-		DrawCircle(new Vector2(radius, radius), radius, (int) (radius * 0.75f), white);
-		DrawCircle(size - new Vector2(radius, radius), radius, (int) (radius * 0.75f), white);
-		DrawCircle(new Vector2(size.X - radius, radius), radius, (int) (radius * 0.75f), white);
-		DrawCircle(new Vector2(radius, size.Y - radius), radius, (int) (radius * 0.75f), white);
-		
+
+		DrawCircle(new Vector2(radius, radius), radius, (int)(radius * 0.75f), white);
+		DrawCircle(size - new Vector2(radius, radius), radius, (int)(radius * 0.75f), white);
+		DrawCircle(new Vector2(size.X - radius, radius), radius, (int)(radius * 0.75f), white);
+		DrawCircle(new Vector2(radius, size.Y - radius), radius, (int)(radius * 0.75f), white);
+
 		framebuffer.Unbind();
-		DrawRectTextured(position, size, framebuffer.GetTextureAttachment(), color);
+		DrawRectTextured(position, size, framebuffer.GetTextureAttachment(), color, rotation);
 	}
 }

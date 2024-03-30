@@ -30,7 +30,7 @@ public class AnimationController
 		_currentFrame = 0;
 	}
 
-	public void Draw(Renderer renderer, Vector2 position, Vector2 size, Color tint = null)
+	public void Draw(Renderer renderer, Vector2 position, Vector2 size, Color tint = null, float rotation = 0)
 	{	
 		float actualFps = Template.BaseFps * SpeedMultiplier;
 
@@ -43,7 +43,7 @@ public class AnimationController
 		if (_currentFrame >= Template.Frames.Length)
 			_currentFrame = 0;
 		
-		renderer.DrawRectTextured(position, size, Template.Frames[_currentFrame], tint);
+		renderer.DrawRectTextured(position, size, Template.Frames[_currentFrame], tint, rotation);
 	}
 
 	public float SpeedMultiplier = 1;

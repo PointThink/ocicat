@@ -29,10 +29,10 @@ static class Game
 			_renderer.BeginDrawing();
 			
 			_renderer.RenderCommands.ClearScreen();
-			animationController.Draw(_renderer, _window.GetMouseMotion(), new Vector2(64, 64));
+			animationController.Draw(_renderer, _window.GetMouseMotion(), new Vector2(64, 64), Color.CreateFloat(1, 1, 1, 1), 45);
 			// _renderer.DrawRect(new Vector2(64, 64), new Vector2(64, 64), Color.CreateFloat(1, 1, 1, 1));
 			
-			_renderer.DrawRoundedRect(new Vector2(64, 64), new Vector2(256, 128), 32, Color.CreateFloat(1, 0, 1, 0.2f));
+			_renderer.DrawRoundedRect(new Vector2(64, 64), new Vector2(256, 128), 32, Color.CreateFloat(1, 0, 1, 0.2f), 46);
 			
 			_renderer.EndDrawing();	
 			_window.Present();
