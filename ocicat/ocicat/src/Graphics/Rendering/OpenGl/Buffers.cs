@@ -11,6 +11,7 @@ public class VertexBuffer : Rendering.VertexBuffer
 		_handle = GL.GenBuffer();
 		GL.BindBuffer(BufferTarget.ArrayBuffer, _handle);
 		GL.BufferData(BufferTarget.ArrayBuffer, data.Length * sizeof(float), data, BufferUsageHint.StaticDraw);
+		GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 	}
 
 	~VertexBuffer()
@@ -40,6 +41,7 @@ public class IndexBuffer : Rendering.IndexBuffer
 		_indexCount = (uint) data.Length;
 		GL.BindBuffer(BufferTarget.ElementArrayBuffer, _handle);
 		GL.BufferData(BufferTarget.ElementArrayBuffer, data.Length * sizeof(uint), data, BufferUsageHint.StaticDraw);
+		GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 	}
 
 	~IndexBuffer()

@@ -152,10 +152,10 @@ public class Renderer
 		// Generate circle mesh
 		for (int i = 0; i < count; i++)
 		{
-			double degrees = (360f / count) * i;
+			double degrees = 360f / count * i;
 
-			Vector2 vertex1 = Vector2.Normalize((float) degrees, radius);
-			Vector2 vertex2 = Vector2.Normalize((float) degrees + (360f / count), radius);
+			Vector2 vertex1 = Vector2.Normalize((float) degrees);
+			Vector2 vertex2 = Vector2.Normalize((float) degrees + 360f / count);
 			
 			vertecies.Add(0);
 			vertecies.Add(0);
@@ -164,13 +164,11 @@ public class Renderer
 			vertecies.Add(vertex2.X);
 			vertecies.Add(vertex2.Y);
 		}
+		
+		uint[] indicies = new uint[count * 3];
 
-		uint[] indicies = new uint[vertecies.Count / 2];
-
-		for (uint i = 0; i < vertecies.Count / 2; i++)
-		{
+		for (uint i = 0; i < count * 3; i++)
 			indicies[i] = i;
-		}
 
 		Mesh mesh = new Mesh(this, vertecies.ToArray(), indicies, new BufferLayout(
 			[new BufferElement("position", ShaderDataType.Float2)]
@@ -178,15 +176,34 @@ public class Renderer
 		
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 view = Camera.CalculateView();
-		Matrix4 transform = Matrix4.CreateTranslation(center.X, center.Y, 0);
-		Matrix4 scaleMat = Matrix4.CreateScale(1, 1, 1);
+		Matrix4 positionMat = Matrix4.CreateTranslation(center.X, center.Y, 0);
+		Matrix4 scale = Matrix4.CreateScale(radius, radius, 1);
+		
+		Matrix4 transform = view * scale;
 		
 		Primitives.UntexturedRectShader.Use();
+		Primitives.UntexturedRectShader.UniformMat4("positionMat", ref positionMat);
 		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
 		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
-		Primitives.UntexturedRectShader.UniformMat4("scale", ref scaleMat);
+		// Primitives.UntexturedRectShader.UniformMat4("scale", ref scale);
 		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
-		
+
 		RenderCommands.DrawIndexed(mesh.VertexArray);
+	}
+
+	public void DrawRoundedRect(Vector2 position, Vector2 size, float radius, Color? color = null)
+	{
+		if (color == null)
+			color = Color.CreateFloat(1, 1, 1, 1);
+		
+		// Debug rect
+		DrawRect(position, size, Color.CreateFloat(1, 0, 1, 0.2f));
+		
+		DrawRect(position + new Vector2(radius, radius), size - new Vector2(radius * 2, radius * 2), color);
+		
+		DrawCircle(position + new Vector2(radius, radius), radius, (int) (radius * 0.75f), color);
+		DrawCircle(position + size - new Vector2(radius, radius), radius, (int) (radius * 0.75f), color);
+		DrawCircle(position + new Vector2(size.X - radius, radius), radius, (int) (radius * 0.75f), color);
+		DrawCircle(position + new Vector2(radius, size.Y - radius), radius, (int) (radius * 0.75f), color);
 	}
 }

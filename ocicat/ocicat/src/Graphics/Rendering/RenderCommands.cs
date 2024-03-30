@@ -7,6 +7,7 @@ public abstract class RenderCommands
 	public abstract void SetClearColor(float r, float g, float b, float a);
 	public abstract void ClearScreen();
 
+	public abstract void DrawArrays(VertexArray vertexArray, int count);
 	public abstract void DrawIndexed(VertexArray vertexArray);
 	
 	public static RenderCommands Create(Renderer renderer)

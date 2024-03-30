@@ -29,9 +29,17 @@ public class RenderCommands : Rendering.RenderCommands
 		GL.Clear(ClearBufferMask.ColorBufferBit);
 	}
 
+	public override void DrawArrays(Rendering.VertexArray vertexArray, int count)
+	{
+		vertexArray.Bind();
+		GL.DrawArrays(PrimitiveType.Triangles, 0, count);
+	}
+
 	public override void DrawIndexed(Rendering.VertexArray vertexArray)
 	{
 		vertexArray.Bind();
+		vertexArray.GetVertexBuffer().Bind();
+		vertexArray.GetIndexBuffer().Bind();
 		GL.DrawElements(PrimitiveType.Triangles, (int) vertexArray.GetIndexBuffer().GetIndexCount(), DrawElementsType.UnsignedInt, 0);		
 	}
 	

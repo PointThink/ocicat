@@ -52,6 +52,8 @@ public class VertexArray : Rendering.VertexArray
 		}
 
 		_vertexBuffer = vertexBuffer;
+		
+		GL.BindVertexArray(0);
 	}
 
 	public override void SetIndexBuffer(Rendering.IndexBuffer indexBuffer)
