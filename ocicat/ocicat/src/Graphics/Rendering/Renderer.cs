@@ -107,7 +107,7 @@ public class Renderer
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
 	}
 
-	public void DrawFontGlyph(FontGlyph glyph, Vector2 position, Color color, float scale = 1)
+	public void DrawFontGlyph(FontGlyph glyph, Vector2 position, Color color, float scale = 1, float rotation = 0)
 	{
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 transform = GenTransform(new Vector2(position.X, position.Y - (glyph.SizeY - glyph.BearingY)), new Vector2(glyph.SizeX  * scale, glyph.SizeY * scale), 0);
@@ -123,7 +123,7 @@ public class Renderer
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
 	}
 
-	public void DrawText(string text, Font font, Vector2 position, Color? color = null, float scale = 1)
+	public void DrawText(string text, Font font, Vector2 position, Color? color = null, float scale = 1, float rotation = 0)
 	{
 		if (color == null)
 			color = Color.CreateFloat(1, 1, 1, 1);
@@ -177,7 +177,6 @@ public class Renderer
 		));
 		
 		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 positionMat = Matrix4.CreateTranslation(center.X, center.Y, 0);
 		Matrix4 transform = GenTransform(center, new Vector2(radius, radius), 0);
 		
 		Primitives.UntexturedRectShader.Use();
@@ -209,5 +208,30 @@ public class Renderer
 
 		framebuffer.Unbind();
 		DrawRectTextured(position, size, framebuffer.GetTextureAttachment(), color, rotation);
+	}
+
+	public void DrawTriangle(Vector2 point1, Vector2 point2, Vector2 point3, Color color)
+	{
+		float[] verticies =
+		{
+			point1.X, point1.Y,
+			point2.X, point2.Y,
+			point3.X, point3.Y
+		};
+
+		Mesh triangleMesh = new Mesh(this, verticies, [0, 1, 2], new BufferLayout(
+			[new BufferElement("position", ShaderDataType.Float2)]
+		));
+		
+		Matrix4 projection = Camera.CalculateProjection();
+		Matrix4 transform = GenTransform(new Vector2(0, 0), new Vector2(1, 1), 0);
+		
+		Primitives.UntexturedRectShader.Use();
+		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
+		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
+		// Primitives.UntexturedRectShader.UniformMat4("scale", ref scale);
+		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
+		
+		RenderCommands.DrawIndexed(triangleMesh.VertexArray);
 	}
 }
