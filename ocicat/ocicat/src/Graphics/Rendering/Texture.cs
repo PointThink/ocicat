@@ -7,6 +7,8 @@ public enum TextureFilter
 	Linear, Nearest		
 }
 
+/// <summary>Image on the GPU.</summary>
+/// <remarks>Constructor is protected. Use the Create method</remarks>
 public abstract class Texture
 {
 	public abstract void Bind(uint slot);

@@ -20,11 +20,17 @@ public class Color
 		A = a;
 	}
 
+	/// <summary>
+	/// Create a color with 0 to 1 values
+	/// </summary>
 	public static Color CreateFloat(float r, float g, float b, float a)
 	{
 		return new Color(r, g, b, a);
 	}
 
+	/// <summary>
+	/// Create a color with 0-255 values
+	/// </summary>
 	public static Color CreateRGBA8(byte r, byte g, byte b, byte a)
 	{
 		return new Color(

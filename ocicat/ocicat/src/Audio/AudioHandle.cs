@@ -3,6 +3,9 @@ using OpenTK.Audio.OpenAL;
 
 namespace ocicat.Audio;
 
+/// <summary>
+/// Controls sound played by the audio engine
+/// </summary>
 public class AudioHandle
 {
 	private int _source;
@@ -19,12 +22,19 @@ public class AudioHandle
 		set => AL.Source(_source, ALSourcef.Pitch, value);
 	}
 
+	/// <summary>
+	/// Speaker volume for stereo. -1 is left, 1 is right.
+	/// </summary>
 	public float Pan
 	{
 		get => AL.GetSource(_source, ALSource3f.Position).X;
 		set => AL.Source(_source, ALSource3f.Position, value, 1 - value, 0);
 	}
 
+	
+	/// <summary>
+	/// Position for spatial sound.
+	/// </summary>
 	public Vector3 Position
 	{
 		get
@@ -35,6 +45,11 @@ public class AudioHandle
 		set => AL.Source(_source, ALSource3f.Position, value.X, value.Y, value.Z);
 	}
 	
+	
+	/// <summary>
+	/// Velocity of the sound source. I honestly don't know what this does.
+	/// The audio system uses OpenAL, so I guess you can look it up in the OpenAL docs.
+	/// </summary>
 	public Vector3 Velocity
 	{
 		get
@@ -60,7 +75,7 @@ public class AudioHandle
 		AL.Source(_source, ALSourcei.Buffer, sound.ALBuffer);
 	}
 
-	~AudioHandle()
+	public void Destroy()
 	{
 		AL.DeleteSource(_source);
 	}
@@ -88,6 +103,6 @@ public class AudioHandle
 	public bool Finished()
 	{
 		AL.GetSource(_source, ALGetSourcei.SourceState, out int value);
-		return value == (int)ALSourceState.Playing;
+		return value != (int)ALSourceState.Playing;
 	}
 }

@@ -3,6 +3,10 @@ using System.Numerics;
 
 namespace ocicat.Graphics;
 
+/// <summary>
+/// Contains all the frames and fps of animation.
+/// Created once for each animation.
+/// </summary>
 public class AnimationTemplate
 {
 	public AnimationTemplate(Texture[] frames, float fps)
@@ -15,6 +19,10 @@ public class AnimationTemplate
 	public readonly float BaseFps;
 }
 
+/// <summary>
+/// An instance of an animation.
+/// Created once per object that uses an animation.
+/// </summary>
 public class AnimationController
 {
 	public readonly AnimationTemplate Template;

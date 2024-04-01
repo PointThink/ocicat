@@ -3,6 +3,8 @@ using OpenTK.Audio.OpenAL;
 
 namespace ocicat.Audio;
 
+/// <summary>Sound data loaded from disk.</summary>
+/// <remarks>Only supports ogg files right now.</remarks>
 public class Sound
 {
 	public readonly int Channels;
@@ -12,7 +14,9 @@ public class Sound
 	public List<float> Data = new List<float>();
 
 	public readonly int ALBuffer;
-	
+
+	/// <param name="engine">Audio engine</param>
+	/// <param name="path">Path to file</param>
 	public Sound(AudioEngine engine, string path)
 	{
 		VorbisReader reader = new VorbisReader(path);

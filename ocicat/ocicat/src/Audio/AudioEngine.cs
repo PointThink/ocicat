@@ -2,6 +2,9 @@ using OpenTK.Audio.OpenAL;
 
 namespace ocicat.Audio;
 
+/// <summary>
+/// Manages everything audio related.
+/// </summary>
 public class AudioEngine
 {
 	private List<AudioHandle> _activeHandles = new List<AudioHandle>();
@@ -18,7 +21,7 @@ public class AudioEngine
 		
 		CheckAlErrors();
 	}
-
+	
 	public AudioHandle PlaySound(Sound sound)
 	{
 		AudioHandle handle = new AudioHandle(sound);
@@ -34,7 +37,10 @@ public class AudioEngine
 		foreach (AudioHandle handle in _activeHandles.ToList())
 		{
 			if (handle.Finished())
+			{
+				handle.Destroy();
 				_activeHandles.Remove(handle);
+			}
 		}
 	}
 

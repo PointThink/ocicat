@@ -3,6 +3,9 @@ using ocicat.Graphics.Rendering;
 
 namespace ocicat.Physics;
 
+/// <summary>
+/// A base class for all colliders.
+/// </summary>
 public abstract class Collider
 {
 	public Vector2 Position;

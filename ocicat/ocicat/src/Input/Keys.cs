@@ -1,5 +1,8 @@
 namespace ocicat.Input;
 
+/// <summary>
+/// A key on the keyboard
+/// </summary>
 public enum Key
 {
 	Unknown = -1,
