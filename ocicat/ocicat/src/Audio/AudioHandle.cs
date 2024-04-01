@@ -5,7 +5,19 @@ namespace ocicat.Audio;
 public class AudioHandle
 {
 	private int _source;
+
+	public float Volume
+	{
+		get => AL.GetSource(_source, ALSourcef.Gain);
+		set => AL.Source(_source, ALSourcef.Gain, value);
+	}
 	
+	public float Pitch
+	{
+		get => AL.GetSource(_source, ALSourcef.Pitch);
+		set => AL.Source(_source, ALSourcef.Pitch, value);
+	}
+
 	public AudioHandle(Sound sound)
 	{
 		_source = AL.GenSource();
@@ -14,6 +26,9 @@ public class AudioHandle
 		AL.Source(_source, ALSource3f.Position, 0, 0, 0);
 		AL.Source(_source, ALSource3f.Velocity, 0, 0, 0);
 		AL.Source(_source, ALSourceb.Looping, false);
+	
+		AL.Source(_source, ALSourcef.MaxGain, 10);
+		AL.Source(_source, ALSourcef.MinGain, 0);
 		
 		AL.Source(_source, ALSourcei.Buffer, sound.ALBuffer);
 	}
