@@ -4,30 +4,29 @@ using ocicat.Graphics;
 
 namespace Textures;
 
+class InGame : GameState
+{
+	public override void Draw()
+	{
+		Game.Renderer.DrawRectTextured(
+			new Vector2(0, 0), 
+			new Vector2(Program.Texture.GetWidth(), Program.Texture.GetWidth()),
+			Program.Texture
+		);
+	}
+}
+
 class Program
 {
+	public static Texture Texture;
+	
 	static void Main(string[] args)
 	{
-		Window window = Window.Create("Hello world", 800, 600);
-		Renderer renderer = new Renderer(window);
+		Game.Create("Textures", 800, 600);
 		
-		Texture texture = Texture.Create(renderer, "image.jpg");
-		
-		while (!window.ShouldClose())
-		{
-			window.HandleEvents();
-			renderer.BeginDrawing();
-			
-			renderer.ClearScreen(Color.CreateRGBA8(255, 255, 255, 255));
-			
-			renderer.DrawRectTextured(
-				new Vector2(0, 0), 
-				new Vector2(texture.GetWidth(), texture.GetWidth()),
-				texture
-			);
-			
-			renderer.EndDrawing();
-			window.Present();
-		}
+		Texture = Texture.Create(Game.Renderer, "image.jpg");
+
+		Game.GameState = new InGame();
+		Game.Run();
 	}
 }

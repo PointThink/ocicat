@@ -4,30 +4,31 @@ using ocicat.Graphics.Rendering;
 
 namespace Text;
 
-class Program {
+class InGame : GameState
+{
+	public override void Draw()
+	{
+		Game.Renderer.DrawText(
+			"The quick brown fox jumps over the lazy dog 1234567890",
+			Program.Font,
+			new Vector2(30, 30),
+			Color.CreateFloat(1, 1, 1, 1),
+			1f
+		);
+	}
+}
+
+class Program
+{
+	public static Font Font;
+	
 	static void Main(string[] args)
 	{
-		Window window = Window.Create("Hello world", 800, 450);
-		Renderer renderer = new Renderer(window);
-
-		Font font = new Font(renderer, "OpenSans.ttf", 24);
+		Game.Create("Text", 800, 450);
 		
-		while (!window.ShouldClose())
-		{
-			window.HandleEvents();
-			renderer.BeginDrawing();
-			
-			renderer.ClearScreen(Color.CreateRGBA8(25, 25, 25, 255));
-			renderer.DrawText(
-				"The quick brown fox jumps over the lazy dog 1234567890",
-				font,
-				new Vector2(30, 30),
-				Color.CreateFloat(1, 1, 1, 1),
-				1f
-			);
-			
-			renderer.EndDrawing();
-			window.Present();
-		}
+		Font = new Font(Game.Renderer, "OpenSans.ttf", 24);
+
+		Game.GameState = new InGame();
+		Game.Run();
 	}
 }

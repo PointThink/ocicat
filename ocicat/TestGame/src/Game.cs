@@ -7,7 +7,7 @@ public class InGame : GameState
 {
 	public override void Draw()
 	{
-		Game.Renderer.DrawCircle(new Vector2(400, 300), 128, 64, Color.CreateFloat(1, 0.2f, 0.2f, 1));
+		Game.Renderer.DrawCircle(new Vector2(400, 300), 128, 64, Color.Yellow);
 	}
 }
 

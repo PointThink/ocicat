@@ -4,32 +4,33 @@ using ocicat.Graphics.Rendering;
 
 namespace Animation;
 
+class InGame : GameState
+{
+	public override void Draw()
+	{
+		Program.Controller.Draw(Game.Renderer, new Vector2(0, 0), new Vector2(256, 256));
+	}
+}
+
 class Program
 {
+	public static AnimationTemplate Template;
+	public static AnimationController Controller;
+	
 	static void Main(string[] args)
 	{
-		Window window = Window.Create("Hello world", 800, 600);
-		Renderer renderer = new Renderer(window);
-
+		Game.Create("Animation", 800, 600);
+		
 		// created once per animation
-		AnimationTemplate template = new AnimationTemplate([
-			Texture.Create(renderer, "image.jpg"),
-			Texture.Create(renderer, "image2.png"),
+		Template = new AnimationTemplate([
+			Texture.Create(Game.Renderer, "image.jpg"),
+			Texture.Create(Game.Renderer, "image2.png"),
 		], 1);
 
 		// create once per object that uses the animation
-		AnimationController animationController = new AnimationController(template);
-		
-		while (!window.ShouldClose())
-		{
-			window.HandleEvents();
-			renderer.BeginDrawing();
-			
-			renderer.ClearScreen(Color.CreateRGBA8(255, 255, 255, 255));
-			animationController.Draw(renderer, new Vector2(0, 0), new Vector2(256, 256));
-			
-			renderer.EndDrawing();
-			window.Present();
-		}
+		Controller = new AnimationController(Template);
+
+		Game.GameState = new InGame();
+		Game.Run();
 	}
 }
