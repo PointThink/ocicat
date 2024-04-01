@@ -1,3 +1,4 @@
+using ocicat.Audio;
 using ocicat.Graphics;
 using ocicat.Graphics.Rendering;
 
@@ -7,6 +8,7 @@ public static class Game
 {
 	public static Window Window { get; private set; }
 	public static Renderer Renderer { get; private set; }
+	public static AudioEngine AudioEngine { get; private set; }
 
 	public static Color ClearColor = Color.CreateFloat(0, 0, 0, 1);
 
@@ -31,6 +33,7 @@ public static class Game
 	{
 		Window = Window.Create(title, width, height);
 		Renderer = new Renderer(Window);
+		AudioEngine = new AudioEngine();
 	}
 
 	public static void Run()
@@ -38,6 +41,8 @@ public static class Game
 		while (!Window.ShouldClose())
 		{
 			Window.HandleEvents();
+			
+			AudioEngine.CleanFinishedSounds();
 			
 			if (_gameState != null)
 				_gameState.Update();
