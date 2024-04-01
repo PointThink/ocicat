@@ -22,6 +22,7 @@ public static class Program
 		AudioHandle handle = Game.AudioEngine.PlaySound(sound);
 		handle.Volume = 2;
 		handle.Pitch = 2;
+		handle.Pan = 12;
 		
 		Game.ClearColor = Color.CreateFloat(0.2f, 0.2f, 0.2f, 1);
 		Game.GameState = new InGame();

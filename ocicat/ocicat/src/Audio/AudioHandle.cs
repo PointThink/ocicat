@@ -18,6 +18,12 @@ public class AudioHandle
 		set => AL.Source(_source, ALSourcef.Pitch, value);
 	}
 
+	public float Pan
+	{
+		get => AL.GetSource(_source, ALSource3f.Position).X;
+		set => AL.Source(_source, ALSource3f.Position, value, 0, 0);
+	}
+	
 	public AudioHandle(Sound sound)
 	{
 		_source = AL.GenSource();
