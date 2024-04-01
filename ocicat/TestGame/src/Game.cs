@@ -20,9 +20,9 @@ public static class Program
 		
 		Sound sound = new Sound(Game.AudioEngine, "erro.ogg");
 		AudioHandle handle = Game.AudioEngine.PlaySound(sound);
-		handle.Volume = 2;
+		handle.Volume = 1;
 		handle.Pitch = 2;
-		handle.Pan = 12;
+		handle.Pan = 1f;
 		
 		Game.ClearColor = Color.CreateFloat(0.2f, 0.2f, 0.2f, 1);
 		Game.GameState = new InGame();

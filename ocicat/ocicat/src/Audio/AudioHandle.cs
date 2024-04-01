@@ -1,3 +1,4 @@
+using System.Numerics;
 using OpenTK.Audio.OpenAL;
 
 namespace ocicat.Audio;
@@ -21,7 +22,27 @@ public class AudioHandle
 	public float Pan
 	{
 		get => AL.GetSource(_source, ALSource3f.Position).X;
-		set => AL.Source(_source, ALSource3f.Position, value, 0, 0);
+		set => AL.Source(_source, ALSource3f.Position, value, 1 - value, 0);
+	}
+
+	public Vector3 Position
+	{
+		get
+		{
+			OpenTK.Mathematics.Vector3 tkVec = AL.GetSource(_source, ALSource3f.Position);
+			return new Vector3(tkVec.X, tkVec.Y, tkVec.Z);
+		}
+		set => AL.Source(_source, ALSource3f.Position, value.X, value.Y, value.Z);
+	}
+	
+	public Vector3 Velocity
+	{
+		get
+		{
+			OpenTK.Mathematics.Vector3 tkVec = AL.GetSource(_source, ALSource3f.Velocity);
+			return new Vector3(tkVec.X, tkVec.Y, tkVec.Z);
+		}
+		set => AL.Source(_source, ALSource3f.Velocity, value.X, value.Y, value.Z);
 	}
 	
 	public AudioHandle(Sound sound)
