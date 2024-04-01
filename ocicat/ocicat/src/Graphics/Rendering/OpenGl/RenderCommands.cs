@@ -17,6 +17,8 @@ public class RenderCommands : Rendering.RenderCommands
 
 		Logging.Log(LogLevel.Info, GL.GetString(StringName.Vendor));
         Logging.Log(LogLevel.Info, GL.GetString(StringName.Version));
+        
+        GL.Enable(EnableCap.Multisample);
     }
 
 	public override void SetClearColor(float r, float g, float b, float a)

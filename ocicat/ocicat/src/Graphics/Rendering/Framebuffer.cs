@@ -14,7 +14,7 @@ public abstract class Framebuffer
 		switch (renderer.RenderingApi)
 		{
 			case RenderingApi.OpenGl:
-				return new OpenGl.Framebuffer(width, height);
+				return new OpenGl.Framebuffer(width, height, renderer.Window.AASamples);
 		}
 
 		throw new ArgumentException("Invalid RenderingApi");

@@ -1,41 +1,25 @@
-﻿using ocicat.Graphics;
-using ocicat.Graphics.Rendering;
-using Vector2 = ocicat.Vector2;
+﻿using ocicat;
+using ocicat.Graphics;
 
 namespace TestGame;
 
-static class Game
+public class InGame : GameState
 {
-	private static Window? _window;
-	private static Renderer? _renderer;
-	
-	static void Main()
+	public override void Draw()
 	{
-		_window = Window.Create("Hello", 1280, 720);
+		Game.Renderer.DrawCircle(new Vector2(400, 300), 128, 64, Color.CreateFloat(1, 0.2f, 0.2f, 1));
+	}
+}
+
+public static class Program
+{
+	public static void Main(string[] args)
+	{
+		Game.Create("Test game", 800, 600);
+
+		Game.ClearColor = Color.CreateFloat(0.2f, 0.2f, 0.2f, 1);
+		Game.GameState = new InGame();
 		
-		_renderer = new Renderer(_window);
-		_renderer.RenderCommands.SetClearColor(0.2f, 0.2f, 0.2f, 1f);
-
-		AnimationTemplate animationTemplate = new AnimationTemplate([
-			Texture.Create(_renderer, "image.jpg"),
-			Texture.Create(_renderer, "image2.png")
-		], 1);
-
-		AnimationController animationController = new AnimationController(animationTemplate);
-
-		while (!_window.ShouldClose())
-		{
-			_window.HandleEvents();
-			_renderer.BeginDrawing();
-			
-			_renderer.RenderCommands.ClearScreen();
-			animationController.Draw(_renderer, _window.GetMouseMotion(), new Vector2(64, 64), Color.CreateFloat(1, 1, 1, 1), 45);
-			// _renderer.DrawRect(new Vector2(64, 64), new Vector2(64, 64), Color.CreateFloat(1, 1, 1, 1));
-			
-			_renderer.DrawRoundedRect(new Vector2(64, 64), new Vector2(256, 128), 32, Color.CreateFloat(1, 0, 1, 0.2f), 46);
-			
-			_renderer.EndDrawing();	
-			_window.Present();
-		}
+		Game.Run();
 	}
 }

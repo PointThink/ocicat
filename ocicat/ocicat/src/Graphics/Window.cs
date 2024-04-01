@@ -10,6 +10,8 @@ public abstract class Window
 	public float DeltaTime { get; protected set; }
 	public float Time { get; protected set; }
 	
+	public int AASamples { get; protected set; }
+	
 	public RenderingApi RenderingApi { get; private set; }
 
 	public abstract bool CursorVisible { get; set; }
@@ -29,7 +31,7 @@ public abstract class Window
 
 	public abstract Vector2 GetMouseMotion();
 	
-	public static Window Create(string title, int width, int height, bool fullscreen = false, bool resizable = false,  RenderingApi? api = null)
+	public static Window Create(string title, int width, int height, bool fullscreen = false, bool resizable = false, int samples = 0, RenderingApi? api = null)
 	{
 		if (api == null)
 			api = RenderingApi.OpenGl;
@@ -39,7 +41,7 @@ public abstract class Window
 		switch (api)
 		{
 			case RenderingApi.OpenGl:
-				window = new OpenTKWindow(title, width, height, fullscreen, resizable);
+				window = new OpenTKWindow(title, width, height, fullscreen, resizable, samples);
 				break;
 			default:
 				throw new ArgumentException("Invalid RenderingApi");

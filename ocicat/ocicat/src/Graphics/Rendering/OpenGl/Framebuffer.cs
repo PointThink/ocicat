@@ -8,14 +8,14 @@ public class Framebuffer : Rendering.Framebuffer
 
 	private Texture _colorAttachment; 
 	
-	public Framebuffer(int width, int height)
+	public Framebuffer(int width, int height, int samples)
 	{
 		_handle = GL.GenFramebuffer();
 		GL.BindFramebuffer(FramebufferTarget.Framebuffer, _handle);
 
 		_colorAttachment = new Texture([], width, height, TextureFilter.Linear, 4);
 		GL.FramebufferTexture2D(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, TextureTarget.Texture2D, _colorAttachment.GetTextureID(), 0);
-
+		
 		if (GL.CheckFramebufferStatus(FramebufferTarget.Framebuffer) != FramebufferErrorCode.FramebufferComplete)
 			Logging.Log(LogLevel.Warning, "Framebuffer broken :(");
 		

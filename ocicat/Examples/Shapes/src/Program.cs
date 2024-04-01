@@ -8,7 +8,7 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		Window window = Window.Create("Hello world", 800, 600);
+		Window window = Window.Create("Hello world", 800, 600, false, false, 82);
 		Renderer renderer = new Renderer(window);
 		
 		Font font = new Font(renderer, "OpenSans.ttf", 24);

@@ -10,7 +10,7 @@ public enum RenderingApi
 
 public class Renderer
 {
-	private Window _window;
+	public Window Window { get; private set; }
 	
 	public RenderingApi RenderingApi { get; private set; } 
 	public RenderCommands RenderCommands { get; private set; }
@@ -21,17 +21,17 @@ public class Renderer
 	
 	public int Width
 	{
-		get { return _window.Width; }
+		get { return Window.Width; }
 	}
 	
 	public int Height
 	{
-		get { return _window.Height; }
+		get { return Window.Height; }
 	}
 	
 	public Renderer(Window window)
 	{
-		_window = window;
+		Window = window;
 		
 		RenderingApi = window.RenderingApi;
 		RenderCommands = RenderCommands.Create(this);
@@ -158,7 +158,7 @@ public class Renderer
 
 			Vector2 vertex1 = Vector2.Normalize((float) degrees);
 			Vector2 vertex2 = Vector2.Normalize((float) degrees + 360f / count);
-			
+
 			vertecies.Add(0);
 			vertecies.Add(0);
 			vertecies.Add(vertex1.X);

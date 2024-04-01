@@ -14,11 +14,13 @@ public class OpenTKWindow : Window
 	private GameWindow _tkWindow;
 	private DateTime frameBeginTime;
 	
-	public OpenTKWindow(string title, int width, int height, bool fullscreen = false, bool resizable = false)
+	public OpenTKWindow(string title, int width, int height, bool fullscreen = false, bool resizable = false, int samples = 0)
 	{
 		NativeWindowSettings nativeWindowSettings = NativeWindowSettings.Default;
 		nativeWindowSettings.APIVersion = new System.Version(4, 6);
 		nativeWindowSettings.API = ContextAPI.OpenGL;
+		nativeWindowSettings.NumberOfSamples = samples;
+		
 		GameWindowSettings gameWindowSettings = new GameWindowSettings();
 
 		nativeWindowSettings.Title = title;
@@ -34,11 +36,13 @@ public class OpenTKWindow : Window
 			nativeWindowSettings.WindowState = WindowState.Fullscreen;
 		
 		_tkWindow = new GameWindow(gameWindowSettings, nativeWindowSettings);
-
+		
 		Width = width;
 		Height = height;
 		
 		DeltaTime = 0;
+
+		AASamples = samples;
 	}
 
 	public override bool CursorVisible
