@@ -9,15 +9,13 @@ public enum LogLevel
 	Error = 4, // Errors
 }
 
-class LogLevelInfo
+struct LogLevelInfo
 {
-	public LogLevelInfo(string label, ConsoleColor color)
+	public LogLevelInfo(ConsoleColor color)
 	{
-		Label = label;
 		Color = color;
 	}
-		
-	public string Label;
+	
 	public ConsoleColor Color;
 }
 
@@ -27,11 +25,11 @@ public class Logging
 
 	private static Dictionary<LogLevel, LogLevelInfo> _logLevelInfo = new Dictionary<LogLevel, LogLevelInfo>()
 	{
-		{ LogLevel.Ocicat, new LogLevelInfo("Ocicat", ConsoleColor.Blue) },
-		{ LogLevel.Developer, new LogLevelInfo("Developer", ConsoleColor.Cyan) },
-		{ LogLevel.Info, new LogLevelInfo("Info", ConsoleColor.White) },
-		{ LogLevel.Warning, new LogLevelInfo("Warning", ConsoleColor.Yellow) },
-		{ LogLevel.Error, new LogLevelInfo("Error", ConsoleColor.Red) }
+		{ LogLevel.Ocicat, new LogLevelInfo(ConsoleColor.Blue) },
+		{ LogLevel.Developer, new LogLevelInfo(ConsoleColor.Cyan) },
+		{ LogLevel.Info, new LogLevelInfo(ConsoleColor.White) },
+		{ LogLevel.Warning, new LogLevelInfo(ConsoleColor.Yellow) },
+		{ LogLevel.Error, new LogLevelInfo(ConsoleColor.Red) }
 	};
 	
 	public static void Log(LogLevel level, string text)
@@ -40,7 +38,7 @@ public class Logging
 		{
 			Console.ForegroundColor = ConsoleColor.Black;
 			Console.BackgroundColor = _logLevelInfo[level].Color;
-			Console.Write($" {_logLevelInfo[level].Label} ");
+			Console.Write($" {Enum.GetName(typeof(LogLevel), level)} ");
 			Console.ResetColor();
 			Console.WriteLine($" {text}");
 		}
