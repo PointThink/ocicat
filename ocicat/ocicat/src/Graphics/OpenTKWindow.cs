@@ -10,7 +10,7 @@ using ocicat.Input;
 public class OpenTKWindow : Window
 {
 	private GameWindow _tkWindow;
-	private DateTime frameBeginTime;
+	private DateTime _frameBeginTime;
 	
 	public OpenTKWindow(string title, int width, int height, bool fullscreen = false, bool resizable = false, int samples = 0)
 	{
@@ -89,14 +89,14 @@ public class OpenTKWindow : Window
 
 	public override void HandleEvents()
 	{
-		frameBeginTime = DateTime.Now;
+		_frameBeginTime = DateTime.Now;
 		_tkWindow.ProcessEvents(0);
 	}
 
 	public override void Present()
 	{
 		_tkWindow.SwapBuffers();
-		DeltaTime = ( (float) (DateTime.Now - frameBeginTime).TotalMilliseconds ) / 1000;
+		DeltaTime = ( (float) (DateTime.Now - _frameBeginTime).TotalMilliseconds ) / 1000;
 		Time += DeltaTime;
 	}
 	
@@ -127,7 +127,6 @@ public class OpenTKWindow : Window
 
 	public override Vector2 GetMouseMotion()
 	{
-		
 		return new Vector2(_tkWindow.MouseState.X, Height - _tkWindow.MouseState.Y);
 	}
 }
