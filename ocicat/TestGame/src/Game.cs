@@ -32,7 +32,7 @@ public static class Program
 	public static Sound Sound;
 	public static void Main(string[] args)
 	{
-		Logging.LogLevel = LogLevel.Developer;
+		Logging.LogLevel = LogLevel.Ocicat;
 		
 		Game.Create("Test game", 800, 600);
 		Sound = new Sound(Game.AudioEngine, "erro.ogg");

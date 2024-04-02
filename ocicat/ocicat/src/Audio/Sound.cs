@@ -19,7 +19,7 @@ public class Sound
 	/// <param name="path">Path to file</param>
 	public Sound(AudioEngine engine, string path)
 	{
-		Logging.Log(LogLevel.Developer, $"Loading sound from {path}");
+		Logging.Log(LogLevel.Ocicat, $"Loading sound from {path}");
 		
 		VorbisReader reader = new VorbisReader(path);
 
@@ -27,7 +27,7 @@ public class Sound
 		SampleRate = reader.SampleRate;
 		TotalTime = reader.TotalTime.TotalSeconds;
 
-		Logging.Log(LogLevel.Developer, $"Audio info:\n\tChannels: {Channels}\n\tSample rate: {SampleRate}\n\tTotal time: {TotalTime}s");
+		Logging.Log(LogLevel.Ocicat, $"Audio info:\n\tChannels: {Channels}\n\tSample rate: {SampleRate}\n\tTotal time: {TotalTime}s");
 		
 		float[] readBuffer = new float[Channels * SampleRate / 5];	
 		

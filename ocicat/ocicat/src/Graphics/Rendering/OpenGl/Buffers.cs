@@ -13,13 +13,13 @@ public class VertexBuffer : Rendering.VertexBuffer
 		GL.BufferData(BufferTarget.ArrayBuffer, data.Length * sizeof(float), data, BufferUsageHint.StaticDraw);
 		GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 		
-		Logging.Log(LogLevel.Developer, $"Created OpenGL VertexBuffer at location {_handle}");
+		Logging.Log(LogLevel.Ocicat, $"Created OpenGL VertexBuffer at location {_handle}");
 	}
 
 	~VertexBuffer()
 	{
 		GL.DeleteBuffer(_handle);
-		Logging.Log(LogLevel.Developer, $"Disposed OpenGL VertexArray with handle {_handle}");
+		Logging.Log(LogLevel.Ocicat, $"Disposed OpenGL VertexArray with handle {_handle}");
 	}
 
 	public override void Bind()
@@ -46,13 +46,13 @@ public class IndexBuffer : Rendering.IndexBuffer
 		GL.BufferData(BufferTarget.ElementArrayBuffer, data.Length * sizeof(uint), data, BufferUsageHint.StaticDraw);
 		GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 		
-		Logging.Log(LogLevel.Developer, $"Created OpenGL IndexBuffer at location {_handle}");
+		Logging.Log(LogLevel.Ocicat, $"Created OpenGL IndexBuffer at location {_handle}");
 	}
 
 	~IndexBuffer()
 	{
 		GL.DeleteBuffer(_handle);
-		Logging.Log(LogLevel.Developer, $"Disposed OpenGL IndexArray with handle {_handle}");
+		Logging.Log(LogLevel.Ocicat, $"Disposed OpenGL IndexArray with handle {_handle}");
 	}
 	
 	public override void Bind()

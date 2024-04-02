@@ -14,12 +14,12 @@ public class VertexArray : Rendering.VertexArray
 		_handle = GL.GenVertexArray();
 		GL.BindVertexArray(_handle);
 		
-		Logging.Log(LogLevel.Developer, $"Created OpenGL VertexArray with handle {_handle}");
+		Logging.Log(LogLevel.Ocicat, $"Created OpenGL VertexArray with handle {_handle}");
 	}
 
 	~VertexArray()
 	{
-		Logging.Log(LogLevel.Developer, $"Disposed OpenGL VertexArray with handle {_handle}");
+		Logging.Log(LogLevel.Ocicat, $"Disposed OpenGL VertexArray with handle {_handle}");
 		GL.DeleteVertexArray(_handle);
 	}
 	

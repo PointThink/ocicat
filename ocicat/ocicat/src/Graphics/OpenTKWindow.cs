@@ -14,7 +14,7 @@ public class OpenTKWindow : Window
 	
 	public OpenTKWindow(string title, int width, int height, bool fullscreen = false, bool resizable = false, int samples = 0)
 	{
-		Logging.Log(LogLevel.Developer, $"Creating OpenTK window.\n\tTitle: {title}\n\tSize: {width}x{height}\n\tFullscreen: {fullscreen}\n\tResizable: {resizable}\n\tAA Samples: {samples}");
+		Logging.Log(LogLevel.Ocicat, $"Creating OpenTK window.\n\tTitle: {title}\n\tSize: {width}x{height}\n\tFullscreen: {fullscreen}\n\tResizable: {resizable}\n\tAA Samples: {samples}");
 		
 		NativeWindowSettings nativeWindowSettings = NativeWindowSettings.Default;
 		nativeWindowSettings.APIVersion = new System.Version(4, 6);

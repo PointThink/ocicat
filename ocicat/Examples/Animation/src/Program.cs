@@ -19,7 +19,7 @@ class Program
 	
 	static void Main(string[] args)
 	{
-		Logging.LogLevel = LogLevel.Developer;
+		Logging.LogLevel = LogLevel.Ocicat;
 		
 		Game.Create("Animation", 800, 600);
 		

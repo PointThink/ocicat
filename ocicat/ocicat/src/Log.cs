@@ -2,10 +2,11 @@ namespace ocicat;
 
 public enum LogLevel
 {
-	Developer = 0,
-	Info = 1,
-	Warning = 2,
-	Error = 3,
+	Ocicat = 0, // Ocicat debug info
+	Developer = 1, // Debug info about game
+	Info = 2, // General info (recommended for release)
+	Warning = 3, // Warnings
+	Error = 4, // Errors
 }
 
 class LogLevelInfo
@@ -26,7 +27,8 @@ public class Logging
 
 	private static Dictionary<LogLevel, LogLevelInfo> _logLevelInfo = new Dictionary<LogLevel, LogLevelInfo>()
 	{
-		{ LogLevel.Developer, new LogLevelInfo("Developer", ConsoleColor.Blue) },
+		{ LogLevel.Ocicat, new LogLevelInfo("Ocicat", ConsoleColor.Blue) },
+		{ LogLevel.Developer, new LogLevelInfo("Developer", ConsoleColor.Cyan) },
 		{ LogLevel.Info, new LogLevelInfo("Info", ConsoleColor.White) },
 		{ LogLevel.Warning, new LogLevelInfo("Warning", ConsoleColor.Yellow) },
 		{ LogLevel.Error, new LogLevelInfo("Error", ConsoleColor.Red) }
