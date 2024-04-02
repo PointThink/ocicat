@@ -4,8 +4,6 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Common.Input;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-using Vector2 = System.Numerics.Vector2;
-
 namespace ocicat.Graphics;
 using ocicat.Input;
 
@@ -116,6 +114,7 @@ public class OpenTKWindow : Window
 
 	public override Vector2 GetMouseMotion()
 	{
+		
 		return new Vector2(_tkWindow.MouseState.X, Height - _tkWindow.MouseState.Y);
 	}
 }

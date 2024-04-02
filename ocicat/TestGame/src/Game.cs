@@ -1,7 +1,9 @@
-﻿using ocicat;
+﻿using System.Numerics;
+using ocicat;
 using ocicat.Audio;
 using ocicat.Graphics;
 using ocicat.Input;
+using Vector2 = ocicat.Vector2;
 
 namespace TestGame;
 
@@ -11,15 +13,17 @@ public class InGame : GameState
 	{
 		if (Game.Window.IsKeyPressed(Key.Space))
 		{
+			Vector2 mousePos = Game.Window.GetMouseMotion();
 			AudioHandle handle = Game.AudioEngine.PlaySound(Program.Sound);
-			handle.Pan = 0;
+			handle.Position = new Vector3(mousePos.X - 400, mousePos.Y - 300, 0);
+			handle.Falloff = 0.1f;
 		}
 	}
 
 	public override void Draw()
 	{
 		// Game.Renderer.DrawCircle(new Vector2(400, 300), 128, 64, Color.Yellow);
-		Game.Renderer.DrawLine(new Vector2(0, 0), Game.Window.GetMouseMotion(), 10, Color.Blue);
+		Game.Renderer.DrawLine(new Vector2(400, 300), Game.Window.GetMouseMotion(), 10, Color.Blue);
 	}
 }
 

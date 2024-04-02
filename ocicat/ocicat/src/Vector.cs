@@ -1,7 +1,5 @@
 namespace ocicat;
 
-using System.Numerics;
-
 public struct Vector2
 {
 	public float X;

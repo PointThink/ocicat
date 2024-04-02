@@ -22,6 +22,12 @@ public class AudioHandle
 		set => AL.Source(_source, ALSourcef.Pitch, value);
 	}
 
+	public float Falloff
+	{
+		get => AL.GetSource(_source, ALSourcef.RolloffFactor);
+		set => AL.Source(_source, ALSourcef.RolloffFactor, value);
+	}
+
 	/// <summary>
 	/// Speaker volume for stereo. -1 is left, 1 is right.
 	/// </summary>
