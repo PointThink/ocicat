@@ -67,7 +67,6 @@ public class Renderer
 		Primitives.UntexturedRectShader.Use();
 		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
 		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
-		// Primitives.UntexturedRectShader.UniformMat4("scale", ref scale);
 		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 		
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
@@ -108,7 +107,6 @@ public class Renderer
 		Primitives.UntexturedRectShader.Use();
 		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
 		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
-		// Primitives.UntexturedRectShader.UniformMat4("scale", ref scale);
 		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 
 		RenderCommands.DrawIndexed(mesh.VertexArray);
@@ -133,7 +131,6 @@ public class Renderer
 		Primitives.UntexturedRectShader.Use();
 		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
 		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
-		// Primitives.UntexturedRectShader.UniformMat4("scale", ref scale);
 		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 		
 		RenderCommands.DrawIndexed(triangleMesh.VertexArray);
@@ -141,8 +138,6 @@ public class Renderer
 	
 	public void DrawRoundedRect(Vector2 position, Vector2 size, float radius, Color color, float rotation = 0)
 	{
-		// Debug rect
-		// DrawRect(position, size, Color.CreateFloat(1, 0, 1, 0.2f));
 		Framebuffer framebuffer = Framebuffer.Create(this, (int)size.X, (int)size.Y);
 		framebuffer.Bind();
 
@@ -218,5 +213,24 @@ public class Renderer
 				currentPosition.X += glyph.Advance * scale;
 			}
 		}
+	}
+
+	public void DrawLine(Vector2 point1, Vector2 point2, float thickness, Color color)
+	{
+		Matrix4 view = Camera.CalculateView();
+		Matrix4 translation = Matrix4.CreateScale(thickness, Vector2.GetDistance(point1, point2), 1) *
+		                      Matrix4.CreateRotationZ(Single.DegreesToRadians(Vector2.GetDirection(point1, point2))) *
+		                      Matrix4.CreateTranslation(point1.X, point1.Y, 0);
+
+
+		Matrix4 transform = translation;
+		Matrix4 projection = Camera.CalculateProjection();
+		
+		Primitives.UntexturedRectShader.Use();
+		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
+		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
+		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
+		
+		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
 	}
 }

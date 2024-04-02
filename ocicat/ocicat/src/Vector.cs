@@ -50,7 +50,10 @@ public struct Vector2
 
 	public static float GetDirection(Vector2 v1, Vector2 v2)
 	{
-		double direction = Math.Atan2(-(v2.Y - v1.Y), -(v2.Y - v2.Y)) * 57.2957795;
+		double xDiff = v2.X - v1.X;
+		double yDiff = v2.Y - v1.Y;
+		
+		double direction = Math.Atan2(yDiff, xDiff) * 180 / Math.PI - 90;
 
 		return (float) direction;
 	}
