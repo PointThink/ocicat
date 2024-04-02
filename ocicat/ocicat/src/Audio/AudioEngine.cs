@@ -11,6 +11,8 @@ public class AudioEngine
 	
 	public AudioEngine()
 	{
+		Logging.Log(LogLevel.Developer, "Initializing OpenAL device");
+		
 		ALDevice device = ALC.OpenDevice(null);
 		ALContext context = ALC.CreateContext(device, new ALContextAttributes());
 		ALC.MakeContextCurrent(context);
@@ -20,6 +22,8 @@ public class AudioEngine
 		AL.Listener(ALListener3f.Velocity, 0, 0, 0);
 		
 		CheckAlErrors();
+		
+		Logging.Log(LogLevel.Developer, $"Device supports {ALC.GetInteger(device, AlcGetInteger.EfxMaxAuxiliarySends)} effects per source");
 	}
 	
 	public AudioHandle PlaySound(Sound sound)

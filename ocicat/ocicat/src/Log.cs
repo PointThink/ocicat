@@ -26,7 +26,7 @@ public class Logging
 
 	private static Dictionary<LogLevel, LogLevelInfo> _logLevelInfo = new Dictionary<LogLevel, LogLevelInfo>()
 	{
-		{ LogLevel.Developer, new LogLevelInfo("Developer", ConsoleColor.Cyan) },
+		{ LogLevel.Developer, new LogLevelInfo("Developer", ConsoleColor.Blue) },
 		{ LogLevel.Info, new LogLevelInfo("Info", ConsoleColor.White) },
 		{ LogLevel.Warning, new LogLevelInfo("Warning", ConsoleColor.Yellow) },
 		{ LogLevel.Error, new LogLevelInfo("Error", ConsoleColor.Red) }

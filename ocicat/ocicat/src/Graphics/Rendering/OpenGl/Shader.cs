@@ -32,16 +32,22 @@ public class Shader : Rendering.Shader
 		{
 			string infoLog = GL.GetProgramInfoLog(_handle);
 			Logging.Log(LogLevel.Error, $"Error linking shader: {infoLog}");
+			return;
 		}
+		
+		
+		Logging.Log(LogLevel.Developer, $"Created OpenGL Shader at location {_handle}");
 
 		_uniformLocations = new Dictionary<string, int>();
 
 		GL.GetProgram(_handle, GetProgramParameterName.ActiveUniforms, out int uniforms);
-
+		
 		for (int i = 0; i < uniforms; i++)
 		{
 			GL.GetActiveUniform(_handle, i, 64, out int lenght, out int size, out ActiveUniformType uniformType, out string name);
 			_uniformLocations.Add(name, GL.GetUniformLocation(_handle, name));
+			
+			Logging.Log(LogLevel.Developer, $"Located uniform in shader: {name} at location {_uniformLocations[name]}");
 		}
 	}
 

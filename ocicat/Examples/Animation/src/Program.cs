@@ -19,6 +19,8 @@ class Program
 	
 	static void Main(string[] args)
 	{
+		Logging.LogLevel = LogLevel.Developer;
+		
 		Game.Create("Animation", 800, 600);
 		
 		// created once per animation

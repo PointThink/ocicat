@@ -24,6 +24,8 @@ public class Renderer
 
 	public Renderer(Window window)
 	{
+		Logging.Log(LogLevel.Developer, $"Initializing renderer with {Enum.GetName(typeof(RenderingApi), window.RenderingApi)}");
+		
 		Window = window;
 		
 		RenderingApi = window.RenderingApi;

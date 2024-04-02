@@ -42,11 +42,14 @@ public class Texture : Rendering.Texture
 		
 		GL.TexImage2D(TextureTarget.Texture2D, 0, InternalFormat.Rgba8, width, height, 0, format, PixelType.UnsignedByte, imageData);
 		GL.BindTexture(TextureTarget.Texture2D, 0);
+		
+		Logging.Log(LogLevel.Developer, $"Created OpenGL Texture:\n\tHandle: {_handle}\n\tWidth: {width}\n\tWidth: {height}\n\tFilter: {Enum.GetName(typeof(TextureFilter), textureFilter)}\n\tChannels: {colorChannels}");
 	}
 
 	~Texture()
 	{
 		GL.DeleteTexture(_handle);
+		Logging.Log(LogLevel.Developer, $"Disposed OpenGL texture {_handle}");
 	}
 
 	public override void Bind(uint slot)
