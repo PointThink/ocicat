@@ -17,7 +17,7 @@ public class Renderer
 	
 	public Primitives Primitives { get; private set; }
 
-	public Camera Camera { get; private set; }
+	public Camera Camera;
 	
 	public int Width => Window.Width;
 	public int Height => Window.Height;

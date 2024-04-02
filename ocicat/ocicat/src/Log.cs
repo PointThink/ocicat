@@ -16,14 +16,14 @@ struct LogLevelInfo
 		Color = color;
 	}
 	
-	public ConsoleColor Color;
+	public readonly ConsoleColor Color;
 }
 
 public class Logging
 {
 	public static LogLevel LogLevel = LogLevel.Info;
 
-	private static Dictionary<LogLevel, LogLevelInfo> _logLevelInfo = new Dictionary<LogLevel, LogLevelInfo>()
+	private static readonly Dictionary<LogLevel, LogLevelInfo> LogLevelInfo = new Dictionary<LogLevel, LogLevelInfo>()
 	{
 		{ LogLevel.Ocicat, new LogLevelInfo(ConsoleColor.Blue) },
 		{ LogLevel.Developer, new LogLevelInfo(ConsoleColor.Cyan) },
@@ -37,7 +37,7 @@ public class Logging
 		if (level >= LogLevel)
 		{
 			Console.ForegroundColor = ConsoleColor.Black;
-			Console.BackgroundColor = _logLevelInfo[level].Color;
+			Console.BackgroundColor = LogLevelInfo[level].Color;
 			Console.Write($" {Enum.GetName(typeof(LogLevel), level)} ");
 			Console.ResetColor();
 			Console.WriteLine($" {text}");

@@ -15,8 +15,10 @@ public class RenderCommands : Rendering.RenderCommands
 		
 		GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
 
-		Logging.Log(LogLevel.Info, GL.GetString(StringName.Vendor));
-        Logging.Log(LogLevel.Info, GL.GetString(StringName.Version));
+		Logging.Log(LogLevel.Info, $"Vendor: {GL.GetString(StringName.Vendor)}");
+        Logging.Log(LogLevel.Info, $"GL Version: {GL.GetString(StringName.Version)}");
+        Logging.Log(LogLevel.Info, $"Renderer: {GL.GetString(StringName.Renderer)}");
+        Logging.Log(LogLevel.Info, $"GLSL Version: {GL.GetString(StringName.ShadingLanguageVersion)}");
         
         GL.Enable(EnableCap.Multisample);
     }

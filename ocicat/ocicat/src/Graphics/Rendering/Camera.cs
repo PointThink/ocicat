@@ -1,5 +1,4 @@
 using OpenTK.Mathematics;
-using Vector2 = System.Numerics.Vector2;
 
 namespace ocicat.Graphics.Rendering;
 

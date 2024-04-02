@@ -1,6 +1,7 @@
 using ocicat.Audio;
 using ocicat.Graphics;
 using ocicat.Graphics.Rendering;
+using ocicat.Input;
 
 namespace ocicat;
 
@@ -9,10 +10,14 @@ namespace ocicat;
 /// </summary>
 public static class Game
 {
-	public static Window Window { get; private set; }
-	public static Renderer Renderer { get; private set; }
-	public static AudioEngine AudioEngine { get; private set; }
+	public static Window Window { get; private set; } = null!;
+	public static Renderer Renderer { get; private set; } = null!;
+	public static AudioEngine AudioEngine { get; private set; } = null!;
+	public static Bindings Bindings { get; private set; } = null!;
 
+	public static double Tickrate = 64;
+	private static double _nextTickTime;
+	
 	/// <summary>
 	/// Color used to clear the screen by the renderer
 	/// </summary>
@@ -49,6 +54,7 @@ public static class Game
 		Window = Window.Create(title, width, height);
 		Renderer = new Renderer(Window);
 		AudioEngine = new AudioEngine();
+		Bindings = new Bindings(Window);
 	}
 	
 	/// <summary>
@@ -63,7 +69,15 @@ public static class Game
 			AudioEngine.CleanFinishedSounds();
 			
 			if (_gameState != null)
+			{
+				if (Window.Time >= _nextTickTime)
+				{
+					_gameState.Tick();
+					_nextTickTime = Window.Time + 1 / Tickrate;
+				}
+				
 				_gameState.Update();
+			}
 			
 			Renderer.BeginDrawing();
 			Renderer.ClearScreen(ClearColor);
