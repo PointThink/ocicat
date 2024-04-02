@@ -49,12 +49,16 @@ public static class Game
 	/// <param name="title">Window title</param>
 	/// <param name="width">Window width</param>
 	/// <param name="height">Window height</param>
-	public static void Create(string title, int width, int height)
+	/// <param name="fullscreen">Is the window fullscreen</param>
+	/// <param name="resizeble">Is the window resizable</param>
+	public static void Create(string title, int width, int height, bool fullscreen = false, bool resizeble = false)
 	{
-		Window = Window.Create(title, width, height);
+		Window = Window.Create(title, width, height, fullscreen, resizeble);
 		Renderer = new Renderer(Window);
 		AudioEngine = new AudioEngine();
 		Bindings = new Bindings(Window);
+
+		Window.OnResize += OnResize;
 	}
 	
 	/// <summary>
@@ -88,5 +92,10 @@ public static class Game
 			Renderer.EndDrawing();
 			Window.Present();
 		}
+	}
+
+	public static void OnResize(int x, int y)
+	{
+		Renderer.ResizeRenderer(x, y);
 	}
 }

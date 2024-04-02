@@ -43,6 +43,17 @@ public class OpenTKWindow : Window
 		DeltaTime = 0;
 
 		AASamples = samples;
+
+		_tkWindow.Resize += OnResizeEvent;
+	}
+	
+	private void OnResizeEvent(ResizeEventArgs args)
+	{
+		if (OnResize != null)
+			OnResize(args.Width, args.Height);
+
+		Width = args.Width;
+		Height = args.Height;
 	}
 
 	public override bool CursorVisible

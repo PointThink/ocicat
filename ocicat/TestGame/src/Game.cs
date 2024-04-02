@@ -24,8 +24,8 @@ public class InGame : GameState
 
 	public override void Draw()
 	{
-		Game.Renderer.DrawCircle(new Vector2(400, 300), 30, 64, Color.Yellow);
-		// Game.Renderer.DrawLine(new Vector2(400, 300), Game.Window.GetMouseMotion(), 1, Color.Blue);
+		Game.Renderer.DrawCircle(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), 30, 64, Color.Yellow);
+		Game.Renderer.DrawLine(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), Game.Window.GetMouseMotion(), 3, Color.Blue);
 	}
 }
 
@@ -36,7 +36,7 @@ public static class Program
 	{
 		// Logging.LogLevel = LogLevel.Ocicat;
 		
-		Game.Create("Test game", 800, 600);
+		Game.Create("Test game", 800, 600, false, true);
 		Sound = new Sound(Game.AudioEngine, "erro.ogg");
 		
 		Game.ClearColor = Color.CreateFloat(0.2f, 0.2f, 0.2f, 1);

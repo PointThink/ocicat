@@ -46,7 +46,12 @@ public class RenderCommands : Rendering.RenderCommands
 		vertexArray.GetIndexBuffer().Bind();
 		GL.DrawElements(PrimitiveType.Triangles, (int) vertexArray.GetIndexBuffer().GetIndexCount(), DrawElementsType.UnsignedInt, 0);		
 	}
-	
+
+	public override void ResizeViewport(int width, int height)
+	{
+		GL.Viewport(0, 0, width, height);
+	}
+
 	// This is copied from OpenTK docs.
 	// Ignore the comments
 	private static void OnDebugMessage(

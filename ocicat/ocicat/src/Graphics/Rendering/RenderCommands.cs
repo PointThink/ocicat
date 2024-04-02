@@ -9,6 +9,8 @@ public abstract class RenderCommands
 
 	public abstract void DrawArrays(VertexArray vertexArray, int count);
 	public abstract void DrawIndexed(VertexArray vertexArray);
+
+	public abstract void ResizeViewport(int width, int height);
 	
 	public static RenderCommands Create(Renderer renderer)
 	{

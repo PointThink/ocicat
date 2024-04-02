@@ -9,8 +9,10 @@ public abstract class Window
 {
 	public float DeltaTime { get; protected set; }
 	public float Time { get; protected set; }
-	
+
 	public int AASamples { get; protected set; }
+	
+	public Action<int, int>? OnResize = null;
 	
 	public RenderingApi RenderingApi { get; private set; }
 

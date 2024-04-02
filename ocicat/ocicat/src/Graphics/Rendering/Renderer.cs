@@ -19,8 +19,9 @@ public class Renderer
 
 	public Camera Camera;
 	
-	public int Width => Window.Width;
-	public int Height => Window.Height;
+	public int Width { get; private set; }
+
+	public int Height { get; private set; }
 
 	public Renderer(Window window)
 	{
@@ -59,6 +60,15 @@ public class Renderer
 		                      Matrix4.CreateTranslation(position.X + size.X / 2, position.Y + size.Y / 2, 0);
 		
 		return view * translation;
+	}
+
+	public void ResizeRenderer(int width, int height)
+	{
+		RenderCommands.ResizeViewport(width, height);
+		Camera = new OrthographicCamera(width, height);
+
+		Width = width;
+		Height = height;
 	}
 
 	public void DrawRect(Vector2 position, Vector2 size, Color color, float rotation = 0)
