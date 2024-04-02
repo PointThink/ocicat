@@ -76,10 +76,10 @@ public class Renderer
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 transform = GenTransform(position, size, rotation);
 		
-		Primitives.UntexturedRectShader.Use();
-		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
-		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
-		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
+		Primitives.UntexturedMeshShader.Use();
+		Primitives.UntexturedMeshShader.UniformMat4("transform", ref transform);
+		Primitives.UntexturedMeshShader.UniformMat4("projection", ref projection);
+		Primitives.UntexturedMeshShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 		
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
 	}
@@ -116,10 +116,10 @@ public class Renderer
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 transform = GenTransform(center, new Vector2(radius, radius), 0);
 		
-		Primitives.UntexturedRectShader.Use();
-		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
-		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
-		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
+		Primitives.UntexturedMeshShader.Use();
+		Primitives.UntexturedMeshShader.UniformMat4("transform", ref transform);
+		Primitives.UntexturedMeshShader.UniformMat4("projection", ref projection);
+		Primitives.UntexturedMeshShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 
 		RenderCommands.DrawIndexed(mesh.VertexArray);
 	}
@@ -140,10 +140,10 @@ public class Renderer
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 transform = GenTransform(new Vector2(0, 0), new Vector2(1, 1), 0);
 		
-		Primitives.UntexturedRectShader.Use();
-		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
-		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
-		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
+		Primitives.UntexturedMeshShader.Use();
+		Primitives.UntexturedMeshShader.UniformMat4("transform", ref transform);
+		Primitives.UntexturedMeshShader.UniformMat4("projection", ref projection);
+		Primitives.UntexturedMeshShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 		
 		RenderCommands.DrawIndexed(triangleMesh.VertexArray);
 	}
@@ -176,13 +176,13 @@ public class Renderer
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 transform = GenTransform(position, size, rotation);
 		
-		Primitives.TexturedRectShader.Use();
-        Primitives.TexturedRectShader.UniformMat4("transform", ref transform);
-        Primitives.TexturedRectShader.UniformMat4("projection", ref projection);;
-		Primitives.TexturedRectShader.Uniform4f("tint", tint.R, tint.G, tint.B, tint.A);
+		Primitives.TexturedMeshShader.Use();
+        Primitives.TexturedMeshShader.UniformMat4("transform", ref transform);
+        Primitives.TexturedMeshShader.UniformMat4("projection", ref projection);;
+		Primitives.TexturedMeshShader.Uniform4f("tint", tint.R, tint.G, tint.B, tint.A);
 
 		texture.Bind(0);
-		Primitives.TexturedRectShader.Uniform1i("textureSampler", 0);
+		Primitives.TexturedMeshShader.Uniform1i("textureSampler", 0);
 		
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
 	}
@@ -238,10 +238,10 @@ public class Renderer
 		Matrix4 transform = translation;
 		Matrix4 projection = Camera.CalculateProjection();
 		
-		Primitives.UntexturedRectShader.Use();
-		Primitives.UntexturedRectShader.UniformMat4("transform", ref transform);
-		Primitives.UntexturedRectShader.UniformMat4("projection", ref projection);
-		Primitives.UntexturedRectShader.Uniform4f("color", color.R, color.G, color.B, color.A);
+		Primitives.UntexturedMeshShader.Use();
+		Primitives.UntexturedMeshShader.UniformMat4("transform", ref transform);
+		Primitives.UntexturedMeshShader.UniformMat4("projection", ref projection);
+		Primitives.UntexturedMeshShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 		
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
 	}

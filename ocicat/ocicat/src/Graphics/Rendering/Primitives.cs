@@ -3,8 +3,8 @@ namespace ocicat.Graphics.Rendering;
 public class Primitives
 {
 	public Mesh RectangleMesh;
-	public Shader UntexturedRectShader;
-	public Shader TexturedRectShader;
+	public Shader UntexturedMeshShader;
+	public Shader TexturedMeshShader;
 	public Shader TextShader;
 	
 	public Primitives(Renderer renderer)
@@ -93,8 +93,8 @@ void main()
     FragColor = sampled * color;
 }";
 		
-		UntexturedRectShader = Shader.Create(renderer, untexturedVertShader, untexturedFragShader);
-		TexturedRectShader = Shader.Create(renderer, texturedVertShader, texturedFragShader);
+		UntexturedMeshShader = Shader.Create(renderer, untexturedVertShader, untexturedFragShader);
+		TexturedMeshShader = Shader.Create(renderer, texturedVertShader, texturedFragShader);
 		TextShader = Shader.Create(renderer, texturedVertShader, fontFragShader);
 	}
 }
