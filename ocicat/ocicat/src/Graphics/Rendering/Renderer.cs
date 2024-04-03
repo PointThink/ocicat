@@ -51,8 +51,20 @@ public class Renderer
 		RenderCommands.ClearScreen();
 	}
 
-	private Matrix4 GenTransform(Vector2 position, Vector2 size, float rotation)
+	private Matrix4 GenTransform(Vector2 position, Vector2 size, float rotation, bool flipVertical = false, bool flipHorizontal = false)
 	{
+		if (flipVertical)
+		{
+			position.Y += size.Y;
+			size.Y *= -1;
+		}
+		
+		if (flipHorizontal)
+		{
+			position.X += size.X;
+			size.X *= -1;
+		}
+		
 		Matrix4 view = Camera.CalculateView();
 		Matrix4 translation = Matrix4.CreateScale(size.X, size.Y, 1) *
 		                      Matrix4.CreateTranslation(-size.X / 2, -size.Y / 2, 0) *
@@ -168,13 +180,13 @@ public class Renderer
 		DrawRectTextured(position, size, framebuffer.GetTextureAttachment(), color, rotation);
 	}
 	
-	public void DrawRectTextured(Vector2 position, Vector2 size, Texture texture, Color? tint = null, float rotation = 0)
+	public void DrawRectTextured(Vector2 position, Vector2 size, Texture texture, Color? tint = null, float rotation = 0, bool flipVertical = false, bool flipHorizontal = false)
 	{
 		if (tint == null)
 			tint = Color.CreateFloat(1, 1, 1, 1);
 		
 		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 transform = GenTransform(position, size, rotation);
+		Matrix4 transform = GenTransform(position, size, rotation, flipVertical, flipHorizontal);
 		
 		Primitives.TexturedMeshShader.Use();
         Primitives.TexturedMeshShader.UniformMat4("transform", ref transform);

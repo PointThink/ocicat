@@ -11,7 +11,11 @@ class InGame : GameState
 		Game.Renderer.DrawRectTextured(
 			new Vector2(0, 0), 
 			new Vector2(Program.Texture.GetWidth(), Program.Texture.GetWidth()),
-			Program.Texture
+			Program.Texture,
+			null,
+			0,
+			true,
+			true
 		);
 	}
 }

@@ -26,7 +26,7 @@ public static class Game
 	/// <summary>
 	/// The current game state
 	/// </summary>
-	private static GameState? _gameState = null;
+	private static GameState? _gameState;
 	
 	public static GameState? GameState
 	{
