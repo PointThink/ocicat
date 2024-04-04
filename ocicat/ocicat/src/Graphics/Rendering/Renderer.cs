@@ -105,8 +105,8 @@ public class Renderer
 		{
 			double degrees = 360f / count * i;
 
-			Vector2 vertex1 = Vector2.Normalize((float) degrees);
-			Vector2 vertex2 = Vector2.Normalize((float) degrees + 360f / count);
+			Vector2 vertex1 = Vector2.FromDegrees((float) degrees);
+			Vector2 vertex2 = Vector2.FromDegrees((float) degrees + 360f / count);
 
 			vertecies.Add(0);
 			vertecies.Add(0);

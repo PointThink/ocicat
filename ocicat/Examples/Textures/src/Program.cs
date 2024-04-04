@@ -22,7 +22,7 @@ class InGame : GameState
 
 class Program
 {
-	public static Texture Texture;
+	public static Texture Texture = null!;
 	
 	static void Main(string[] args)
 	{

@@ -56,7 +56,7 @@ public struct Vector2
 		return (float) direction;
 	}
 
-	public static Vector2 Normalize(float angle, float length = 1)
+	public static Vector2 FromDegrees(float angle, float length = 1)
 	{
 		double tangents = (180 - angle) * 0.0174532925;
 

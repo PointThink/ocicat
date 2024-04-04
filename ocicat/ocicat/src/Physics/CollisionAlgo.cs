@@ -61,7 +61,7 @@ public class CollisionAlgo
 		{
 			collisionInfo.HasCollision = true;
 			collisionInfo.Depth = distance - (circle1.Radius + circle2.Radius);
-			collisionInfo.Normal = Vector2.Normalize(Vector2.GetDirection(circle1.Position, circle2.Position));
+			collisionInfo.Normal = Vector2.FromDegrees(Vector2.GetDirection(circle1.Position, circle2.Position));
 		}
 
 		return collisionInfo;
