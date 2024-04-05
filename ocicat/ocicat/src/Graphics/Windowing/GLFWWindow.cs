@@ -113,6 +113,8 @@ public unsafe class GLFWWindow : Window
 	private OpenTK.Windowing.GraphicsLibraryFramework.Window* _window;
 
 	private GLFWCallbacks.KeyCallback _keyCallback;
+	private GLFWCallbacks.MouseButtonCallback _mouseCallback;
+	private GLFWCallbacks.WindowSizeCallback _resizeCallback;
 	
 	public GLFWWindow(string title, int width, int height, bool fullscreen, bool resizable)
 	{
@@ -141,13 +143,15 @@ public unsafe class GLFWWindow : Window
 		_resizable = resizable;
 		
 		_keyCallback = new GLFWCallbacks.KeyCallback(KeyCallback);
+		_mouseCallback = new GLFWCallbacks.MouseButtonCallback(MouseButtonCallback);
+		_resizeCallback = new GLFWCallbacks.WindowSizeCallback(ResizeCallback);
 		
-		GLFW.SetWindowSizeCallback(_window, ResizeCallback);
+		GLFW.SetWindowSizeCallback(_window, _resizeCallback);
 		GLFW.SetKeyCallback(_window, _keyCallback);
-		GLFW.SetMouseButtonCallback(_window, MouseButtonCallback);
+		GLFW.SetMouseButtonCallback(_window, _mouseCallback);
 	}
 
-	private void MouseButtonCallback(OpenTK.Windowing.GraphicsLibraryFramework.Window* window, MouseButton button, InputAction action, KeyModifiers mods)
+	private void MouseButtonCallback(OpenTK.Windowing.GraphzicsLibraryFramework.Window* window, MouseButton button, InputAction action, KeyModifiers mods)
 	{
 		if (action == InputAction.Press)
 		{
