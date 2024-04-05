@@ -12,24 +12,34 @@ public unsafe class GLFWWindow : Window
 	private bool[] _keyPressedState = new bool[(int) Key.KeysCount];
 	private bool[] _mouseDownState = new bool[255];
 	private bool[] _mousePressedState = new bool[255];
+
+	private bool _resizable;
+	
 	// yikes
 	private OpenTK.Windowing.GraphicsLibraryFramework.Window* _window;
 	
-	public GLFWWindow(string title, int width, int height)
+	public GLFWWindow(string title, int width, int height, bool fullscreen, bool resizable)
 	{
 		GLFW.Init();
 		_window = GLFW.CreateWindow(width, height, title, null, null);
 		
+		if (!resizable)
+		{
+			GLFW.SetWindowSize(_window, width, height);
+			GLFW.SetWindowSizeLimits(_window, width, height, width, height);
+		}
+		
 		GLFW.MakeContextCurrent(_window);
 		OpenTK.Graphics.OpenGL.GL.LoadBindings(new GLFWBindingsContext());
 		OpenTK.Graphics.OpenGL4.GL.LoadBindings(new GLFWBindingsContext());
-
-		GLFW.SetWindowSizeCallback(_window, ResizeCallback);
-		GLFW.SetKeyCallback(_window, KeyCallback);
-		GLFW.SetMouseButtonCallback(_window, MouseButtonCallback);
 		
 		Width = width;
 		Height = height;
+		_resizable = resizable;
+        
+		GLFW.SetWindowSizeCallback(_window, ResizeCallback);
+		GLFW.SetKeyCallback(_window, KeyCallback);
+		GLFW.SetMouseButtonCallback(_window, MouseButtonCallback);
 	}
 
 	private void MouseButtonCallback(OpenTK.Windowing.GraphicsLibraryFramework.Window* window, MouseButton button, InputAction action, KeyModifiers mods)
@@ -56,6 +66,9 @@ public unsafe class GLFWWindow : Window
 
 	private void ResizeCallback(OpenTK.Windowing.GraphicsLibraryFramework.Window* window, int width, int height)
 	{
+		if (!_resizable)
+			return;
+		
 		Width = width;
 		Height = height;
 		

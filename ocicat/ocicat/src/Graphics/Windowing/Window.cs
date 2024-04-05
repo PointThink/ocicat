@@ -40,8 +40,8 @@ public abstract class Window
 		switch (api)
 		{
 			case RenderingApi.OpenGl:
-				window = new OpenTKWindow(title, width, height, fullscreen, resizable, samples);
-				// window = new GLFWWindow(title, width, height);
+				// window = new OpenTKWindow(title, width, height, fullscreen, resizable, samples);
+				window = new GLFWWindow(title, width, height, fullscreen, resizable);
 				break;
 			default:
 				throw new ArgumentException("Invalid RenderingApi");

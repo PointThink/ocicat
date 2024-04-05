@@ -34,6 +34,10 @@ public class Renderer
 		RenderCommands.Init();
 
 		Primitives = new Primitives(this);
+
+		Width = window.Width;
+		Height = window.Height;
+		
 		Camera = new OrthographicCamera(window.Width, window.Height);
 	}
 
