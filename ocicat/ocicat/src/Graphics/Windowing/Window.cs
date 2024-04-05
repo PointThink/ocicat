@@ -28,7 +28,7 @@ public abstract class Window
 	public abstract bool IsMouseButtonDown(int button);
 	public abstract bool IsMouseButtonPressed(int button);
 
-	public abstract Vector2 GetMouseMotion();
+	public abstract Vector2 GetMousePosition();
 	
 	public static Window Create(string title, int width, int height, bool fullscreen = false, bool resizable = false, int samples = 0, RenderingApi? api = null)
 	{
@@ -41,6 +41,7 @@ public abstract class Window
 		{
 			case RenderingApi.OpenGl:
 				window = new OpenTKWindow(title, width, height, fullscreen, resizable, samples);
+				// window = new GLFWWindow(title, width, height);
 				break;
 			default:
 				throw new ArgumentException("Invalid RenderingApi");
