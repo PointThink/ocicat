@@ -36,7 +36,7 @@ public static class Program
 	{
 		// Logging.LogLevel = LogLevel.Ocicat;
 		
-		Game.Create("Test game", 800, 600, false, false);
+		Game.Create("Test game", 800, 600, true, false);
 		Sound = new Sound(Game.AudioEngine, "erro.ogg");
 		
 		

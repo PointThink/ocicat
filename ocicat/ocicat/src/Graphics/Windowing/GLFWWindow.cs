@@ -1,6 +1,7 @@
 using ocicat.Input;
 using OpenTK.Graphics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using Monitor = OpenTK.Windowing.GraphicsLibraryFramework.Monitor;
 
 namespace ocicat.Graphics;
 
@@ -24,9 +25,13 @@ public unsafe class GLFWWindow : Window
 		_window = GLFW.CreateWindow(width, height, title, null, null);
 		
 		if (!resizable)
-		{
-			GLFW.SetWindowSize(_window, width, height);
 			GLFW.SetWindowSizeLimits(_window, width, height, width, height);
+		
+		if (fullscreen)
+		{
+			Monitor* monitor = GLFW.GetPrimaryMonitor();
+			GLFW.SetWindowMonitor(_window, monitor, 0, 0, width, height, GLFW.DontCare);
+			GLFW.SetWindowSize(_window, width, height);
 		}
 		
 		GLFW.MakeContextCurrent(_window);
@@ -66,9 +71,6 @@ public unsafe class GLFWWindow : Window
 
 	private void ResizeCallback(OpenTK.Windowing.GraphicsLibraryFramework.Window* window, int width, int height)
 	{
-		if (!_resizable)
-			return;
-		
 		Width = width;
 		Height = height;
 		
