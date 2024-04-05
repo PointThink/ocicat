@@ -24,7 +24,7 @@ public class InGame : GameState
 	public override void Draw()
 	{
 		Game.Renderer.DrawCircle(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), 30, 64, Color.Yellow);
-		Game.Renderer.DrawLine(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), Game.Window.GetMousePosition(), 3, Color.Blue);
+		Game.Renderer.DrawLine(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), Game.Window.MousePosition, 3, Color.Blue);
 	}
 }
 
