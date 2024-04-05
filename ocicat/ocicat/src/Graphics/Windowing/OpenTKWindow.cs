@@ -7,6 +7,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 namespace ocicat.Graphics;
 using ocicat.Input;
 
+[Obsolete("Use GLFWWindow instead")]
 public class OpenTKWindow : Window
 {
 	private GameWindow _tkWindow;
@@ -37,8 +38,8 @@ public class OpenTKWindow : Window
 		
 		_tkWindow = new GameWindow(gameWindowSettings, nativeWindowSettings);
 		
-		Width = width;
-		Height = height;
+		_width = width;
+		_height = height;
 		
 		DeltaTime = 0;
 
@@ -52,8 +53,47 @@ public class OpenTKWindow : Window
 		if (OnResize != null)
 			OnResize(args.Width, args.Height);
 
-		Width = args.Width;
-		Height = args.Height;
+		_width = args.Width;
+		_height = args.Height;
+	}
+
+	private int _width;
+	private int _height;
+
+	public override string Title
+	{
+		get => throw new NotImplementedException();
+		set => throw new NotImplementedException();
+	}
+
+	public override int Width
+	{
+		get => _width;
+		set => throw new NotImplementedException();
+	}
+
+	public override int Height
+	{
+		get => _height;
+		set => throw new NotImplementedException();
+	}
+	
+	public override bool Resizable 
+	{
+		get => throw new NotImplementedException();
+		set => throw new NotImplementedException();
+	}
+	
+	public override bool Fullscreen
+	{
+		get => _tkWindow.IsFullscreen;
+		set => throw new NotImplementedException();
+	}
+	
+	public override Vector2 MousePosition
+	{
+		get => new Vector2(_tkWindow.MouseState.X, _height - _tkWindow.MouseState.Y);
+		set => throw new NotImplementedException();
 	}
 
 	public override bool CursorVisible
@@ -124,9 +164,9 @@ public class OpenTKWindow : Window
 	{
 		return _tkWindow.IsMouseButtonPressed(MouseButton.Button1 + button);
 	}
-
+	
 	public override Vector2 GetMousePosition()
 	{
-		return new Vector2(_tkWindow.MouseState.X, Height - _tkWindow.MouseState.Y);
+		return new Vector2(_tkWindow.MouseState.X, _height - _tkWindow.MouseState.Y);
 	}
 }

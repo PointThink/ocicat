@@ -16,7 +16,7 @@ public class InGame : GameState
 		{
 			Vector2 mousePos = Game.Window.GetMousePosition();
 			AudioHandle handle = Game.AudioEngine.PlaySound(Program.Sound);
-			handle.Position = new Vector3(mousePos.X - 400, mousePos.Y - 300, 0);
+			handle.Position = new Vector3(mousePos.X - Game.Renderer.Width / 2, mousePos.Y - Game.Renderer.Height / 2, 0);
 			handle.Falloff = 0.01f;
 			handle.Volume = 1;
 		}
@@ -36,9 +36,14 @@ public static class Program
 	{
 		// Logging.LogLevel = LogLevel.Ocicat;
 		
-		Game.Create("Test game", 800, 600, true, false);
+		Game.Create("Test game", 800, 600, false, false);
 		Sound = new Sound(Game.AudioEngine, "erro.ogg");
-		
+
+		Game.Window.Title = "Hello world";
+		Game.Window.Width = 1024;
+		Game.Window.Height = 768;
+		//Game.Window.Fullscreen = true;
+		Game.Window.CursorVisible = false;
 		
 		Game.ClearColor = Color.CreateFloat(0.2f, 0.2f, 0.2f, 1);
 		Game.GameState = new InGame();
