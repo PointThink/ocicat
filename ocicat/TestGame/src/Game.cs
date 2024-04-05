@@ -2,7 +2,6 @@
 using ocicat;
 using ocicat.Audio;
 using ocicat.Graphics;
-using ocicat.Graphics.Rendering;
 using ocicat.Input;
 using Vector2 = ocicat.Vector2;
 
@@ -14,7 +13,7 @@ public class InGame : GameState
 	{
 		if (Game.Window.IsKeyPressed(Key.Space))
 		{
-			Vector2 mousePos = Game.Window.GetMousePosition();
+			Vector2 mousePos = Game.Window.MousePosition;
 			AudioHandle handle = Game.AudioEngine.PlaySound(Program.Sound);
 			handle.Position = new Vector3(mousePos.X - Game.Renderer.Width / 2, mousePos.Y - Game.Renderer.Height / 2, 0);
 			handle.Falloff = 0.01f;

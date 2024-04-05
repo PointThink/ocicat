@@ -31,12 +31,6 @@ public abstract class Window
 	public abstract bool IsKeyPressed(Input.Key key);
 	public abstract bool IsMouseButtonDown(int button);
 	public abstract bool IsMouseButtonPressed(int button);
-
-
-	[Obsolete("Use the MousePosition property instead. Doesn't work with all window classes.")]
-	public virtual Vector2 GetMousePosition()
-	{
-		throw new NotImplementedException();}
 	
 	public static Window Create(string title, int width, int height, bool fullscreen = false, bool resizable = false, int samples = 0, RenderingApi? api = null)
 	{

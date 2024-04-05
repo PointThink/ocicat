@@ -164,9 +164,4 @@ public class OpenTKWindow : Window
 	{
 		return _tkWindow.IsMouseButtonPressed(MouseButton.Button1 + button);
 	}
-	
-	public override Vector2 GetMousePosition()
-	{
-		return new Vector2(_tkWindow.MouseState.X, _height - _tkWindow.MouseState.Y);
-	}
 }

@@ -221,10 +221,4 @@ public unsafe class GLFWWindow : Window
 	{
 		return _mousePressedState[button];
 	}
-
-	public override Vector2 GetMousePosition()
-	{
-		GLFW.GetCursorPos(_window, out double xPos, out double yPos);
-		return new Vector2((float)xPos, (float)Height - (float)yPos);
-	}
 }
