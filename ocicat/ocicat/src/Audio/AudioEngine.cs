@@ -17,6 +17,8 @@ public class AudioEngine
 		ALContext context = ALC.CreateContext(device, new ALContextAttributes());
 		ALC.MakeContextCurrent(context);
 		
+		CheckAlErrors();
+		
 		// setup listener
 		AL.Listener(ALListener3f.Position, 0, 0, 0);
 		AL.Listener(ALListener3f.Velocity, 0, 0, 0);

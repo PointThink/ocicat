@@ -151,7 +151,7 @@ public unsafe class GLFWWindow : Window
 		GLFW.SetMouseButtonCallback(_window, _mouseCallback);
 	}
 
-	private void MouseButtonCallback(OpenTK.Windowing.GraphzicsLibraryFramework.Window* window, MouseButton button, InputAction action, KeyModifiers mods)
+	private void MouseButtonCallback(OpenTK.Windowing.GraphicsLibraryFramework.Window* window, MouseButton button, InputAction action, KeyModifiers mods)
 	{
 		if (action == InputAction.Press)
 		{
