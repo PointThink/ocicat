@@ -142,9 +142,9 @@ public unsafe class GLFWWindow : Window
 		_fullscreen = fullscreen;
 		_resizable = resizable;
 		
-		_keyCallback = new GLFWCallbacks.KeyCallback(KeyCallback);
-		_mouseCallback = new GLFWCallbacks.MouseButtonCallback(MouseButtonCallback);
-		_resizeCallback = new GLFWCallbacks.WindowSizeCallback(ResizeCallback);
+		_keyCallback = KeyCallback;
+		_mouseCallback = MouseButtonCallback;
+		_resizeCallback = ResizeCallback;
 		
 		GLFW.SetWindowSizeCallback(_window, _resizeCallback);
 		GLFW.SetKeyCallback(_window, _keyCallback);

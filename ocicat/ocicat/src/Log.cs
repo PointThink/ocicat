@@ -23,7 +23,7 @@ public class Logging
 {
 	public static LogLevel LogLevel = LogLevel.Info;
 
-	private static readonly Dictionary<LogLevel, LogLevelInfo> LogLevelInfo = new Dictionary<LogLevel, LogLevelInfo>()
+	private static readonly Dictionary<LogLevel, LogLevelInfo> LogLevelInfo = new()
 	{
 		{ LogLevel.Ocicat, new LogLevelInfo(ConsoleColor.Blue) },
 		{ LogLevel.Developer, new LogLevelInfo(ConsoleColor.Cyan) },

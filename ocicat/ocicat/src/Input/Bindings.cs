@@ -50,7 +50,7 @@ public class MouseBind : Binding
 
 public class Bindings
 {
-	private Dictionary<string, Binding> _bindings = new Dictionary<string, Binding>();
+	private Dictionary<string, Binding> _bindings = new();
 	private Window _window;
 	
 	public Bindings(Window window)

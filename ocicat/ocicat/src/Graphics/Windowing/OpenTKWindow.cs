@@ -18,11 +18,11 @@ public class OpenTKWindow : Window
 		Logging.Log(LogLevel.Ocicat, $"Creating OpenTK window.\n\tTitle: {title}\n\tSize: {width}x{height}\n\tFullscreen: {fullscreen}\n\tResizable: {resizable}\n\tAA Samples: {samples}");
 		
 		NativeWindowSettings nativeWindowSettings = NativeWindowSettings.Default;
-		nativeWindowSettings.APIVersion = new System.Version(4, 6);
+		nativeWindowSettings.APIVersion = new Version(4, 6);
 		nativeWindowSettings.API = ContextAPI.OpenGL;
 		nativeWindowSettings.NumberOfSamples = samples;
 		
-		GameWindowSettings gameWindowSettings = new GameWindowSettings();
+		GameWindowSettings gameWindowSettings = new();
 
 		nativeWindowSettings.Title = title;
 		nativeWindowSettings.ClientSize = new Vector2i(width, height);

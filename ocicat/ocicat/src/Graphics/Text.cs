@@ -33,7 +33,7 @@ public unsafe class Font
 {
 	public int SpaceSize = 10;
 	
-	private readonly Dictionary<uint, FontGlyph> _glyphs = new Dictionary<uint, FontGlyph>();
+	private readonly Dictionary<uint, FontGlyph> _glyphs = new();
 
 	public Font(Renderer renderer, string path, uint size)
 	{

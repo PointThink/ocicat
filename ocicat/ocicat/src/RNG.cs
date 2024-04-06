@@ -2,12 +2,7 @@ namespace ocicat;
 
 public class RNG
 {
-	private Random _random;
-	
-	public RNG()
-	{
-		_random = new Random();
-	}
+	private Random _random = new ();
 
 	public int GenerateInt(int min, int max)
 	{

@@ -10,7 +10,7 @@ public struct DisplayInfo
 
 	public static unsafe DisplayInfo GetDisplayInfo()
 	{
-		DisplayInfo displayInfo = new DisplayInfo();
+		DisplayInfo displayInfo = new();
 
 		VideoMode* videoMode = GLFW.GetVideoMode(GLFW.GetPrimaryMonitor());
 

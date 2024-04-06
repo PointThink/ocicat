@@ -54,7 +54,7 @@ public static class Game
 	public static void Create(string title, int width, int height, bool fullscreen = false, bool resizeble = false)
 	{
 		Window = Window.Create(title, width, height, fullscreen, resizeble);
-		Renderer = new Renderer(Window);
+		Renderer = new (Window);
 		AudioEngine = new AudioEngine();
 		Bindings = new Bindings(Window);
 
