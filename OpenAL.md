@@ -1,5 +1,5 @@
 # OpenAL on Windows
-Unfortunately OpenTK (The library ocicat uses) does not provide any native binaries for OpenAL out of the box.
+Unfortunately OpenTK (The library ocicat uses) does not provide any native binaries for OpenAL.
 Most Linux distros and MacOS provide OpenAL binaries out of the box, but for Windows you will need to get them manually.
 
 > [!IMPORTANT]  
