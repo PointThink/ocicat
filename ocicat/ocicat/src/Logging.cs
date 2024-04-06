@@ -22,7 +22,8 @@ struct LogLevelInfo
 public class Logging
 {
 	public static LogLevel LogLevel = LogLevel.Info;
-
+	private static StreamWriter? _logFile;
+	
 	private static readonly Dictionary<LogLevel, LogLevelInfo> LogLevelInfo = new()
 	{
 		{ LogLevel.Ocicat, new LogLevelInfo(ConsoleColor.Blue) },
@@ -31,6 +32,14 @@ public class Logging
 		{ LogLevel.Warning, new LogLevelInfo(ConsoleColor.Yellow) },
 		{ LogLevel.Error, new LogLevelInfo(ConsoleColor.Red) }
 	};
+
+	static Logging()
+	{
+		_logFile = File.CreateText("ocicat.log");
+		_logFile.AutoFlush = true;
+		// File.WriteAllText("ocicat.log", string.Empty);
+		// _logFile.BaseStream.SetLength(0);
+	}
 	
 	public static void Log(LogLevel level, string text)
 	{
@@ -41,6 +50,12 @@ public class Logging
 			Console.Write($" {Enum.GetName(typeof(LogLevel), level)} ");
 			Console.ResetColor();
 			Console.WriteLine($" {text}");
+
+			if (_logFile != null)
+			{
+				_logFile.Write($"[{Enum.GetName(typeof(LogLevel), level)}] {text}\n");
+				// _logFile.Flush();
+			}
 		}
 	}
 }
