@@ -99,6 +99,20 @@ public class Renderer
 		
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
 	}
+
+	public void DrawRectLines(Vector2 position, Vector2 size, Color color, float thickness = 1, float rotation = 0)
+	{
+		Framebuffer framebuffer = Framebuffer.Create(this, (int) Math.Ceiling(size.X), (int) Math.Ceiling(size.Y));
+		framebuffer.Bind();
+		
+		DrawLine(new Vector2(0, thickness), new Vector2(size.X - thickness, thickness), thickness, Color.White);
+		DrawLine(new Vector2(0, 0), new Vector2(0, size.Y - thickness), thickness, Color.White);
+		DrawLine(new Vector2(0, size.Y - thickness), new Vector2(size.X - thickness, size.Y - thickness), thickness, Color.White);
+		DrawLine(new Vector2(size.X - thickness, 0), new Vector2(size.X - thickness, size.Y - thickness), thickness, Color.White);
+		
+		framebuffer.Unbind();
+		DrawRectTextured(position, size, framebuffer.GetTextureAttachment(), color, rotation);
+	}
 	
 	public void DrawCircle(Vector2 center, float radius, int count, Color color)
 	{

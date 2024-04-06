@@ -25,6 +25,7 @@ public class InGame : GameState
 	{
 		Game.Renderer.DrawCircle(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), 30, 64, Color.Yellow);
 		Game.Renderer.DrawLine(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), Game.Window.MousePosition, 3, Color.Blue);
+		Game.Renderer.DrawRectLines(new Vector2(40, 40), new Vector2(128, 128), Color.Cyan, 5);
 	}
 }
 

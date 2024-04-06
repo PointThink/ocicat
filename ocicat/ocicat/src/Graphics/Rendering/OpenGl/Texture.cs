@@ -1,4 +1,4 @@
-using OpenTK.Graphics.ES11;
+using OpenTK.Graphics.OpenGL4;
 
 namespace ocicat.Graphics.Rendering.OpenGl;
 
@@ -40,7 +40,7 @@ public class Texture : Rendering.Texture
 		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.ClampToEdge);
 		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapR, (int) TextureWrapMode.ClampToEdge);
 		
-		GL.TexImage2D(TextureTarget.Texture2D, 0, InternalFormat.Rgba8, width, height, 0, format, PixelType.UnsignedByte, imageData);
+		GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba8, width, height, 0, format, PixelType.UnsignedByte, imageData);
 		GL.BindTexture(TextureTarget.Texture2D, 0);
 		
 		Logging.Log(LogLevel.Ocicat, $"Created OpenGL Texture:\n\tHandle: {_handle}\n\tWidth: {width}\n\tWidth: {height}\n\tFilter: {Enum.GetName(typeof(TextureFilter), textureFilter)}\n\tChannels: {colorChannels}");
