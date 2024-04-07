@@ -180,7 +180,7 @@ public unsafe class GLFWWindow : Window
 		
 		OnResize?.Invoke(width, height);
 	}
-	
+
 	public override void HandleEvents()
 	{
 		for (int i = 0; i < _keyPressedState.Length; i++)
@@ -191,7 +191,7 @@ public unsafe class GLFWWindow : Window
 		
 		_frameBeginTime = DateTime.Now;
 		
-		GLFW.WaitEvents();
+		GLFW.PollEvents();
 	}
 
 	public override void Present()
@@ -224,5 +224,41 @@ public unsafe class GLFWWindow : Window
 	public override bool IsMouseButtonPressed(int button)
 	{
 		return _mousePressedState[button];
+	}
+
+	public override GamePadState GetGamePadState(int gamepad)
+	{
+		GamePadState gamePadState = new GamePadState();
+
+		GamepadState glfwGpState;
+		gamePadState.IsConnected = GLFW.GetGamepadState(gamepad, out glfwGpState);
+		
+		gamePadState.LeftStick.X = glfwGpState.Axes[0];
+		gamePadState.LeftStick.Y = glfwGpState.Axes[1];
+		gamePadState.RightStick.X = glfwGpState.Axes[2];
+		gamePadState.RightStick.Y = glfwGpState.Axes[3];
+		gamePadState.LeftTrigger = glfwGpState.Axes[4];
+		gamePadState.RightTrigger = glfwGpState.Axes[5];
+
+		gamePadState.A = glfwGpState.Buttons[0] == 1;
+		gamePadState.B = glfwGpState.Buttons[1] == 1;
+		gamePadState.X = glfwGpState.Buttons[2] == 1;
+		gamePadState.Y = glfwGpState.Buttons[3] == 1;
+		
+		gamePadState.LeftBumper = glfwGpState.Buttons[4] == 1;
+		gamePadState.RightBumper = glfwGpState.Buttons[5] == 1;
+		
+		gamePadState.Back = glfwGpState.Buttons[6] == 1;
+		gamePadState.Start = glfwGpState.Buttons[7] == 1;
+		gamePadState.Guide = glfwGpState.Buttons[8] == 1;
+		gamePadState.LeftThumb = glfwGpState.Buttons[9] == 1;
+		gamePadState.RightThumb = glfwGpState.Buttons[10] == 1;
+		
+		gamePadState.DpadUp = glfwGpState.Buttons[11] == 1;
+		gamePadState.DpadRight = glfwGpState.Buttons[14] == 1;
+		gamePadState.DpadDown = glfwGpState.Buttons[12] == 1;
+		gamePadState.DpadLeft = glfwGpState.Buttons[13] == 1;
+		
+		return gamePadState;
 	}
 }

@@ -164,4 +164,9 @@ public class OpenTKWindow : Window
 	{
 		return _tkWindow.IsMouseButtonPressed(MouseButton.Button1 + button);
 	}
+
+	public override GamePadState GetGamePadState(int gamepad)
+	{
+		throw new NotImplementedException();
+	}
 }

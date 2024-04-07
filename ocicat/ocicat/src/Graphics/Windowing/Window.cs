@@ -1,4 +1,5 @@
 using ocicat.Graphics.Rendering;
+using ocicat.Input;
 
 namespace ocicat.Graphics;
 
@@ -31,6 +32,8 @@ public abstract class Window
 	public abstract bool IsKeyPressed(Input.Key key);
 	public abstract bool IsMouseButtonDown(int button);
 	public abstract bool IsMouseButtonPressed(int button);
+
+	public abstract GamePadState GetGamePadState(int gamepad);
 	
 	public static Window Create(string title, int width, int height, bool fullscreen = false, bool resizable = false, int samples = 0, RenderingApi? api = null)
 	{

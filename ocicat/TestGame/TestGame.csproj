@@ -11,4 +11,8 @@
       <ProjectReference Include="..\ocicat\ocicat.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="OpenAL.Soft" Version="1.19.1" />
+    </ItemGroup>
+
 </Project>
