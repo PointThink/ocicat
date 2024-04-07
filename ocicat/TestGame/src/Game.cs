@@ -46,18 +46,11 @@ public class InGame : GameState
 public static class Program
 {
 	public static Sound Sound;
-
-	public static void LogCallback(LogLevel level, string text)
-	{
-		Console.Beep();
-	}
 	
 	public static void Main(string[] args)
-	{ 
-		Logging.OnLog += LogCallback;
-		
+	{
 		Game.Create("Test game", 800, 600, false, true);
-		Game.Window.Icon = new Image("image.jpg");
+		Game.Window.Icon = new Image("imag.jpg");
 		
 		Sound = new Sound(Game.AudioEngine, "erro.ogg");
 		
