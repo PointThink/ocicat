@@ -16,7 +16,7 @@ HTML_COLORSTYLE = LIGHT
 FULL_PATH_NAMES = YES
 STRIP_FROM_PATH = ../
 
-OUTPUT_DIRECTORY       = docs
+OUTPUT_DIRECTORY = docs
 
 USE_MDFILE_AS_MAINPAGE = "Mainpage.md"
-INPUT = "../ocicat/ocicat/src" + Mainpage.md
+INPUT = "ocicat/ocicat/src" + "docs/Mainpage.md"
