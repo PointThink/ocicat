@@ -15,6 +15,7 @@ public abstract class Window
 	public RenderingApi RenderingApi { get; private set; }
 
 	public abstract string Title { get; set; }
+	public abstract Image Icon { get; set; }
 	public abstract int Width { get; set; }
 	public abstract int Height { get; set; }
 	public abstract bool Resizable { get; set; }

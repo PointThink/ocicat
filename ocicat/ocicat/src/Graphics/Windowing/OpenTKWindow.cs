@@ -66,6 +66,8 @@ public class OpenTKWindow : Window
 		set => throw new NotImplementedException();
 	}
 
+	public override Image? Icon { get; set; }
+
 	public override int Width
 	{
 		get => _width;

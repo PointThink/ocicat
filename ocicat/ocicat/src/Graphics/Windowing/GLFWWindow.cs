@@ -15,6 +15,7 @@ public unsafe class GLFWWindow : Window
 	private bool[] _mousePressedState = new bool[255];
 
 	private string _title;
+	private Image? _icon;
 	private int _width;
 	private int _height;
 	private bool _fullscreen;
@@ -29,6 +30,26 @@ public unsafe class GLFWWindow : Window
 		{
 			GLFW.SetWindowTitle(_window, value);
 			_title = value;
+		}
+	}
+
+	public override Image? Icon
+	{
+		get => _icon;
+		set
+		{
+			if (value != null)
+			{
+				OpenTK.Windowing.GraphicsLibraryFramework.Image[] image =
+					new OpenTK.Windowing.GraphicsLibraryFramework.Image[1];
+
+				fixed (byte* dataPtr = value.Data)
+					image[0] = new(value.Width, value.Height, dataPtr);
+
+				GLFW.SetWindowIcon(_window, image);
+			}
+			else
+				GLFW.SetWindowIcon(_window, ReadOnlySpan<OpenTK.Windowing.GraphicsLibraryFramework.Image>.Empty);
 		}
 	}
 

@@ -32,8 +32,7 @@ public abstract class Texture
 
 	public static Texture Create(Renderer renderer, string filePath, TextureFilter textureFilter = TextureFilter.Linear)
 	{
-		ImageResult image = ImageResult.FromStream(File.OpenRead(filePath), ColorComponents.RedGreenBlueAlpha);
-        
-		return Create(renderer, image.Data, image.Width, image.Height, textureFilter);
+		Image image = new Image(filePath);
+		return Texture.Create(renderer, image.Data, image.Width, image.Height, textureFilter);
 	}
 }

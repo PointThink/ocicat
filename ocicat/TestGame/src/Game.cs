@@ -26,10 +26,10 @@ public class InGame : GameState
 	{
 		Console.WriteLine($"{1 / Game.Window.DeltaTime} fps");
 
-		GamePadState gamePadState = Game.Window.GetGamePadState(0);
+		// GamePadState gamePadState = Game.Window.GetGamePadState(0);
 		
-		if (gamePadState.X)
-			Console.WriteLine("X pressed");
+		// if (gamePadState.X)
+			// Console.WriteLine("X pressed");
 	}
 
 	public override void Draw()
@@ -37,7 +37,7 @@ public class InGame : GameState
 		// Game.Renderer.DrawCircle(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), 30, 64, Color.Yellow);
 		// Game.Renderer.DrawLine(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), Game.Window.MousePosition, 3, Color.Blue);
 		//Game.Renderer.DrawRectLines(new Vector2(40, 40), new Vector2(128, 128), Color.Cyan, 5);
-		GamePadState gpState = Game.Window.GetGamePadState(0);
+		GamePadState gpState = Game.Window.GetGamePadState();
 		
 		Game.Renderer.DrawLine(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2) + gpState.RightStick * new Vector2(90, 90), 3, Color.Blue);
 	}
@@ -46,13 +46,21 @@ public class InGame : GameState
 public static class Program
 {
 	public static Sound Sound;
+
+	public static void LogCallback(LogLevel level, string text)
+	{
+		Console.Beep();
+	}
 	
 	public static void Main(string[] args)
-	{
-		// Logging.LogLevel = LogLevel.Ocicat;
+	{ 
+		Logging.OnLog += LogCallback;
+		
 		Game.Create("Test game", 800, 600, false, true);
+		Game.Window.Icon = new Image("image.jpg");
+		
 		Sound = new Sound(Game.AudioEngine, "erro.ogg");
-
+		
 		Game.Window.Title = "Hello world";
 		Game.Window.Width = 1024;
 		Game.Window.Height = 768;

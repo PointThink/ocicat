@@ -33,6 +33,8 @@ public class Logging
 		{ LogLevel.Error, new LogLevelInfo(ConsoleColor.Red) }
 	};
 
+	public static Action<LogLevel, string>? OnLog = null;
+
 	static Logging()
 	{
 		_logFile = File.CreateText("ocicat.log");
@@ -56,6 +58,9 @@ public class Logging
 				_logFile.Write($"[{Enum.GetName(typeof(LogLevel), level)}] {text}\n");
 				// _logFile.Flush();
 			}
+
+			if (OnLog != null)
+				OnLog(level, text);
 		}
 	}
 }
