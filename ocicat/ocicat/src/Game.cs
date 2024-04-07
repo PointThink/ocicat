@@ -17,6 +17,8 @@ public static class Game
 
 	public static double Tickrate = 64;
 	private static double _nextTickTime;
+
+	public static Action<int, int>? OnResizeEvent = null;
 	
 	/// <summary>
 	/// Color used to clear the screen by the renderer
@@ -97,5 +99,8 @@ public static class Game
 	public static void OnResize(int x, int y)
 	{
 		Renderer.ResizeRenderer(x, y);
+
+		if (OnResizeEvent != null)
+			OnResizeEvent(x, y);
 	}
 }

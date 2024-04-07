@@ -2,6 +2,7 @@
 using ocicat;
 using ocicat.Audio;
 using ocicat.Graphics;
+using ocicat.Graphics.Rendering;
 using ocicat.Input;
 using Vector2 = ocicat.Vector2;
 
@@ -32,22 +33,21 @@ public class InGame : GameState
 public static class Program
 {
 	public static Sound Sound;
+	
 	public static void Main(string[] args)
 	{
 		// Logging.LogLevel = LogLevel.Ocicat;
 		
-		Game.Create("Test game", 800, 600, false, false);
+		Game.Create("Test game", 800, 600, false, true);
 		Sound = new Sound(Game.AudioEngine, "erro.ogg");
 
 		Game.Window.Title = "Hello world";
 		Game.Window.Width = 1024;
 		Game.Window.Height = 768;
-		//Game.Window.Fullscreen = true;
 		Game.Window.CursorVisible = false;
 		
 		Game.ClearColor = Color.CreateFloat(0.2f, 0.2f, 0.2f, 1);
 		Game.GameState = new InGame();
-
 		Game.Run();
 	}
 }
