@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ocicat: Logging Class Reference</title>
+<title>Ocicat: Image Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classLogging.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classImage.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -93,38 +93,41 @@ $(document).ready(function(){initNavTree('classLogging.html',''); initResizable(
 
 <div class="header">
   <div class="summary">
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
-<a href="classLogging-members.html">List of all members</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a> &#124;
+<a href="classImage-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Logging Class Reference</div>  </div>
+<div class="title">Image Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a8b08cbfbdae898f63b9545cfc8eb1903"><td class="memItemLeft" align="right" valign="top"><a id="a8b08cbfbdae898f63b9545cfc8eb1903"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>Log</b> (LogLevel level, string text)</td></tr>
-<tr class="separator:a8b08cbfbdae898f63b9545cfc8eb1903"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a09e8fd457f68311d3a79ba9f7be01ffa"><td class="memItemLeft" align="right" valign="top"><a id="a09e8fd457f68311d3a79ba9f7be01ffa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Image</b> (string path)</td></tr>
+<tr class="separator:a09e8fd457f68311d3a79ba9f7be01ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:ab9ccb0501eb6bbead1629ef4adbd23fe"><td class="memItemLeft" align="right" valign="top"><a id="ab9ccb0501eb6bbead1629ef4adbd23fe"></a>
-static LogLevel&#160;</td><td class="memItemRight" valign="bottom"><b>LogLevel</b> = LogLevel.Info</td></tr>
-<tr class="separator:ab9ccb0501eb6bbead1629ef4adbd23fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a3f42ccc35e6e8b260b1159a9edaf37"><td class="memItemLeft" align="right" valign="top"><a id="a9a3f42ccc35e6e8b260b1159a9edaf37"></a>
-static ? Action&lt; LogLevel, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OnLog</b> = null</td></tr>
-<tr class="separator:a9a3f42ccc35e6e8b260b1159a9edaf37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:acf34b6e6f6f578e926e9667d7b654728"><td class="memItemLeft" align="right" valign="top"><a id="acf34b6e6f6f578e926e9667d7b654728"></a>
+byte[]&#160;</td><td class="memItemRight" valign="bottom"><b>Data</b><code> [get]</code></td></tr>
+<tr class="separator:acf34b6e6f6f578e926e9667d7b654728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7def367d61536ddb8819509aa409bef9"><td class="memItemLeft" align="right" valign="top"><a id="a7def367d61536ddb8819509aa409bef9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Width</b><code> [get]</code></td></tr>
+<tr class="separator:a7def367d61536ddb8819509aa409bef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e0be9a53ffa0b72a3353327cbf1e651"><td class="memItemLeft" align="right" valign="top"><a id="a3e0be9a53ffa0b72a3353327cbf1e651"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Height</b><code> [get]</code></td></tr>
+<tr class="separator:a3e0be9a53ffa0b72a3353327cbf1e651"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>ocicat/ocicat/ocicat/src/Logging.cs</li>
+<li>ocicat/ocicat/ocicat/src/Graphics/Image.cs</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="classLogging.html">Logging</a></li>
+    <li class="navelem"><a class="el" href="classImage.html">Image</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['indexbuffer_28',['IndexBuffer',['../classIndexBuffer.html',1,'']]]
+  ['image_28',['Image',['../classImage.html',1,'']]],
+  ['indexbuffer_29',['IndexBuffer',['../classIndexBuffer.html',1,'']]]
 ];

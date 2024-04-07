@@ -13,6 +13,7 @@ var classOpenTKWindow =
     [ "CursorVisible", "classOpenTKWindow.html#ae930eea1c63f4a237d37d697fef3ec19", null ],
     [ "Fullscreen", "classOpenTKWindow.html#a6fa2e988b4cc2f876b0a092907a41752", null ],
     [ "Height", "classOpenTKWindow.html#a1a9846126c3b12b694958db93bb47297", null ],
+    [ "Icon", "classOpenTKWindow.html#a3671dfd5c36a934b96038fd3fec5f6af", null ],
     [ "MousePosition", "classOpenTKWindow.html#a5a576e01ecd65604677f6af26f923605", null ],
     [ "Resizable", "classOpenTKWindow.html#a46565c9efb3baa8b00e9669810ebe8b4", null ],
     [ "Title", "classOpenTKWindow.html#a2bb31f18bdefa2b897f37469dde416ba", null ],

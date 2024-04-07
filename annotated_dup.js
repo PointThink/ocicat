@@ -22,6 +22,7 @@ var annotated_dup =
     [ "GamePadState", "structGamePadState.html", "structGamePadState" ],
     [ "GameState", "classGameState.html", "classGameState" ],
     [ "GLFWWindow", "classGLFWWindow.html", "classGLFWWindow" ],
+    [ "Image", "classImage.html", "classImage" ],
     [ "IndexBuffer", "classIndexBuffer.html", "classIndexBuffer" ],
     [ "KeyboardBind", "classKeyboardBind.html", "classKeyboardBind" ],
     [ "Logging", "classLogging.html", "classLogging" ],

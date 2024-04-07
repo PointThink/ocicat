@@ -16,6 +16,7 @@ var classWindow =
     [ "DeltaTime", "classWindow.html#aac8ef91e37c9e736dcbf49ccb9bf22c1", null ],
     [ "Fullscreen", "classWindow.html#a78d59dc59a055f1671c5d500fe818a3c", null ],
     [ "Height", "classWindow.html#abddfe97dab14adfabf124ebf86d9f2fd", null ],
+    [ "Icon", "classWindow.html#adc55ccea8f97edcd2ea21cdd9ecda63a", null ],
     [ "MousePosition", "classWindow.html#a636d9abc6e4e3e5a0673e45fa668f614", null ],
     [ "RenderingApi", "classWindow.html#ad465d5c8b4a8423b6e4b08d936dc70b0", null ],
     [ "Resizable", "classWindow.html#a35a46408e42e54512598fd1a34a27abb", null ],

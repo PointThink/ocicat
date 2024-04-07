@@ -30,6 +30,7 @@ var hierarchy =
     [ "Game", "classGame.html", null ],
     [ "GamePadState", "structGamePadState.html", null ],
     [ "GameState", "classGameState.html", null ],
+    [ "Image", "classImage.html", null ],
     [ "Rendering.IndexBuffer", null, [
       [ "IndexBuffer", "classIndexBuffer.html", null ]
     ] ],

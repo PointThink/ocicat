@@ -13,6 +13,7 @@ var classGLFWWindow =
     [ "CursorVisible", "classGLFWWindow.html#ae9ca21bb7c23b9128490c9ff545a5377", null ],
     [ "Fullscreen", "classGLFWWindow.html#ae87b998d0c74f156b5d82fdb2e406a9f", null ],
     [ "Height", "classGLFWWindow.html#a7d1c3970f5afc9ac791cc0c9292a63e9", null ],
+    [ "Icon", "classGLFWWindow.html#a88ef690e1a97118fbf29f8ae66e1cf08", null ],
     [ "MousePosition", "classGLFWWindow.html#a1e9fdb7b13d85e6665700e6f09102822", null ],
     [ "Resizable", "classGLFWWindow.html#a385d18dab222a6018348d9389ca0432e", null ],
     [ "Title", "classGLFWWindow.html#ab4193d3a8cce1929b8844ffa345fabc9", null ],
