@@ -1,0 +1,5 @@
+<map id="AnimationTemplate" name="AnimationTemplate">
+<area shape="rect" id="node1" title="Contains all the frames and fps of animation. Created once for each animation." alt="" coords="5,171,155,197"/>
+<area shape="rect" id="node2" href="$classTexture.html" title="Image on the GPU." alt="" coords="45,81,115,108"/>
+<area shape="rect" id="node3" title=" " alt="" coords="8,5,152,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="FontGlyph" name="FontGlyph">
+<area shape="rect" id="node1" title="A single character from the font." alt="" coords="33,171,121,197"/>
+<area shape="rect" id="node2" href="$classTexture.html" title="Image on the GPU." alt="" coords="42,81,113,108"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,149,32"/>
+</map>

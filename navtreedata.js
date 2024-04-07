@@ -24,12 +24,27 @@
 */
 var NAVTREE =
 [
-  [ "Ocicat", "index.html", ]
+  [ "Ocicat", "index.html", [
+    [ "Examples", "index.html#autotoc_md1", null ],
+    [ "Tutorials", "index.html#autotoc_md2", null ],
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ],
+        [ "Properties", "functions_prop.html", null ]
+      ] ]
+    ] ]
+  ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+"annotated.html",
+"classShader.html#a4b433a10f2d148287dccf2831a3e433b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
