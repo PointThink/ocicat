@@ -1,6 +1,7 @@
 var classOpenTKWindow =
 [
     [ "OpenTKWindow", "classOpenTKWindow.html#aaeac3c4b9083d0fe54879664603686e1", null ],
+    [ "GetGamePadState", "classOpenTKWindow.html#adddc24cf510121c17db1de36058cfac1", null ],
     [ "HandleEvents", "classOpenTKWindow.html#a581d7ce84d468439fe02699e5ccca78a", null ],
     [ "IsKeyDown", "classOpenTKWindow.html#a7e6514377c78f68346667a8920fd90b4", null ],
     [ "IsKeyPressed", "classOpenTKWindow.html#aa6f2bd6a626630419e74e5d43ce26c2e", null ],

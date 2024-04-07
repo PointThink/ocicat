@@ -19,6 +19,7 @@ var annotated_dup =
     [ "FontGlyph", "classFontGlyph.html", "classFontGlyph" ],
     [ "Framebuffer", "classFramebuffer.html", "classFramebuffer" ],
     [ "Game", "classGame.html", "classGame" ],
+    [ "GamePadState", "structGamePadState.html", "structGamePadState" ],
     [ "GameState", "classGameState.html", "classGameState" ],
     [ "GLFWWindow", "classGLFWWindow.html", "classGLFWWindow" ],
     [ "IndexBuffer", "classIndexBuffer.html", "classIndexBuffer" ],

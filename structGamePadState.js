@@ -1,0 +1,26 @@
+var structGamePadState =
+[
+    [ "GamePadState", "structGamePadState.html#a6e6c1c02e15da589049a1e12ff50157e", null ],
+    [ "A", "structGamePadState.html#a96967e53575bff746a2f577058d43d76", null ],
+    [ "B", "structGamePadState.html#a6cf0158358e93da2bb1cfb4bcfb2408f", null ],
+    [ "Back", "structGamePadState.html#a610263c8dc098a12ee4c8d6b47857b37", null ],
+    [ "DpadDown", "structGamePadState.html#a3b6721c0bbbf0baedabab7b38eeaa76d", null ],
+    [ "DpadLeft", "structGamePadState.html#a28d060733a759434fa4380d3bde371cc", null ],
+    [ "DpadRight", "structGamePadState.html#acfa0e9d125144d5808351c4094b5f0ac", null ],
+    [ "DpadUp", "structGamePadState.html#a237bad401e3961ae14b8f2b5c08a2d14", null ],
+    [ "Guide", "structGamePadState.html#a14af9eed39f188261b6a7a477f657f5f", null ],
+    [ "IsConnected", "structGamePadState.html#ac33dbfa162b3e0caa1c57d6d44765aa7", null ],
+    [ "LeftBumper", "structGamePadState.html#ad75e923ca7b57e6c839774c497301823", null ],
+    [ "LeftStick", "structGamePadState.html#a142b684d77052ebb028d8c17efe5552e", null ],
+    [ "LeftStickPressed", "structGamePadState.html#a06416eb39ac7a748edbd73e41b23e6e9", null ],
+    [ "LeftThumb", "structGamePadState.html#a9182b770eaa68b38edcbfbe0af9b97e9", null ],
+    [ "LeftTrigger", "structGamePadState.html#aff92479345b785c5925978fdb429311d", null ],
+    [ "RightBumper", "structGamePadState.html#a6496c1ce7235f8c61f28e37e8cd2b043", null ],
+    [ "RightStick", "structGamePadState.html#a8ba21dd6157a7d7d75273fc3cc13803f", null ],
+    [ "RightStickPressed", "structGamePadState.html#a9099a601a5e76c1bb085d40b7de8c983", null ],
+    [ "RightThumb", "structGamePadState.html#a02e613d1dc448e72c8d01c2c725da366", null ],
+    [ "RightTrigger", "structGamePadState.html#aa39d429df108c4b89806d08821556b84", null ],
+    [ "Start", "structGamePadState.html#ac9220088263a1c3dbc8ab7493c1c8637", null ],
+    [ "X", "structGamePadState.html#a721d779c8db269a757bc4a22118d6d15", null ],
+    [ "Y", "structGamePadState.html#afcd76958b4caf69dd54b313eccc34d1f", null ]
+];

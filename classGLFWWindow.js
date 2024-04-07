@@ -1,6 +1,7 @@
 var classGLFWWindow =
 [
     [ "GLFWWindow", "classGLFWWindow.html#a2da19a8caf0f432ece3029c0977aac21", null ],
+    [ "GetGamePadState", "classGLFWWindow.html#ab9685a2c1b68e0d7d5875a908714438d", null ],
     [ "HandleEvents", "classGLFWWindow.html#abf8e8177f25da72260c685496ffa90c1", null ],
     [ "IsKeyDown", "classGLFWWindow.html#af23b2909240133ef80873acfa5642f7b", null ],
     [ "IsKeyPressed", "classGLFWWindow.html#ac913c705a4145c5c9ef201012fcb7d9f", null ],

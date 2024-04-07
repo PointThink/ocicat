@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['game_69',['Game',['../classGame.html',1,'']]],
-  ['gamestate_70',['GameState',['../classGameState.html',1,'']]],
-  ['glfwwindow_71',['GLFWWindow',['../classGLFWWindow.html',1,'']]]
+  ['game_70',['Game',['../classGame.html',1,'']]],
+  ['gamepadstate_71',['GamePadState',['../structGamePadState.html',1,'']]],
+  ['gamestate_72',['GameState',['../classGameState.html',1,'']]],
+  ['glfwwindow_73',['GLFWWindow',['../classGLFWWindow.html',1,'']]]
 ];
