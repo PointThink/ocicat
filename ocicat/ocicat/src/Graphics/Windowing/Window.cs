@@ -33,7 +33,12 @@ public abstract class Window
 	public abstract bool IsMouseButtonDown(int button);
 	public abstract bool IsMouseButtonPressed(int button);
 
-	public abstract GamePadState GetGamePadState(int gamepad);
+	/// <summary>
+	/// Returns the current state of a gamepad
+	/// </summary>
+	/// <param name="gamepad">Gamepad ID. 0 is the first connected gamepad</param>
+	/// <returns></returns>
+	public abstract GamePadState GetGamePadState(int gamepad = 0);
 	
 	public static Window Create(string title, int width, int height, bool fullscreen = false, bool resizable = false, int samples = 0, RenderingApi? api = null)
 	{

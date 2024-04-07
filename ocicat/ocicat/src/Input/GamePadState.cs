@@ -1,6 +1,6 @@
 ﻿namespace ocicat.Input;
 
-// Xbox style controller mapping
+///<summary>Xbox style controller mapping</summary>
 public struct GamePadState
 {
     public bool IsConnected;
