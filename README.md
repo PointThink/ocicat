@@ -7,4 +7,4 @@ Ocicat is a .NET game/media framework written in C#.
 > Check OpenAL.md for more info
 
 ## Documentation
-All documentation is available at pointthink.github.io/ocicat
+All documentation is available at [the project website](pointthink.github.io/ocicat)
