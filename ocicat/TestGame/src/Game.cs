@@ -50,7 +50,7 @@ public static class Program
 	public static void Main(string[] args)
 	{
 		Game.Create("Test game", 800, 600, false, true);
-		Game.Window.Icon = new Image("imag.jpg");
+		Game.Window.Icon = new Image("image.jpg");
 		
 		Sound = new Sound(Game.AudioEngine, "erro.ogg");
 		

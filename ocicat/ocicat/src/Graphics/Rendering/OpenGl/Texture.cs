@@ -34,8 +34,20 @@ public class Texture : Rendering.Texture
 		
 		GL.BindTexture(TextureTarget.Texture2D, _handle);
 		
-		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) TextureMinFilter.Linear);
-		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) TextureMagFilter.Linear);
+		if (textureFilter == TextureFilter.Linear)
+		{
+			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter,
+				(int)TextureMinFilter.Linear);
+			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter,
+				(int)TextureMagFilter.Linear);
+		}
+		else
+		{
+			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter,
+				(int)TextureMinFilter.Nearest);
+			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter,
+				(int)TextureMagFilter.Nearest);
+		}
 		
 		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.ClampToEdge);
 		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapR, (int) TextureWrapMode.ClampToEdge);
