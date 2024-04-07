@@ -1,7 +1,7 @@
 var classWindow =
 [
     [ "Create", "classWindow.html#a91346ca64187776763a3ae916bfa02b5", null ],
-    [ "GetGamePadState", "classWindow.html#a6ea02e20a0b2b716682fb4dfd2b053d4", null ],
+    [ "GetGamePadState", "classWindow.html#a5e11090adc74c0cd64e9df07f98d15b7", null ],
     [ "HandleEvents", "classWindow.html#a45a5bb688805e428917773d6d4a692c5", null ],
     [ "IsKeyDown", "classWindow.html#a2b5e422d6296c5cf9cce46c9474dde7d", null ],
     [ "IsKeyPressed", "classWindow.html#a187707648ea88c1812ef1e8711b8ab3c", null ],
