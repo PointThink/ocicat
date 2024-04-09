@@ -27,6 +27,7 @@ var NAVTREE =
   [ "Ocicat", "index.html", [
     [ "Examples", "index.html#autotoc_md1", null ],
     [ "Tutorials", "index.html#autotoc_md2", null ],
+    [ "Contact", "index.html#autotoc_md3", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
