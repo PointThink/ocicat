@@ -87,17 +87,43 @@ public class Renderer
 		Height = height;
 	}
 
-	public void DrawRect(Vector2 position, Vector2 size, Color color, float rotation = 0)
+	public void DrawMesh(Mesh mesh, Vector2 position, Vector2 size, Color color, float rotation)
 	{
 		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 transform = GenTransform(position, size, rotation);
+		Matrix4 transform = GenTransform(position, size, rotation, false, false);
 		
 		Primitives.UntexturedMeshShader.Use();
 		Primitives.UntexturedMeshShader.UniformMat4("transform", ref transform);
 		Primitives.UntexturedMeshShader.UniformMat4("projection", ref projection);
 		Primitives.UntexturedMeshShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 		
-		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
+		RenderCommands.DrawIndexed(mesh.VertexArray);
+	}
+	
+	public void DrawTexturedMesh(Mesh mesh, Texture texture, Vector2 position, Vector2 size, Color? tint, float rotation,
+		bool flipVertical, bool flipHorizontal
+		)
+	{
+		if (tint == null)
+			tint = Color.CreateFloat(1, 1, 1, 1);
+		
+		Matrix4 projection = Camera.CalculateProjection();
+		Matrix4 transform = GenTransform(position, size, rotation, flipVertical, flipHorizontal);
+		
+		Primitives.TexturedMeshShader.Use();
+		Primitives.TexturedMeshShader.UniformMat4("transform", ref transform);
+		Primitives.TexturedMeshShader.UniformMat4("projection", ref projection);;
+		Primitives.TexturedMeshShader.Uniform4f("tint", tint.R, tint.G, tint.B, tint.A);
+
+		texture.Bind(0);
+		Primitives.TexturedMeshShader.Uniform1i("textureSampler", 0);
+		
+		RenderCommands.DrawIndexed(mesh.VertexArray);
+	}
+
+	public void DrawRect(Vector2 position, Vector2 size, Color color, float rotation = 0)
+	{
+		DrawMesh(Primitives.RectangleMesh, position, size, color, rotation);
 	}
 
 	public void DrawRectLines(Vector2 position, Vector2 size, Color color, float thickness = 1, float rotation = 0)
@@ -116,42 +142,8 @@ public class Renderer
 	
 	public void DrawCircle(Vector2 center, float radius, int count, Color color)
 	{
-		List<float> vertecies = new List<float>();
-		
-		// Generate circle mesh
-		for (int i = 0; i < count; i++)
-		{
-			double degrees = 360f / count * i;
-
-			Vector2 vertex1 = Vector2.FromDegrees((float) degrees);
-			Vector2 vertex2 = Vector2.FromDegrees((float) degrees + 360f / count);
-
-			vertecies.Add(0);
-			vertecies.Add(0);
-			vertecies.Add(vertex1.X);
-			vertecies.Add(vertex1.Y);
-			vertecies.Add(vertex2.X);
-			vertecies.Add(vertex2.Y);
-		}
-		
-		uint[] indicies = new uint[count * 3];
-
-		for (uint i = 0; i < count * 3; i++)
-			indicies[i] = i;
-
-		Mesh mesh = new Mesh(this, vertecies.ToArray(), indicies, new BufferLayout(
-			[new BufferElement("position", ShaderDataType.Float2)]
-		));
-		
-		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 transform = GenTransform(center, new Vector2(radius, radius), 0);
-		
-		Primitives.UntexturedMeshShader.Use();
-		Primitives.UntexturedMeshShader.UniformMat4("transform", ref transform);
-		Primitives.UntexturedMeshShader.UniformMat4("projection", ref projection);
-		Primitives.UntexturedMeshShader.Uniform4f("color", color.R, color.G, color.B, color.A);
-
-		RenderCommands.DrawIndexed(mesh.VertexArray);
+		Mesh circleMesh = Mesh.GenCircleMesh(this, count);
+		DrawMesh(circleMesh, center, new Vector2(radius, radius), color, 0);
 	}
 	
 	public void DrawTriangle(Vector2 point1, Vector2 point2, Vector2 point3, Color color)
@@ -167,15 +159,7 @@ public class Renderer
 			[new BufferElement("position", ShaderDataType.Float2)]
 		));
 		
-		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 transform = GenTransform(new Vector2(0, 0), new Vector2(1, 1), 0);
-		
-		Primitives.UntexturedMeshShader.Use();
-		Primitives.UntexturedMeshShader.UniformMat4("transform", ref transform);
-		Primitives.UntexturedMeshShader.UniformMat4("projection", ref projection);
-		Primitives.UntexturedMeshShader.Uniform4f("color", color.R, color.G, color.B, color.A);
-		
-		RenderCommands.DrawIndexed(triangleMesh.VertexArray);
+		DrawMesh(triangleMesh, new Vector2(0, 0), new Vector2(1, 1), color, 0);
 	}
 	
 	public void DrawRoundedRect(Vector2 position, Vector2 size, float radius, Color color, float rotation = 0)
@@ -200,21 +184,7 @@ public class Renderer
 	
 	public void DrawRectTextured(Vector2 position, Vector2 size, Texture texture, Color? tint = null, float rotation = 0, bool flipVertical = false, bool flipHorizontal = false)
 	{
-		if (tint == null)
-			tint = Color.CreateFloat(1, 1, 1, 1);
-		
-		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 transform = GenTransform(position, size, rotation, flipVertical, flipHorizontal);
-		
-		Primitives.TexturedMeshShader.Use();
-        Primitives.TexturedMeshShader.UniformMat4("transform", ref transform);
-        Primitives.TexturedMeshShader.UniformMat4("projection", ref projection);;
-		Primitives.TexturedMeshShader.Uniform4f("tint", tint.R, tint.G, tint.B, tint.A);
-
-		texture.Bind(0);
-		Primitives.TexturedMeshShader.Uniform1i("textureSampler", 0);
-		
-		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
+		DrawTexturedMesh(Primitives.RectangleMesh, texture, position, size, tint, rotation, flipVertical, flipHorizontal);
 	}
 
 	public void DrawFontGlyph(FontGlyph glyph, Vector2 position, Color color, float scale = 1, float rotation = 0)

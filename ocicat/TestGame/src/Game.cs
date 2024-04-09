@@ -2,7 +2,6 @@
 using ocicat;
 using ocicat.Audio;
 using ocicat.Graphics;
-using ocicat.Graphics.Rendering;
 using ocicat.Input;
 using Vector2 = ocicat.Vector2;
 
@@ -25,21 +24,13 @@ public class InGame : GameState
 	public override void Tick()
 	{
 		Console.WriteLine($"{1 / Game.Window.DeltaTime} fps");
-
-		// GamePadState gamePadState = Game.Window.GetGamePadState(0);
-		
-		// if (gamePadState.X)
-			// Console.WriteLine("X pressed");
 	}
 
 	public override void Draw()
 	{
-		// Game.Renderer.DrawCircle(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), 30, 64, Color.Yellow);
-		// Game.Renderer.DrawLine(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), Game.Window.MousePosition, 3, Color.Blue);
-		//Game.Renderer.DrawRectLines(new Vector2(40, 40), new Vector2(128, 128), Color.Cyan, 5);
-		GamePadState gpState = Game.Window.GetGamePadState();
-		
-		Game.Renderer.DrawLine(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2) + gpState.RightStick * new Vector2(90, 90), 3, Color.Blue);
+		Game.Renderer.DrawCircle(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), 30, 64, Color.Blue);
+		Game.Renderer.DrawLine(new Vector2(Game.Renderer.Width / 2, Game.Renderer.Height / 2), Game.Window.MousePosition, 3, Color.Red);
+		// Game.Renderer.DrawRectLines(new Vector2(40, 40), new Vector2(128, 128), Color.Cyan, 5);
 	}
 }
 
