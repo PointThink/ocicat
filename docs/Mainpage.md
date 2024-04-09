@@ -12,3 +12,6 @@ Please note that not all features might be in the examples.
 I plan to create text tutorials once the library has matured and stabilized.
 I do not want the tutorials to be out of date after a few commits.
 
+# Contact
+Contact the author:
+- Email: pointthink@protonmail.com
