@@ -9,6 +9,8 @@ var classWindow =
     [ "IsMouseButtonPressed", "classWindow.html#ae1625453a9f5f46d8a599d451ceeb747", null ],
     [ "Present", "classWindow.html#ad75703a83c3089784190a458c510b374", null ],
     [ "ShouldClose", "classWindow.html#a1a390a075d95cb2bbc058d7b8ba3d520", null ],
+    [ "OnKeyPressed", "classWindow.html#a003a05ccd00d8ac5ca4749d9d123531f", null ],
+    [ "OnMousePressed", "classWindow.html#a265f451c43c8c0c2d448abc2655f18d8", null ],
     [ "OnResize", "classWindow.html#a24d7cc177cc25eb81c8ce356bd512817", null ],
     [ "AASamples", "classWindow.html#ac5b22c604f94a295cb811864e96682b9", null ],
     [ "CursorLocked", "classWindow.html#a0019b2f671f54ebd74c55e4915a81cb9", null ],
