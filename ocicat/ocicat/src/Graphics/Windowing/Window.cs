@@ -11,7 +11,9 @@ public abstract class Window
 	public int AASamples { get; protected set; }
 
 	public Action<int, int>? OnResize = null;
-
+	public Action<Key>? OnKeyPressed = null;
+	public Action<int>? OnMousePressed = null;
+	
 	public RenderingApi RenderingApi { get; private set; }
 
 	public abstract string Title { get; set; }

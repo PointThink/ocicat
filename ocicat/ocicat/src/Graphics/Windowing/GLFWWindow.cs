@@ -178,6 +178,7 @@ public unsafe class GLFWWindow : Window
 		{
 			_mouseDownState[(int) button] = true;
 			_mousePressedState[(int) button] = true;
+			OnMousePressed?.Invoke((int)button);
 		}
 		else
 			_mouseDownState[(int) button] = false;
@@ -189,6 +190,7 @@ public unsafe class GLFWWindow : Window
 		{
 			_keyDownState[(int) key] = true;
 			_keyPressedState[(int) key] = true;
+			OnKeyPressed?.Invoke((Key)key);
 		}
 		if (action == InputAction.Release)
 			_keyDownState[(int) key] = false;
