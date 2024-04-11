@@ -25,6 +25,7 @@ var annotated_dup =
     [ "Image", "classImage.html", "classImage" ],
     [ "IndexBuffer", "classIndexBuffer.html", "classIndexBuffer" ],
     [ "KeyboardBind", "classKeyboardBind.html", "classKeyboardBind" ],
+    [ "KeyInfo", "classKeyInfo.html", "classKeyInfo" ],
     [ "Logging", "classLogging.html", "classLogging" ],
     [ "LogLevelInfo", "structLogLevelInfo.html", "structLogLevelInfo" ],
     [ "Mesh", "classMesh.html", "classMesh" ],

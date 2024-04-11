@@ -34,6 +34,7 @@ var hierarchy =
     [ "Rendering.IndexBuffer", null, [
       [ "IndexBuffer", "classIndexBuffer.html", null ]
     ] ],
+    [ "KeyInfo", "classKeyInfo.html", null ],
     [ "Logging", "classLogging.html", null ],
     [ "LogLevelInfo", "structLogLevelInfo.html", null ],
     [ "Mesh", "classMesh.html", null ],
