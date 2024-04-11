@@ -20,7 +20,6 @@ public class Renderer
 	public Camera Camera;
 	
 	public int Width { get; private set; }
-
 	public int Height { get; private set; }
 
 	public Renderer(Window window)

@@ -116,3 +116,16 @@ public enum Key
 	Menu = 348,
 	KeysCount = 349,
 }
+
+public static class KeyInfo
+{
+	public static string? GetKeyName(Key key)
+	{
+		return Enum.GetName(typeof(Key), key);
+	}
+
+	public static Key? GetKeyByName(string name)
+	{
+		return (Key?)Enum.Parse(typeof(Key), name);
+	}
+}
