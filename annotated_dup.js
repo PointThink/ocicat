@@ -4,6 +4,7 @@ var annotated_dup =
     [ "AnimationTemplate", "classAnimationTemplate.html", "classAnimationTemplate" ],
     [ "AudioEngine", "classAudioEngine.html", "classAudioEngine" ],
     [ "AudioHandle", "classAudioHandle.html", "classAudioHandle" ],
+    [ "AudioSource", "classAudioSource.html", "classAudioSource" ],
     [ "Binding", "classBinding.html", "classBinding" ],
     [ "Bindings", "classBindings.html", "classBindings" ],
     [ "BufferElement", "classBufferElement.html", "classBufferElement" ],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['displayinfo_69',['DisplayInfo',['../structDisplayInfo.html',1,'']]]
+  ['displayinfo_71',['DisplayInfo',['../structDisplayInfo.html',1,'']]]
 ];

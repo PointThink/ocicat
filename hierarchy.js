@@ -4,6 +4,7 @@ var hierarchy =
     [ "AnimationTemplate", "classAnimationTemplate.html", null ],
     [ "AudioEngine", "classAudioEngine.html", null ],
     [ "AudioHandle", "classAudioHandle.html", null ],
+    [ "AudioSource", "classAudioSource.html", null ],
     [ "Binding", "classBinding.html", [
       [ "KeyboardBind", "classKeyboardBind.html", null ],
       [ "MouseBind", "classMouseBind.html", null ]
