@@ -1,3 +1,5 @@
+using System.Diagnostics.Tracing;
+using System.Numerics;
 using OpenTK.Audio.OpenAL;
 
 namespace ocicat.Audio;
@@ -8,6 +10,26 @@ namespace ocicat.Audio;
 public class AudioEngine
 {
 	private List<AudioHandle> _activeHandles = new List<AudioHandle>();
+
+	public Vector3 ListenerPosition
+	{
+		get
+		{
+			AL.GetListener(ALListener3f.Position, out OpenTK.Mathematics.Vector3 position);
+			return new Vector3(position.X, position.Y, position.Z);
+		}
+		set => AL.Listener(ALListener3f.Position, value.X, value.Y, value.Z);
+	}
+
+	public Vector3 ListenerVelocity
+    {
+    	get
+    	{
+    		AL.GetListener(ALListener3f.Velocity, out OpenTK.Mathematics.Vector3 velocity);
+    		return new Vector3(velocity.X, velocity.Y, velocity.Z);
+    	}
+    	set => AL.Listener(ALListener3f.Velocity, value.X, value.Y, value.Z);
+    }	
 	
 	public AudioEngine()
 	{
@@ -36,6 +58,12 @@ public class AudioEngine
 		_activeHandles.Add(handle);
 
 		return handle;
+	}
+
+	public void PlaySoundFromSource(Sound sound, AudioSource source)
+	{
+		AL.Source(source.AlSource, ALSourcei.Buffer, sound.ALBuffer);
+		AL.SourcePlay(source.AlSource);
 	}
 
 	public void CleanFinishedSounds()
