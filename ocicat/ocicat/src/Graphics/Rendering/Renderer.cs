@@ -189,7 +189,7 @@ public class Renderer
 	public void DrawFontGlyph(FontGlyph glyph, Vector2 position, Color color, float scale = 1, float rotation = 0)
 	{
 		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 transform = GenTransform(new Vector2(position.X, position.Y - (glyph.SizeY - glyph.BearingY)), new Vector2(glyph.SizeX  * scale, glyph.SizeY * scale), 0);
+		Matrix4 transform = GenTransform(new Vector2(position.X, position.Y - (glyph.SizeY - glyph.BearingY) * scale), new Vector2(glyph.SizeX  * scale, glyph.SizeY * scale), 0);
 		
 		Primitives.TextShader.Use();
 		Primitives.TextShader.UniformMat4("transform", ref transform);

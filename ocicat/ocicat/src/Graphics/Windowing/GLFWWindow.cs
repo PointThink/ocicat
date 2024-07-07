@@ -7,7 +7,7 @@ namespace ocicat.Graphics;
 
 public unsafe class GLFWWindow : Window
 {
-	private DateTime _frameBeginTime;
+	private double _frameBeginTime;
 
 	private bool[] _keyDownState = new bool[(int) Key.KeysCount];
 	private bool[] _keyPressedState = new bool[(int) Key.KeysCount];
@@ -206,13 +206,15 @@ public unsafe class GLFWWindow : Window
 
 	public override void HandleEvents()
 	{
+		DeltaTime = (float) (GLFW.GetTime() - _frameBeginTime);
+		Time += DeltaTime;
+		_frameBeginTime = GLFW.GetTime();
+		
 		for (int i = 0; i < _keyPressedState.Length; i++)
 			_keyPressedState[i] = false;
 		
 		for (int i = 0; i < _mousePressedState.Length; i++)
 			_mousePressedState[i] = false;
-		
-		_frameBeginTime = DateTime.Now;
 		
 		GLFW.PollEvents();
 	}
@@ -220,8 +222,6 @@ public unsafe class GLFWWindow : Window
 	public override void Present()
 	{
 		GLFW.SwapBuffers(_window);
-		DeltaTime = ( (float) (DateTime.Now - _frameBeginTime).TotalMilliseconds ) / 1000;
-		Time += DeltaTime;
 	}
 
 	public override bool ShouldClose()
