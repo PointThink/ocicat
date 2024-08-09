@@ -59,6 +59,15 @@ public class AudioEngine
 
 		return handle;
 	}
+	
+	public AudioHandle CreateHandle(Sound sound)
+	{
+		AudioHandle handle = new AudioHandle(sound);
+		
+		_activeHandles.Add(handle);
+
+		return handle;
+	}
 
 	public void PlaySoundFromSource(Sound sound, AudioSource source)
 	{

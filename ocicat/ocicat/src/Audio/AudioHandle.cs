@@ -9,6 +9,7 @@ namespace ocicat.Audio;
 public class AudioHandle
 {
 	private int _source;
+	public bool ManualCleanup = false;
 
 	public float Volume
 	{
@@ -109,6 +110,6 @@ public class AudioHandle
 	public bool Finished()
 	{
 		AL.GetSource(_source, ALGetSourcei.SourceState, out int value);
-		return value != (int)ALSourceState.Playing;
+		return value != (int)ALSourceState.Playing && !ManualCleanup;
 	}
 }

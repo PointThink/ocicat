@@ -9,15 +9,35 @@ namespace TestGame;
 
 public class InGame : GameState
 {
+	double _lastSoundTime = 0.0;
+	private AudioHandle? _handle = null;
+
+	public InGame()
+	{
+		Vector2 mousePos = Game.Window.MousePosition;
+		
+		_handle = Game.AudioEngine.CreateHandle(Program.Sound);
+		_handle.ManualCleanup = true;
+		_handle.Position = Game.AudioEngine.ListenerPosition;
+		_handle.Falloff = 0.01f;
+		_handle.Volume = 1;
+				
+		_lastSoundTime = Game.Window.Time;
+	}
+	~InGame()
+	{
+		_handle.Destroy();
+	}
+	
 	public override void Update()
 	{
-		if (Game.Window.IsKeyPressed(Key.Space))
+		if (_lastSoundTime + 0.075 < Game.Window.Time)
 		{
-			Vector2 mousePos = Game.Window.MousePosition;
-			AudioHandle handle = Game.AudioEngine.PlaySound(Program.Sound);
-			handle.Position = new Vector3(mousePos.X - Game.Renderer.Width / 2, mousePos.Y - Game.Renderer.Height / 2, 0);
-			handle.Falloff = 0.01f;
-			handle.Volume = 1;
+			if (Game.Window.IsKeyDown(Key.Space))
+			{
+				_handle.Play();
+				_lastSoundTime = Game.Window.Time;
+			}
 		}
 	}
 
