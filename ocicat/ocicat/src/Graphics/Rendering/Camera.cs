@@ -23,7 +23,7 @@ public class OrthographicCamera : Camera
 
 	public override Matrix4 CalculateProjection()
 	{
-		return Matrix4.CreateOrthographicOffCenter(Offset.X, Width + Offset.X, Offset.Y, Height + Offset.Y, 0f, 1f);
+		return Matrix4.CreateOrthographicOffCenter(Offset.X, Width + Offset.X, Height + Offset.Y, Offset.Y, 0f, 1f);
 	}
 
 	public override Matrix4 CalculateView()

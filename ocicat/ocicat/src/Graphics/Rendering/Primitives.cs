@@ -10,10 +10,10 @@ public class Primitives
 	public Primitives(Renderer renderer)
 	{
 		float[] rectVertices = {
-			0, 0, 0, 1,
-			1, 0, 1, 1,
-			1, 1, 1, 0,
-			0, 1, 0, 0
+			0, 0, 0, 0,
+			1, 0, 1, 0,
+			1, 1, 1, 1,
+			0, 1, 0, 1
 		};
 
 		uint[] rectIndices =
