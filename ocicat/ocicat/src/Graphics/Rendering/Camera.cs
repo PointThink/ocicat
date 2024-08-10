@@ -10,8 +10,8 @@ public abstract class Camera
 
 public class OrthographicCamera : Camera
 {
-	public int Width { get; private set; }
-	public int Height { get; private set; }
+	public int Width;
+	public int Height;
 
 	public Vector2 Offset = new Vector2(0, 0);
 	
