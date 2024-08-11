@@ -94,7 +94,7 @@ public unsafe class GLFWWindow : Window
 			if (value)
 				GLFW.SetWindowMonitor(_window, GLFW.GetPrimaryMonitor(), 0, 0, _width, _height, GLFW.DontCare);
 			else
-				GLFW.SetWindowMonitor(_window, null, 0, 0, _width, _height, GLFW.DontCare);
+				GLFW.SetWindowMonitor(_window, null, 0, 0, 800, 600, GLFW.DontCare);
 
 			_fullscreen = value;
 		}
