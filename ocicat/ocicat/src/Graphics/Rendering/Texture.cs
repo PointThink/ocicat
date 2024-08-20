@@ -15,7 +15,7 @@ public abstract class Texture
 	public abstract void Unbind();
 	
 	public abstract int GetWidth();
-	public abstract int GetHeight(uint slot);
+	public abstract int GetHeight();
 
 	public abstract int GetTextureID();
 	

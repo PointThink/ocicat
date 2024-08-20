@@ -74,7 +74,7 @@ public class Renderer
 		                      Matrix4.CreateRotationZ(Single.DegreesToRadians(rotation)) *
 		                      Matrix4.CreateTranslation(position.X + size.X / 2, position.Y + size.Y / 2, 0);
 		
-		return view * translation;
+		return translation * view;
 	}
 
 	public void ResizeRenderer(int width, int height)
@@ -108,6 +108,8 @@ public class Renderer
 		
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 transform = GenTransform(position, size, rotation, flipVertical, flipHorizontal);
+
+		OrthographicCamera camera = (OrthographicCamera)Camera;
 		
 		Primitives.TexturedMeshShader.Use();
 		Primitives.TexturedMeshShader.UniformMat4("transform", ref transform);
@@ -189,7 +191,7 @@ public class Renderer
 	public void DrawFontGlyph(FontGlyph glyph, Vector2 position, Color color, float scale = 1, float rotation = 0)
 	{
 		Matrix4 projection = Camera.CalculateProjection();
-		Matrix4 transform = GenTransform(new Vector2(position.X, position.Y - (glyph.SizeY - glyph.BearingY) * scale), new Vector2(glyph.SizeX  * scale, glyph.SizeY * scale), 0);
+		Matrix4 transform = GenTransform(new Vector2(position.X, position.Y + (glyph.FontSize - glyph.BearingY) * scale), new Vector2(glyph.SizeX  * scale, glyph.SizeY * scale), 0);
 		
 		Primitives.TextShader.Use();
 		Primitives.TextShader.UniformMat4("transform", ref transform);

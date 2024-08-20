@@ -9,7 +9,7 @@ namespace ocicat.Graphics;
 /// </summary>
 public class FontGlyph
 {
-	public FontGlyph(Texture texture, int sizeX, int sizeY, int bearingX, int bearingY, uint advance)
+	public FontGlyph(Texture texture, int sizeX, int sizeY, int bearingX, int bearingY, uint advance, uint fontSize)
 	{
 		Texture = texture;
 		SizeX = sizeX;
@@ -17,6 +17,7 @@ public class FontGlyph
 		BearingX = bearingX;
 		BearingY = bearingY;
 		Advance = advance;
+		FontSize = fontSize;
 	}
 	
 	public readonly Texture Texture;
@@ -25,8 +26,8 @@ public class FontGlyph
 	public readonly int SizeY;
 	public readonly int BearingX;
 	public readonly int BearingY;
-
 	public readonly uint Advance;
+	public readonly uint FontSize;
 }
 
 public unsafe class Font
@@ -45,12 +46,14 @@ public unsafe class Font
 		
 		FT.FT_Set_Pixel_Sizes((IntPtr)freetypeFace, 0, size);
 
+		FT.FT_Library_SetLcdFilter(freetype, FT_LcdFilter.FT_LCD_FILTER_MAX);
+
 		// Load all glyphs
 		for (uint ch = 0; ch < 128; ch++)
 		{
-			if (FT.FT_Load_Char((IntPtr)freetypeFace, ch, FT.FT_LOAD_DEFAULT) == FT_Error.FT_Err_Ok)
+			if (FT.FT_Load_Char((IntPtr)freetypeFace, ch, FT.FT_LOAD_RENDER) == FT_Error.FT_Err_Ok)
 			{
-				FT_Error error = FT.FT_Render_Glyph((IntPtr)freetypeFace->glyph, FT_Render_Mode.FT_RENDER_MODE_NORMAL);
+				FT_Error error = FT.FT_Render_Glyph((IntPtr)freetypeFace->glyph, FT_Render_Mode.FT_RENDER_MODE_MAX);
 
 				if (error != FT_Error.FT_Err_Ok)
 				{
@@ -78,7 +81,7 @@ public unsafe class Font
 				Texture texture = Texture.Create(renderer, managedArray, charSize.X, charSize.Y, TextureFilter.Linear,
 					1);
 
-				_glyphs.Add(ch, new FontGlyph(texture, charSize.X, charSize.Y, bearing.X, bearing.Y, advance));
+				_glyphs.Add(ch, new FontGlyph(texture, charSize.X, charSize.Y, bearing.X, bearing.Y, advance, size));
 			}
 		}
 

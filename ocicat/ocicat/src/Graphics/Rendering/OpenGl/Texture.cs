@@ -49,8 +49,8 @@ public class Texture : Rendering.Texture
 				(int)TextureMagFilter.Nearest);
 		}
 		
-		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.ClampToEdge);
-		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapR, (int) TextureWrapMode.ClampToEdge);
+		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.Repeat);
+		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapR, (int) TextureWrapMode.Repeat2);
 		
 		GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba8, width, height, 0, format, PixelType.UnsignedByte, imageData);
 		GL.BindTexture(TextureTarget.Texture2D, 0);
@@ -82,7 +82,7 @@ public class Texture : Rendering.Texture
 		return _width;
 	}
 
-	public override int GetHeight(uint slot)
+	public override int GetHeight()
 	{
 		return _height;
 	}
