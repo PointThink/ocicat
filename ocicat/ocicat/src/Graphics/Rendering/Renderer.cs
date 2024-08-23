@@ -230,13 +230,12 @@ public class Renderer
 
 	public void DrawLine(Vector2 point1, Vector2 point2, float thickness, Color color)
 	{
-		Matrix4 view = Camera.CalculateView();
-		Matrix4 translation = Matrix4.CreateScale(thickness, Vector2.GetDistance(point1, point2), 1) *
+		Matrix4 translation = Matrix4.CreateScale(Vector2.GetDistance(point1, point2), thickness, 1) *
 		                      Matrix4.CreateRotationZ(Single.DegreesToRadians(Vector2.GetDirection(point1, point2))) *
 		                      Matrix4.CreateTranslation(point1.X, point1.Y, 0);
 
 
-		Matrix4 transform = translation;
+		Matrix4 transform = translation * Camera.CalculateView();
 		Matrix4 projection = Camera.CalculateProjection();
 		
 		Primitives.UntexturedMeshShader.Use();

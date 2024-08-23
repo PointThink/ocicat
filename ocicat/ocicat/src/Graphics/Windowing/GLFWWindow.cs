@@ -137,12 +137,13 @@ public unsafe class GLFWWindow : Window
 	private GLFWCallbacks.MouseButtonCallback _mouseCallback;
 	private GLFWCallbacks.WindowSizeCallback _resizeCallback;
 	
-	public GLFWWindow(string title, int width, int height, bool fullscreen, bool resizable)
+	public GLFWWindow(string title, int width, int height, bool fullscreen, bool resizable, int samples)
 	{
 		GLFW.Init();
 		
 		GLFW.WindowHint(WindowHintBool.Resizable, resizable);
 		_resizable = resizable;
+		GLFW.WindowHint(WindowHintInt.Samples, samples);
 		
 		_window = GLFW.CreateWindow(width, height, title, null, null);
 		

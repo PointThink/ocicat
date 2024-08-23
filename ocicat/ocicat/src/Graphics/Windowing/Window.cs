@@ -54,7 +54,7 @@ public abstract class Window
 		{
 			case RenderingApi.OpenGl:
 				// window = new OpenTKWindow(title, width, height, fullscreen, resizable, samples);
-				window = new GLFWWindow(title, width, height, fullscreen, resizable);
+				window = new GLFWWindow(title, width, height, fullscreen, resizable, samples);
 				break;
 			default:
 				throw new ArgumentException("Invalid RenderingApi");
