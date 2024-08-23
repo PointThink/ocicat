@@ -50,7 +50,7 @@ public class Texture : Rendering.Texture
 		}
 		
 		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.Repeat);
-		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapR, (int) TextureWrapMode.Repeat2);
+		GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapR, (int) TextureWrapMode.Repeat);
 		
 		GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba8, width, height, 0, format, PixelType.UnsignedByte, imageData);
 		GL.BindTexture(TextureTarget.Texture2D, 0);

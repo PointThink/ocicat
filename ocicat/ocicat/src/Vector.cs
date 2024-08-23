@@ -51,14 +51,14 @@ public struct Vector2
 		double xDiff = v2.X - v1.X;
 		double yDiff = v2.Y - v1.Y;
 		
-		double direction = Math.Atan2(yDiff, xDiff) * 180 / Math.PI - 90;
+		double direction = Math.Atan2(yDiff, xDiff) * (180 / Math.PI);
 
 		return (float) direction;
 	}
 
 	public static Vector2 FromDegrees(float angle, float length = 1)
 	{
-		double tangents = (180 - angle) * 0.0174532925;
+		double tangents = (angle) * 0.0174532925;
 
 		return new Vector2((float) (length * Math.Cos(tangents)), (float) (length * Math.Sin(tangents)));
 	}
