@@ -2,6 +2,7 @@ var classColor =
 [
     [ "CreateFloat", "classColor.html#acdaaf334482b87d84906055071979a9e", null ],
     [ "CreateRGBA8", "classColor.html#ad73b893b3e942730d2e0871b19e05f0c", null ],
+    [ "Black", "classColor.html#aa3b0a53553e12d1b2ab2be8bae385138", null ],
     [ "Blue", "classColor.html#a8d65154b6c696d5f852a516af9bd6f8c", null ],
     [ "Cyan", "classColor.html#a1ab8523e9b72ccdaf53e45754f7daee0", null ],
     [ "Green", "classColor.html#abdab8bf1062e19c9a2cfdb66a7bb0397", null ],
