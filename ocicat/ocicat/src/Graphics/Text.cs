@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Text;
 using FreeTypeSharp.Native;
 using ocicat.Graphics.Rendering;
 using OpenTK.Mathematics;
@@ -35,6 +36,7 @@ public unsafe class Font
 	public int SpaceSize = 10;
 	
 	private readonly Dictionary<uint, FontGlyph> _glyphs = new();
+	public readonly uint FontSize;
 
 	public Font(Renderer renderer, string path, uint size)
 	{
@@ -48,6 +50,8 @@ public unsafe class Font
 
 		FT.FT_Library_SetLcdFilter(freetype, FT_LcdFilter.FT_LCD_FILTER_MAX);
 
+		FontSize = size;
+		
 		// Load all glyphs
 		for (uint ch = 0; ch < 128; ch++)
 		{
@@ -94,5 +98,27 @@ public unsafe class Font
 	public FontGlyph GetGlyph(uint glyph)
 	{
 		return _glyphs[glyph];
+	}
+
+	public float GetStringSize(string text)
+	{
+		
+		byte[] characters = Encoding.ASCII.GetBytes(text);
+		Vector2 currentPosition = new Vector2();
+		
+		foreach (byte character in characters)
+		{
+			if (character == 32) // space
+				currentPosition.X += SpaceSize;
+			else if (character == 9) // tab
+				currentPosition.X += SpaceSize * 4;
+			else
+			{
+				FontGlyph glyph = GetGlyph(character);
+				currentPosition.X += glyph.Advance;
+			}
+		}
+		
+		return currentPosition.X;
 	}
 }

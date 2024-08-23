@@ -9,7 +9,8 @@ public class Color
 	public static readonly Color Yellow = CreateFloat(1, 1, 0, 1);
 	public static readonly Color Magenta = CreateFloat(1, 0, 1, 1);
 	public static readonly Color Cyan = CreateFloat(0, 1, 1, 1);
-
+	public static readonly Color Black = CreateFloat(0, 0, 0, 1);
+	
 	public float R, G, B, A;
 	
 	private Color(float r, float g, float b, float a)
@@ -19,6 +20,7 @@ public class Color
 		B = b;
 		A = a;
 	}
+	
 
 	/// <summary>
 	/// Create a color with 0 to 1 values
