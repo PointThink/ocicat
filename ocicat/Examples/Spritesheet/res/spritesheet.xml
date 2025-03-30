@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Sprites>
+    <Sprite>
+        <Name>sprite1</Name>
+        <Offset>0,0</Offset>
+        <Size>16,16</Size>
+    </Sprite>
+    <Sprite>
+        <Name>sprite2</Name>
+        <Offset>16,0</Offset>
+        <Size>16,16</Size>
+    </Sprite>
+    <Sprite>
+        <Name>sprite3</Name>
+        <Offset>32,0</Offset>
+        <Size>16,16</Size>
+    </Sprite>
+</Sprites>

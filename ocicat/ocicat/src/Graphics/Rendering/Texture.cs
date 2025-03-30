@@ -19,7 +19,7 @@ public abstract class Texture
 
 	public abstract int GetTextureID();
 	
-	public static Texture Create(Renderer renderer, byte[] imageData, int width, int height, TextureFilter textureFilter = TextureFilter.Linear, int colorChannels = 4)
+	public static Texture Create(Renderer renderer, byte[] imageData, int width, int height, TextureFilter textureFilter = TextureFilter.Nearest, int colorChannels = 4)
 	{
 		switch (renderer.RenderingApi)
 		{
@@ -30,7 +30,7 @@ public abstract class Texture
 		throw new ArgumentException("Invalid RenderingApi");
 	}
 
-	public static Texture Create(Renderer renderer, string filePath, TextureFilter textureFilter = TextureFilter.Linear)
+	public static Texture Create(Renderer renderer, string filePath, TextureFilter textureFilter = TextureFilter.Nearest)
 	{
 		Image image = new Image(filePath);
 		return Texture.Create(renderer, image.Data, image.Width, image.Height, textureFilter);

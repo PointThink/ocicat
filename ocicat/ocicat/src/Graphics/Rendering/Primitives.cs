@@ -5,6 +5,7 @@ public class Primitives
 	public Mesh RectangleMesh;
 	public Shader UntexturedMeshShader;
 	public Shader TexturedMeshShader;
+	public Shader SpritesheetShader;
 	public Shader TextShader;
 	
 	public Primitives(Renderer renderer)
@@ -78,6 +79,26 @@ void main()
 {
     FragColor = texture(textureSampler, vTexCoords) * tint;
 }";
+		
+		string spritesheetFragShader = @"#version 330 core
+out vec4 FragColor;
+
+uniform sampler2D textureSampler;
+uniform vec4 tint;
+
+in vec2 vTexCoords;
+
+uniform vec2 sheetSize;
+uniform vec2 spriteOffset;
+uniform vec2 spriteSize;
+
+void main()
+{
+	vec2 spriteBegin = spriteOffset / sheetSize;
+	vec2 spriteTrueSize = spriteSize / sheetSize;
+	vec2 trueOffset = spriteTrueSize * vTexCoords;
+    FragColor = texture(textureSampler, spriteBegin + trueOffset) * tint;
+}";
 
 		string fontFragShader = @"#version 330 core
 out vec4 FragColor;
@@ -95,6 +116,7 @@ void main()
 		
 		UntexturedMeshShader = Shader.Create(renderer, untexturedVertShader, untexturedFragShader);
 		TexturedMeshShader = Shader.Create(renderer, texturedVertShader, texturedFragShader);
+		SpritesheetShader = Shader.Create(renderer, texturedVertShader, spritesheetFragShader);
 		TextShader = Shader.Create(renderer, texturedVertShader, fontFragShader);
 	}
 }

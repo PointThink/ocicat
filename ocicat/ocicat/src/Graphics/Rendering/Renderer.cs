@@ -188,6 +188,31 @@ public class Renderer
 		DrawTexturedMesh(Primitives.RectangleMesh, texture, position, size, tint, rotation, flipVertical, flipHorizontal);
 	}
 
+	public void DrawSprite(Vector2 position, Sprite sprite, float scale = 1, Color? tint = null, float rotation = 0,
+		bool flipVertical = false, bool flipHorizontal = false)
+	{
+		if (tint == null)
+			tint = Color.CreateFloat(1, 1, 1, 1);
+		
+		Matrix4 projection = Camera.CalculateProjection();
+		Matrix4 transform = GenTransform(position, sprite.Size * new Vector2(scale, scale), rotation, flipVertical, flipHorizontal);
+
+		OrthographicCamera camera = (OrthographicCamera)Camera;
+		
+		Primitives.SpritesheetShader.Use();
+		Primitives.SpritesheetShader.UniformMat4("transform", ref transform);
+		Primitives.SpritesheetShader.UniformMat4("projection", ref projection);;
+		Primitives.SpritesheetShader.Uniform4f("tint", tint.R, tint.G, tint.B, tint.A);
+
+		sprite.Spritesheet.SpritesheetTexture.Bind(0);
+		Primitives.SpritesheetShader.Uniform1i("textureSampler", 0);
+		Primitives.SpritesheetShader.Uniform2f("sheetSize", sprite.Spritesheet.SpritesheetTexture.GetWidth(), sprite.Spritesheet.SpritesheetTexture.GetHeight());
+		Primitives.SpritesheetShader.Uniform2f("spriteOffset", sprite.Offset.X, sprite.Offset.Y);
+		Primitives.SpritesheetShader.Uniform2f("spriteSize", sprite.Size.X, sprite.Size.Y);
+		
+		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
+	}
+
 	public void DrawFontGlyph(FontGlyph glyph, Vector2 position, Color color, float scale = 1, float rotation = 0)
 	{
 		Matrix4 projection = Camera.CalculateProjection();
