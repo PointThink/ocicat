@@ -52,7 +52,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"namespaceocicat_1_1Input.html#a586f3ade4fe0145fdce9cce78f6e3ec7affa5882d1ddcf903bf0d0dbc30bfc604"
+"structocicat_1_1Input_1_1GamePadState.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

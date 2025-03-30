@@ -98,26 +98,33 @@ $(document).ready(function(){initNavTree('classocicat_1_1Audio_1_1AudioEngine.ht
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#properties">Properties</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classocicat_1_1Audio_1_1AudioEngine-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ocicat.Audio.AudioEngine Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Manages everything audio related.  
- <a href="classocicat_1_1Audio_1_1AudioEngine.html#details">More...</a></p>
+<div class="dynheader">
+Collaboration diagram for ocicat.Audio.AudioEngine:</div>
+<div class="dyncontent">
+<div class="center"><img src="classocicat_1_1Audio_1_1AudioEngine__coll__graph.png" border="0" usemap="#aocicat_8Audio_8AudioEngine_coll__map" alt="Collaboration graph"/></div>
+<map name="aocicat_8Audio_8AudioEngine_coll__map" id="aocicat_8Audio_8AudioEngine_coll__map">
+<area shape="rect" title=" " alt="" coords="5,93,192,119"/>
+<area shape="rect" href="structocicat_1_1Vector2.html" title=" " alt="" coords="41,5,156,31"/>
+<area shape="poly" title=" " alt="" coords="101,45,101,93,96,93,96,45"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a638f1d6dc3dcba705ee71b3e72e9af01" id="r_a638f1d6dc3dcba705ee71b3e72e9af01"><td class="memItemLeft" align="right" valign="top"><a id="a638f1d6dc3dcba705ee71b3e72e9af01" name="a638f1d6dc3dcba705ee71b3e72e9af01"></a>
 <a class="el" href="classocicat_1_1Audio_1_1AudioHandle.html">AudioHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PlaySound</b> (<a class="el" href="classocicat_1_1Audio_1_1Sound.html">Sound</a> sound)</td></tr>
 <tr class="separator:a638f1d6dc3dcba705ee71b3e72e9af01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbd2271ba542b38d0259c9b18361d06d" id="r_afbd2271ba542b38d0259c9b18361d06d"><td class="memItemLeft" align="right" valign="top"><a id="afbd2271ba542b38d0259c9b18361d06d" name="afbd2271ba542b38d0259c9b18361d06d"></a>
+<a class="el" href="classocicat_1_1Audio_1_1AudioHandleSpatial.html">AudioHandleSpatial</a>&#160;</td><td class="memItemRight" valign="bottom"><b>PlaySoundSpatial</b> (<a class="el" href="classocicat_1_1Audio_1_1Sound.html">Sound</a> sound, <a class="el" href="structocicat_1_1Vector2.html">Vector2</a> position, float falloff, float volume)</td></tr>
+<tr class="separator:afbd2271ba542b38d0259c9b18361d06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a882556d8c1d31028fb7891d6454c6aeb" id="r_a882556d8c1d31028fb7891d6454c6aeb"><td class="memItemLeft" align="right" valign="top"><a id="a882556d8c1d31028fb7891d6454c6aeb" name="a882556d8c1d31028fb7891d6454c6aeb"></a>
 <a class="el" href="classocicat_1_1Audio_1_1AudioHandle.html">AudioHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><b>CreateHandle</b> (<a class="el" href="classocicat_1_1Audio_1_1Sound.html">Sound</a> sound)</td></tr>
 <tr class="separator:a882556d8c1d31028fb7891d6454c6aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87ff4296b8c9ee02baa114d0f0581cdc" id="r_a87ff4296b8c9ee02baa114d0f0581cdc"><td class="memItemLeft" align="right" valign="top"><a id="a87ff4296b8c9ee02baa114d0f0581cdc" name="a87ff4296b8c9ee02baa114d0f0581cdc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>PlaySoundFromSource</b> (<a class="el" href="classocicat_1_1Audio_1_1Sound.html">Sound</a> sound, <a class="el" href="classocicat_1_1Audio_1_1AudioSource.html">AudioSource</a> source)</td></tr>
-<tr class="separator:a87ff4296b8c9ee02baa114d0f0581cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2d7e9187148cd39b208db7bb1697063" id="r_ae2d7e9187148cd39b208db7bb1697063"><td class="memItemLeft" align="right" valign="top"><a id="ae2d7e9187148cd39b208db7bb1697063" name="ae2d7e9187148cd39b208db7bb1697063"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CleanFinishedSounds</b> ()</td></tr>
 <tr class="separator:ae2d7e9187148cd39b208db7bb1697063"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,18 +132,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>CleanFinishedSounds</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>CheckAlErrors</b> ()</td></tr>
 <tr class="separator:a5c0189195c55268054eaaeb52f36be0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
-Properties</h2></td></tr>
-<tr class="memitem:aa54020fc1a050212fb1515ac2f884cbd" id="r_aa54020fc1a050212fb1515ac2f884cbd"><td class="memItemLeft" align="right" valign="top"><a id="aa54020fc1a050212fb1515ac2f884cbd" name="aa54020fc1a050212fb1515ac2f884cbd"></a>
-Vector3&#160;</td><td class="memItemRight" valign="bottom"><b>ListenerPosition</b><code> [get, set]</code></td></tr>
-<tr class="separator:aa54020fc1a050212fb1515ac2f884cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e95c56d3963bef345e0fae0c53161b2" id="r_a0e95c56d3963bef345e0fae0c53161b2"><td class="memItemLeft" align="right" valign="top"><a id="a0e95c56d3963bef345e0fae0c53161b2" name="a0e95c56d3963bef345e0fae0c53161b2"></a>
-Vector3&#160;</td><td class="memItemRight" valign="bottom"><b>ListenerVelocity</b><code> [get, set]</code></td></tr>
-<tr class="separator:a0e95c56d3963bef345e0fae0c53161b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a5bc5fbb49688361dd9a865c2677e5081" id="r_a5bc5fbb49688361dd9a865c2677e5081"><td class="memItemLeft" align="right" valign="top"><a id="a5bc5fbb49688361dd9a865c2677e5081" name="a5bc5fbb49688361dd9a865c2677e5081"></a>
+<a class="el" href="structocicat_1_1Vector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ListenerPosition</b></td></tr>
+<tr class="separator:a5bc5fbb49688361dd9a865c2677e5081"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Manages everything audio related. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>ocicat/ocicat/ocicat/src/Audio/<b>AudioEngine.cs</b></li>
 </ul>
 </div><!-- contents -->

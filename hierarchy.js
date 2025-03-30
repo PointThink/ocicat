@@ -3,8 +3,9 @@ var hierarchy =
     [ "ocicat.Graphics.AnimationController", "classocicat_1_1Graphics_1_1AnimationController.html", null ],
     [ "ocicat.Graphics.AnimationTemplate", "classocicat_1_1Graphics_1_1AnimationTemplate.html", null ],
     [ "ocicat.Audio.AudioEngine", "classocicat_1_1Audio_1_1AudioEngine.html", null ],
-    [ "ocicat.Audio.AudioHandle", "classocicat_1_1Audio_1_1AudioHandle.html", null ],
-    [ "ocicat.Audio.AudioSource", "classocicat_1_1Audio_1_1AudioSource.html", null ],
+    [ "ocicat.Audio.AudioHandle", "classocicat_1_1Audio_1_1AudioHandle.html", [
+      [ "ocicat.Audio.AudioHandleSpatial", "classocicat_1_1Audio_1_1AudioHandleSpatial.html", null ]
+    ] ],
     [ "ocicat.Input.Binding", "classocicat_1_1Input_1_1Binding.html", [
       [ "ocicat.Input.KeyboardBind", "classocicat_1_1Input_1_1KeyboardBind.html", null ],
       [ "ocicat.Input.MouseBind", "classocicat_1_1Input_1_1MouseBind.html", null ]
