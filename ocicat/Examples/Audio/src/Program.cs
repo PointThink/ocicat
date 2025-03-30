@@ -4,28 +4,27 @@ using ocicat.Input;
 
 namespace Audio;
 
-class InGame : GameState
+class Game : Application
 {
-	public override void Update()
+	public Sound Sound;
+
+	public Game() : base("Press space to play sound", 800, 600) { }
+
+	public override void Initialize()
 	{
-		if (Game.Window.IsKeyPressed(Key.Space))
+		Sound = new Sound(AudioEngine, "erro.ogg");
+	}
+	
+	public override void Update(float deltaTime)
+	{
+		if (Window.IsKeyPressed(Key.Space))
 		{
-			Game.AudioEngine.PlaySound(Program.Sound);
+			AudioEngine.PlaySound(Sound);
 		}
 	}
-}
-
-class Program
-{
-	public static Sound Sound;
 	
 	static void Main(string[] args)
 	{
-		Game.Create("Press space to play sound", 800, 600);
-
-		Sound = new Sound(Game.AudioEngine, "erro.ogg");
-		
-		Game.GameState = new InGame();
-		Game.Run();
+		new Game().Run();
 	}
 }

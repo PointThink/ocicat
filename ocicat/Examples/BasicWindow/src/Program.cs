@@ -2,11 +2,14 @@
 
 namespace BasicWindow;
 
-class Program
+class Game : Application
 {
-	static void Main(string[] args)
+	public Game() : base("Hello world", 800, 600)
 	{
-		Game.Create("Hello world", 800, 600);
-		Game.Run();
+	}
+
+	static void Main(string[] args)
+	{ 
+		new Game().Run();
 	}
 }

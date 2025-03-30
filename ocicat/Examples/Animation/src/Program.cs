@@ -4,35 +4,36 @@ using ocicat.Graphics.Rendering;
 
 namespace Animation;
 
-class InGame : GameState
+class Game : Application
 {
-	public override void Draw()
-	{
-		Program.Controller.Draw(Game.Renderer, new Vector2(0, 0), new Vector2(256, 256));
-	}
-}
+	public AnimationTemplate Template;
+	public AnimationController Controller;
 
-class Program
-{
-	public static AnimationTemplate Template;
-	public static AnimationController Controller;
-	
-	static void Main(string[] args)
+	public Game() : base("Animation", 800, 600)
+	{
+	}
+
+	public override void Initialize()
 	{
 		Logging.LogLevel = LogLevel.Ocicat;
 		
-		Game.Create("Animation", 800, 600);
-		
 		// created once per animation
 		Template = new AnimationTemplate([
-			Texture.Create(Game.Renderer, "image.jpg"),
-			Texture.Create(Game.Renderer, "image2.png"),
+			Texture.Create(Renderer, "image.jpg"),
+			Texture.Create(Renderer, "image2.png"),
 		], 1);
 
 		// create once per object that uses the animation
 		Controller = new AnimationController(Template);
+	}
 
-		Game.GameState = new InGame();
-		Game.Run();
+	public override void Draw(float deltaTime)
+	{
+		Controller.Draw(Renderer, new Vector2(0, 0), new Vector2(256, 256));
+	}
+
+	static void Main(string[] args)
+	{
+		new Game().Run();
 	}
 }
