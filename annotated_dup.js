@@ -41,6 +41,8 @@ var annotated_dup =
         [ "GLFWWindow", "classocicat_1_1Graphics_1_1GLFWWindow.html", null ],
         [ "Image", "classocicat_1_1Graphics_1_1Image.html", null ],
         [ "OpenTKWindow", "classocicat_1_1Graphics_1_1OpenTKWindow.html", null ],
+        [ "Sprite", "classocicat_1_1Graphics_1_1Sprite.html", null ],
+        [ "Spritesheet", "classocicat_1_1Graphics_1_1Spritesheet.html", null ],
         [ "Window", "classocicat_1_1Graphics_1_1Window.html", "classocicat_1_1Graphics_1_1Window" ]
       ] ],
       [ "Hardware", "namespaceocicat_1_1Hardware.html", [

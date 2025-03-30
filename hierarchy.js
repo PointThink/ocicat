@@ -49,6 +49,8 @@ var hierarchy =
       [ "ocicat.Graphics.Rendering.OpenGl.Shader", "classocicat_1_1Graphics_1_1Rendering_1_1OpenGl_1_1Shader.html", null ]
     ] ],
     [ "ocicat.Audio.Sound", "classocicat_1_1Audio_1_1Sound.html", null ],
+    [ "ocicat.Graphics.Sprite", "classocicat_1_1Graphics_1_1Sprite.html", null ],
+    [ "ocicat.Graphics.Spritesheet", "classocicat_1_1Graphics_1_1Spritesheet.html", null ],
     [ "ocicat.Graphics.Rendering.Texture", "classocicat_1_1Graphics_1_1Rendering_1_1Texture.html", [
       [ "ocicat.Graphics.Rendering.OpenGl.Texture", "classocicat_1_1Graphics_1_1Rendering_1_1OpenGl_1_1Texture.html", null ]
     ] ],
