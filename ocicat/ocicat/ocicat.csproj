@@ -15,4 +15,9 @@
       <PackageReference Include="StbImageSharp" Version="2.27.13" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="src\Audio\" />
+      <Folder Include="src\FileSystem\" />
+    </ItemGroup>
+
 </Project>

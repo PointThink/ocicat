@@ -1,8 +1,7 @@
 using ocicat.Audio;
 using ocicat.Graphics;
 using ocicat.Graphics.Rendering;
-using ocicat.Input;
-
+using ocicat.Input; 
 namespace ocicat;
 
 /// <summary>

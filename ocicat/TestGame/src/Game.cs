@@ -1,8 +1,5 @@
-﻿using System.Numerics;
-using ocicat;
-using ocicat.Audio;
+﻿using ocicat;
 using ocicat.Graphics;
-using ocicat.Input;
 using Vector2 = ocicat.Vector2;
 
 namespace TestGame;
@@ -26,7 +23,7 @@ public class Game : Application
 
     public override void Update(float deltaTime)
     {
-        Console.WriteLine($"{1 / deltaTime} FPS");
+        // Console.WriteLine($"{1 / deltaTime} FPS");
     }
 
     static void Main(string[] args)

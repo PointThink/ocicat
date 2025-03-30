@@ -3,9 +3,6 @@ using OpenTK.Audio.OpenAL;
 
 namespace ocicat.Audio;
 
-/// <summary>
-/// Controls sound played by the audio engine
-/// </summary>
 public class AudioHandle
 {
 	private int _source;
@@ -23,48 +20,13 @@ public class AudioHandle
 		set => AL.Source(_source, ALSourcef.Pitch, value);
 	}
 
-	public float Falloff
-	{
-		get => AL.GetSource(_source, ALSourcef.RolloffFactor);
-		set => AL.Source(_source, ALSourcef.RolloffFactor, value);
-	}
-
 	/// <summary>
 	/// Speaker volume for stereo. -1 is left, 1 is right.
 	/// </summary>
 	public float Pan
 	{
 		get => AL.GetSource(_source, ALSource3f.Position).X;
-		set => AL.Source(_source, ALSource3f.Position, value, 1 - value, 0);
-	}
-
-	
-	/// <summary>
-	/// Position for spatial sound.
-	/// </summary>
-	public Vector3 Position
-	{
-		get
-		{
-			OpenTK.Mathematics.Vector3 tkVec = AL.GetSource(_source, ALSource3f.Position);
-			return new Vector3(tkVec.X, tkVec.Y, tkVec.Z);
-		}
-		set => AL.Source(_source, ALSource3f.Position, value.X, value.Y, value.Z);
-	}
-	
-	
-	/// <summary>
-	/// Velocity of the sound source. I honestly don't know what this does.
-	/// The audio system uses OpenAL, so I guess you can look it up in the OpenAL docs.
-	/// </summary>
-	public Vector3 Velocity
-	{
-		get
-		{
-			OpenTK.Mathematics.Vector3 tkVec = AL.GetSource(_source, ALSource3f.Velocity);
-			return new Vector3(tkVec.X, tkVec.Y, tkVec.Z);
-		}
-		set => AL.Source(_source, ALSource3f.Velocity, value.X, value.Y, value.Z);
+		set => AL.Source(_source, ALSource3f.Position, value, 0f, (float) -Math.Sqrt(1f - value * value));
 	}
 	
 	public AudioHandle(Sound sound)
@@ -78,6 +40,9 @@ public class AudioHandle
 	
 		AL.Source(_source, ALSourcef.MaxGain, 10);
 		AL.Source(_source, ALSourcef.MinGain, 0);
+		
+		AL.Source(_source, ALSourcef.RolloffFactor, 0);
+		AL.Source(_source, ALSourceb.SourceRelative, true);
 		
 		AL.Source(_source, ALSourcei.Buffer, sound.ALBuffer);
 	}
@@ -112,4 +77,37 @@ public class AudioHandle
 		AL.GetSource(_source, ALGetSourcei.SourceState, out int value);
 		return value != (int)ALSourceState.Playing && !ManualCleanup;
 	}
+}
+
+public class AudioHandleSpatial : AudioHandle
+{
+	private AudioEngine _engine;
+	
+	public AudioHandleSpatial(AudioEngine engine, Sound sound) : base(sound)
+	{
+		_engine = engine;
+	}
+	
+	private Vector2 _position;
+
+	public Vector2 Position
+	{
+		get => _position;
+		set
+		{
+			_position = value;
+			float desiredVolume = (Falloff - Vector2.GetDistance(value, _engine.ListenerPosition)) / Falloff;
+			desiredVolume = desiredVolume < 0 ? 0 : desiredVolume;
+			Volume = desiredVolume;
+
+			float panDistance = Vector2.GetDistance(value, _engine.ListenerPosition);
+			
+			if (_engine.ListenerPosition.X - value.X > 0)
+				panDistance *= -1;
+			
+			Pan = ( panDistance / Falloff ) / 2;
+		}
+	}
+	
+	public float Falloff;
 }
