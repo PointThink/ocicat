@@ -1,6 +1,0 @@
-<map id="AnimationController" name="AnimationController">
-<area shape="rect" id="node1" title="An instance of an animation. Created once per object that uses an animation." alt="" coords="5,260,159,287"/>
-<area shape="rect" id="node2" href="$classAnimationTemplate.html" title="Contains all the frames and fps of animation. Created once for each animation." alt="" coords="7,171,157,197"/>
-<area shape="rect" id="node3" href="$classTexture.html" title="Image on the GPU." alt="" coords="47,81,117,108"/>
-<area shape="rect" id="node4" title=" " alt="" coords="10,5,154,32"/>
-</map>

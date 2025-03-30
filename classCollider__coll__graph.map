@@ -1,4 +1,0 @@
-<map id="Collider" name="Collider">
-<area shape="rect" id="node1" title="A base class for all colliders." alt="" coords="5,95,77,121"/>
-<area shape="rect" id="node2" href="$structVector2.html" title=" " alt="" coords="6,5,77,32"/>
-</map>

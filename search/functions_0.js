@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['create_101',['Create',['../classGame.html#af9ad13a277c9fa14e4520474808e4805',1,'Game']]],
-  ['createfloat_102',['CreateFloat',['../classColor.html#acdaaf334482b87d84906055071979a9e',1,'Color']]],
-  ['creatergba8_103',['CreateRGBA8',['../classColor.html#ad73b893b3e942730d2e0871b19e05f0c',1,'Color']]]
+  ['create_0',['Create',['../classocicat_1_1Game.html#a92e09a361b95832739aada50c10b45a1',1,'ocicat::Game']]],
+  ['createfloat_1',['CreateFloat',['../classocicat_1_1Graphics_1_1Color.html#a23e0986146a642b04c353ee7cd35d83d',1,'ocicat::Graphics::Color']]],
+  ['creatergba8_2',['CreateRGBA8',['../classocicat_1_1Graphics_1_1Color.html#ae4224e69e5c754dc412919970f205fc2',1,'ocicat::Graphics::Color']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['logging_83',['Logging',['../classLogging.html',1,'']]],
-  ['loglevelinfo_84',['LogLevelInfo',['../structLogLevelInfo.html',1,'']]]
+  ['logging_0',['Logging',['../classocicat_1_1Logging.html',1,'ocicat']]],
+  ['loglevelinfo_1',['LogLevelInfo',['../structocicat_1_1LogLevelInfo.html',1,'ocicat']]]
 ];

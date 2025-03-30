@@ -1,4 +1,0 @@
-<map id="CollisionInfo" name="CollisionInfo">
-<area shape="rect" id="node1" title="The result of a collision check" alt="" coords="5,95,108,121"/>
-<area shape="rect" id="node2" href="$structVector2.html" title=" " alt="" coords="21,5,92,32"/>
-</map>

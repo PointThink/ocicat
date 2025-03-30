@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['getgamepadstate_104',['GetGamePadState',['../classGLFWWindow.html#ab9685a2c1b68e0d7d5875a908714438d',1,'GLFWWindow.GetGamePadState()'],['../classOpenTKWindow.html#adddc24cf510121c17db1de36058cfac1',1,'OpenTKWindow.GetGamePadState()'],['../classWindow.html#a5e11090adc74c0cd64e9df07f98d15b7',1,'Window.GetGamePadState()']]],
-  ['getglyph_105',['GetGlyph',['../classFont.html#aea7e8b7fc6c59cf1975c31271edfb8dd',1,'Font']]]
+  ['getgamepadstate_0',['GetGamePadState',['../classocicat_1_1Graphics_1_1Window.html#aead60f24b0a8c7dd10193be782c31629',1,'ocicat::Graphics::Window']]],
+  ['getglyph_1',['GetGlyph',['../classocicat_1_1Graphics_1_1Font.html#a74f4f871065d18407f835cfb40bfbd97',1,'ocicat::Graphics::Font']]]
 ];

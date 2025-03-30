@@ -1,0 +1,5 @@
+<map id="ocicat.Physics.RectCollider" name="ocicat.Physics.RectCollider">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,203,104"/>
+<area shape="rect" id="Node000002" href="$classocicat_1_1Physics_1_1Collider.html" title="A base class for all colliders." alt="" coords="68,5,140,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,44,107,79,101,79,101,44"/>
+</map>
