@@ -126,20 +126,6 @@ public class Renderer
 	{
 		DrawMesh(Primitives.RectangleMesh, position, size, color, rotation);
 	}
-
-	public void DrawRectLines(Vector2 position, Vector2 size, Color color, float thickness = 1, float rotation = 0)
-	{
-		Framebuffer framebuffer = Framebuffer.Create(this, (int) Math.Ceiling(size.X), (int) Math.Ceiling(size.Y));
-		framebuffer.Bind();
-		
-		DrawLine(new Vector2(0, thickness), new Vector2(size.X - thickness, thickness), thickness, Color.White);
-		DrawLine(new Vector2(0, 0), new Vector2(0, size.Y - thickness), thickness, Color.White);
-		DrawLine(new Vector2(0, size.Y - thickness), new Vector2(size.X - thickness, size.Y - thickness), thickness, Color.White);
-		DrawLine(new Vector2(size.X - thickness, 0), new Vector2(size.X - thickness, size.Y - thickness), thickness, Color.White);
-		
-		framebuffer.Unbind();
-		DrawRectTextured(position, size, framebuffer.GetTextureAttachment(), color, rotation);
-	}
 	
 	public void DrawCircle(Vector2 center, float radius, int count, Color color)
 	{
@@ -162,26 +148,7 @@ public class Renderer
 		
 		DrawMesh(triangleMesh, new Vector2(0, 0), new Vector2(1, 1), color, 0);
 	}
-	
-	public void DrawRoundedRect(Vector2 position, Vector2 size, float radius, Color color, float rotation = 0)
-	{
-		Framebuffer framebuffer = Framebuffer.Create(this, (int)size.X, (int)size.Y);
-		framebuffer.Bind();
 
-		Color white = Color.CreateFloat(1, 1, 1, 1);
-
-		DrawRect(new Vector2(0, radius), size - new Vector2(0, radius * 2), white);
-		DrawRect(new Vector2(radius, 0), new Vector2(size.X - radius * 2, radius), white);
-		DrawRect(new Vector2(radius, size.Y - radius), new Vector2(size.X - radius * 2, radius), white);
-
-		DrawCircle(new Vector2(radius, radius), radius, (int)(radius * 0.75f), white);
-		DrawCircle(size - new Vector2(radius, radius), radius, (int)(radius * 0.75f), white);
-		DrawCircle(new Vector2(size.X - radius, radius), radius, (int)(radius * 0.75f), white);
-		DrawCircle(new Vector2(radius, size.Y - radius), radius, (int)(radius * 0.75f), white);
-
-		framebuffer.Unbind();
-		DrawRectTextured(position, size, framebuffer.GetTextureAttachment(), color, rotation);
-	}
 	
 	public void DrawRectTextured(Vector2 position, Vector2 size, Texture texture, Color? tint = null, float rotation = 0, bool flipVertical = false, bool flipHorizontal = false)
 	{
