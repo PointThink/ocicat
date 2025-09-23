@@ -5,5 +5,5 @@ var searchData=
   ['collider_2',['Collider',['../classocicat_1_1Physics_1_1Collider.html',1,'ocicat::Physics']]],
   ['collisionalgo_3',['CollisionAlgo',['../classocicat_1_1Physics_1_1CollisionAlgo.html',1,'ocicat::Physics']]],
   ['collisioninfo_4',['CollisionInfo',['../structocicat_1_1Physics_1_1CollisionInfo.html',1,'ocicat::Physics']]],
-  ['color_5',['Color',['../classocicat_1_1Graphics_1_1Color.html',1,'ocicat::Graphics']]]
+  ['color_5',['Color',['../structocicat_1_1Graphics_1_1Color.html',1,'ocicat::Graphics']]]
 ];

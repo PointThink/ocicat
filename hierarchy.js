@@ -22,7 +22,7 @@ var hierarchy =
     ] ],
     [ "ocicat.Physics.CollisionAlgo", "classocicat_1_1Physics_1_1CollisionAlgo.html", null ],
     [ "ocicat.Physics.CollisionInfo", "structocicat_1_1Physics_1_1CollisionInfo.html", null ],
-    [ "ocicat.Graphics.Color", "classocicat_1_1Graphics_1_1Color.html", null ],
+    [ "ocicat.Graphics.Color", "structocicat_1_1Graphics_1_1Color.html", null ],
     [ "ocicat.Hardware.DisplayInfo", "structocicat_1_1Hardware_1_1DisplayInfo.html", null ],
     [ "ocicat.Graphics.Font", "classocicat_1_1Graphics_1_1Font.html", null ],
     [ "ocicat.Graphics.FontGlyph", "classocicat_1_1Graphics_1_1FontGlyph.html", null ],
