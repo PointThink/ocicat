@@ -20,7 +20,7 @@ public class FontGlyph
 		Advance = advance;
 		FontSize = fontSize;
 	}
-	
+
 	public readonly Texture Texture;
 
 	public readonly int SizeX;
@@ -57,7 +57,7 @@ public unsafe class Font
 		{
 			if (FT.FT_Load_Char((IntPtr)freetypeFace, ch, FT.FT_LOAD_RENDER) == FT_Error.FT_Err_Ok)
 			{
-				FT_Error error = FT.FT_Render_Glyph((IntPtr)freetypeFace->glyph, FT_Render_Mode.FT_RENDER_MODE_MAX);
+				FT_Error error = FT.FT_Render_Glyph((IntPtr)freetypeFace->glyph, FT_Render_Mode.FT_RENDER_MODE_SDF);
 
 				if (error != FT_Error.FT_Err_Ok)
 				{
@@ -78,7 +78,7 @@ public unsafe class Font
 					(int)freetypeFace->glyph->bitmap_top);
 				uint advance = (uint)freetypeFace->glyph->metrics.horiAdvance >> 6;
 
-				int dataSize = charSize.X * charSize.Y;
+				int dataSize = charSize.X * charSize.Y * 1;
 
 				byte[] managedArray = new byte[dataSize];
 				Marshal.Copy(freetypeFace->glyph->bitmap.buffer, managedArray, 0, dataSize);

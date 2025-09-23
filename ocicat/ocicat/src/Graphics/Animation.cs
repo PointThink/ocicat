@@ -38,7 +38,7 @@ public class AnimationController
 		_currentFrame = 0;
 	}
 
-	public void Draw(Renderer renderer, Vector2 position, Vector2 size, Color tint = null, float rotation = 0)
+	public void Draw(Renderer renderer, Vector2 position, Vector2 size, Color tint, float rotation = 0)
 	{	
 		float actualFps = Template.BaseFps * SpeedMultiplier;
 

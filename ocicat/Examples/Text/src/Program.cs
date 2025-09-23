@@ -14,7 +14,7 @@ class Game : Application
 
 	public override void Initialize()
 	{
-		Font = new Font(Renderer, "OpenSans.ttf", 24);
+		Font = new Font(Renderer, "OpenSans.ttf", 64);
 	}
 
 	public override void Draw(float deltaTime)
@@ -25,7 +25,7 @@ class Game : Application
 			Font,
 			new Vector2(30, 30),
 			Color.CreateFloat(1, 1, 1, 1),
-			1f
+			0.5f
 		);
 	}
 

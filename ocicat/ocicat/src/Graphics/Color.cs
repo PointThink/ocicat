@@ -1,6 +1,6 @@
 namespace ocicat.Graphics;
 
-public class Color
+public struct Color
 {
 	public static readonly Color White = CreateFloat(1, 1, 1, 1);
 	public static readonly Color Red = CreateFloat(1, 0, 0, 1);

@@ -15,7 +15,6 @@ public abstract class VertexBuffer
 		{
 			case RenderingApi.OpenGl:
 				return new OpenGl.VertexBuffer(data);
-				break;
 		}
 
 		throw new ArgumentException("Invalid RenderingApi");

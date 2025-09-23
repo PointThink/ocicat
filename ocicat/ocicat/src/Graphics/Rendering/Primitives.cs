@@ -110,8 +110,12 @@ in vec2 vTexCoords;
 
 void main()
 {
-	vec4 sampled = vec4(1, 1, 1, texture(textureSampler, vTexCoords));
-    FragColor = sampled * color;
+	float sample = texture(textureSampler, vTexCoords).r;
+	float sd = sample - 0.5;
+	float smoothing = fwidth(sd);
+	float alpha = smoothstep(-smoothing, +smoothing, sd);
+
+    FragColor = vec4(1, 1, 1, alpha) * color;
 }";
 		
 		UntexturedMeshShader = Shader.Create(renderer, untexturedVertShader, untexturedFragShader);

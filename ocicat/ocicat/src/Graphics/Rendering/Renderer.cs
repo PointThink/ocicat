@@ -99,12 +99,10 @@ public class Renderer
 		RenderCommands.DrawIndexed(mesh.VertexArray);
 	}
 	
-	public void DrawTexturedMesh(Mesh mesh, Texture texture, Vector2 position, Vector2 size, Color? tint, float rotation,
+	public void DrawTexturedMesh(Mesh mesh, Texture texture, Vector2 position, Vector2 size, Color tint, float rotation,
 		bool flipVertical, bool flipHorizontal
 		)
 	{
-		if (tint == null)
-			tint = Color.CreateFloat(1, 1, 1, 1);
 		
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 transform = GenTransform(position, size, rotation, flipVertical, flipHorizontal);
@@ -150,16 +148,14 @@ public class Renderer
 	}
 
 	
-	public void DrawRectTextured(Vector2 position, Vector2 size, Texture texture, Color? tint = null, float rotation = 0, bool flipVertical = false, bool flipHorizontal = false)
+	public void DrawRectTextured(Vector2 position, Vector2 size, Texture texture, Color tint, float rotation = 0, bool flipVertical = false, bool flipHorizontal = false)
 	{
 		DrawTexturedMesh(Primitives.RectangleMesh, texture, position, size, tint, rotation, flipVertical, flipHorizontal);
 	}
 
-	public void DrawSprite(Vector2 position, Sprite sprite, float scale = 1, Color? tint = null, float rotation = 0,
+	public void DrawSprite(Vector2 position, Sprite sprite, Color tint, float scale = 1, float rotation = 0,
 		bool flipVertical = false, bool flipHorizontal = false)
 	{
-		if (tint == null)
-			tint = Color.CreateFloat(1, 1, 1, 1);
 		
 		Matrix4 projection = Camera.CalculateProjection();
 		Matrix4 transform = GenTransform(position, sprite.Size * new Vector2(scale, scale), rotation, flipVertical, flipHorizontal);
@@ -196,11 +192,8 @@ public class Renderer
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
 	}
 
-	public void DrawText(string text, Font font, Vector2 position, Color? color = null, float scale = 1, float rotation = 0)
-	{
-		if (color == null)
-			color = Color.CreateFloat(1, 1, 1, 1);
-		
+	public void DrawText(string text, Font font, Vector2 position, Color color, float scale = 1, float rotation = 0)
+	{	
 		byte[] characters = Encoding.ASCII.GetBytes(text);
 		Vector2 currentPosition = position;
 		
