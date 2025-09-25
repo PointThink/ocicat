@@ -1,5 +1,6 @@
 ﻿using ocicat;
 using ocicat.Graphics;
+using ocicat.Graphics.Rendering;
 using Vector2 = ocicat.Vector2;
 
 namespace TestGame;
@@ -9,9 +10,16 @@ public class Game : Application
     private TexturedBatch _texturedQuadBatch;
     private RNG _rng = new RNG();
 
+    private Texture[] _textures;
+
     public Game() : base("Test game", 800, 600)
     {
         _texturedQuadBatch = new TexturedBatch(Renderer, 100);
+
+        _textures = [
+            Texture.Create(Renderer, "image.jpg"),
+            Texture.Create(Renderer, "image2.png")
+        ];
     }
 
     public override void Initialize()
@@ -31,7 +39,7 @@ public class Game : Application
                 Color.CreateFloat(_rng.GenerateFloat(0, 1), _rng.GenerateFloat(0, 1), _rng.GenerateFloat(0, 1), 1)
             );
 
-            _texturedQuadBatch.AddQuad(batchedVertices);
+            _texturedQuadBatch.AddQuad(batchedVertices, _textures[_rng.GenerateInt(0, 2)]);
         }
 
         _texturedQuadBatch.Render(Renderer, Renderer.Camera);

@@ -7,6 +7,7 @@ public class Primitives
 	public Shader TexturedMeshShader;
 	public Shader SpritesheetShader;
 	public Shader TextShader;
+	public Texture WhiteTexture;
 
 	public Shader BatchedQuadShader;
 
@@ -32,7 +33,7 @@ public class Primitives
 			])
 		);
 
-		string untexturedVertShader = @"#version 330 core
+		string untexturedVertShader = @"#version 450 core
 layout (location = 0) in vec2 aPosition;
 
 uniform mat4 projection;
@@ -44,7 +45,7 @@ void main()
     gl_Position = vec4(aPosition, 0.0, 1.0) * transform * projection;
 }";
 
-		string untexturedFragShader = @"#version 330 core
+		string untexturedFragShader = @"#version 450 core
 out vec4 FragColor;
 uniform vec4 color;
 
@@ -53,7 +54,7 @@ void main()
     FragColor = color;
 }";
 
-		string texturedVertShader = @"#version 330 core
+		string texturedVertShader = @"#version 450 core
 layout (location = 0) in vec2 aPosition;
 layout (location = 1) in vec2 texCoords;
 
@@ -69,7 +70,7 @@ void main()
 	vTexCoords = texCoords;
 }";
 
-		string texturedFragShader = @"#version 330 core
+		string texturedFragShader = @"#version 450 core
 out vec4 FragColor;
 
 uniform sampler2D textureSampler;
@@ -82,7 +83,7 @@ void main()
     FragColor = texture(textureSampler, vTexCoords) * tint;
 }";
 
-		string spritesheetFragShader = @"#version 330 core
+		string spritesheetFragShader = @"#version 450 core
 out vec4 FragColor;
 
 uniform sampler2D textureSampler;
@@ -102,7 +103,7 @@ void main()
     FragColor = texture(textureSampler, spriteBegin + trueOffset) * tint;
 }";
 
-		string fontFragShader = @"#version 330 core
+		string fontFragShader = @"#version 450 core
 out vec4 FragColor;
 
 uniform sampler2D textureSampler;
@@ -112,8 +113,8 @@ in vec2 vTexCoords;
 
 void main()
 {
-	float sample = texture(textureSampler, vTexCoords).r;
-	float sd = sample - 0.5;
+	float smpl = texture(textureSampler, vTexCoords).r;
+	float sd = smpl - 0.5;
 	float smoothing = fwidth(sd);
 	float alpha = smoothstep(-smoothing, +smoothing, sd);
 
@@ -121,7 +122,7 @@ void main()
 }";
 
 
-		string batchedQuadVert = @"#version 330 core
+		string batchedQuadVert = @"#version 450 core
 layout (location = 0) in vec2 position;
 layout (location = 1) in vec4 color;
 layout (location = 2) in vec2 uvs;
@@ -132,23 +133,29 @@ uniform mat4 transform;
 
 out vec2 vTexCoords;
 out vec4 vColor;
+out float vTextureID;
 
 void main()
 {
     gl_Position = vec4(position, 0.0, 1.0) * transform * projection;
 	vTexCoords = uvs;
 	vColor = color;
+	vTextureID = textureId;
 }";
 
-		string batchedQuadFrag = @"#version 330 core
+		string batchedQuadFrag = @"#version 450 core
 out vec4 FragColor;
 
 in vec4 vColor;
 in vec2 vTexCoords;
+in float vTextureID;
+
+uniform sampler2D textures[32];
 
 void main()
 {
-    FragColor = vColor;
+	int index = int(vTextureID);
+    FragColor = texture(textures[index], vTexCoords) * vColor;
 }";
 
 		UntexturedMeshShader = Shader.Create(renderer, untexturedVertShader, untexturedFragShader);
@@ -156,5 +163,6 @@ void main()
 		SpritesheetShader = Shader.Create(renderer, texturedVertShader, spritesheetFragShader);
 		TextShader = Shader.Create(renderer, texturedVertShader, fontFragShader);
 		BatchedQuadShader = Shader.Create(renderer, batchedQuadVert, batchedQuadFrag);
+		WhiteTexture = Texture.Create(renderer, Image.GenerateWhitePixel().Data, 1, 1, TextureFilter.Nearest);
 	}
 }

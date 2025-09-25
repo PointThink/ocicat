@@ -13,12 +13,12 @@ public abstract class Texture
 {
 	public abstract void Bind(uint slot);
 	public abstract void Unbind();
-	
+
 	public abstract int GetWidth();
 	public abstract int GetHeight();
 
 	public abstract int GetTextureID();
-	
+
 	public static Texture Create(Renderer renderer, byte[] imageData, int width, int height, TextureFilter textureFilter = TextureFilter.Nearest, int colorChannels = 4)
 	{
 		switch (renderer.RenderingApi)
