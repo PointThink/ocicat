@@ -109,7 +109,7 @@ public class Shader : Rendering.Shader
 		GL.ProgramUniform4(_handle, _uniformLocations[name], f1, f2, f3, f4);
 	}
 
-	public override void UniformMat4(string name, ref Matrix4 matrix4)
+	public override void UniformMat4(string name, Matrix4 matrix4)
 	{
 		GL.ProgramUniformMatrix4(_handle, _uniformLocations[name], true, ref matrix4);
 	}

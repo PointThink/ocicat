@@ -10,14 +10,15 @@ namespace ocicat.Graphics;
 /// </summary>
 public class FontGlyph
 {
-	public FontGlyph(Texture texture, int sizeX, int sizeY, int bearingX, int bearingY, uint advance, uint fontSize)
+	public FontGlyph(Texture texture, int sizeX, int sizeY, int bearingX, int bearingY, int advanceX, int advanceY, uint fontSize)
 	{
 		Texture = texture;
 		SizeX = sizeX;
 		SizeY = sizeY;
 		BearingX = bearingX;
 		BearingY = bearingY;
-		Advance = advance;
+		AdvanceX = advanceX;
+		AdvanceY = advanceY;
 		FontSize = fontSize;
 	}
 
@@ -27,7 +28,8 @@ public class FontGlyph
 	public readonly int SizeY;
 	public readonly int BearingX;
 	public readonly int BearingY;
-	public readonly uint Advance;
+	public readonly int AdvanceX;
+	public readonly int AdvanceY;
 	public readonly uint FontSize;
 }
 
@@ -76,7 +78,8 @@ public unsafe class Font
 					(int)freetypeFace->glyph->bitmap.rows);
 				Vector2i bearing = new Vector2i((int)freetypeFace->glyph->bitmap_left,
 					(int)freetypeFace->glyph->bitmap_top);
-				uint advance = (uint)freetypeFace->glyph->metrics.horiAdvance >> 6;
+				int advanceX = (int)(freetypeFace->glyph->metrics.horiAdvance >> 6);
+				int advanceY = (int)(freetypeFace->glyph->metrics.vertAdvance >> 6);
 
 				int dataSize = charSize.X * charSize.Y * 1;
 
@@ -85,7 +88,7 @@ public unsafe class Font
 				Texture texture = Texture.Create(renderer, managedArray, charSize.X, charSize.Y, TextureFilter.Linear,
 					1);
 
-				_glyphs.Add(ch, new FontGlyph(texture, charSize.X, charSize.Y, bearing.X, bearing.Y, advance, size));
+				_glyphs.Add(ch, new FontGlyph(texture, charSize.X, charSize.Y, bearing.X, bearing.Y, advanceX, advanceY, size));
 			}
 		}
 
@@ -115,7 +118,7 @@ public unsafe class Font
 			else
 			{
 				FontGlyph glyph = GetGlyph(character);
-				currentPosition.X += glyph.Advance;
+				currentPosition.X += glyph.AdvanceX;
 			}
 		}
 		

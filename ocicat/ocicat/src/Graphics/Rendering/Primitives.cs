@@ -7,7 +7,9 @@ public class Primitives
 	public Shader TexturedMeshShader;
 	public Shader SpritesheetShader;
 	public Shader TextShader;
-	
+
+	public Shader BatchedQuadShader;
+
 	public Primitives(Renderer renderer)
 	{
 		float[] rectVertices = {
@@ -29,7 +31,7 @@ public class Primitives
 				new BufferElement("uv", ShaderDataType.Float2)
 			])
 		);
-		
+
 		string untexturedVertShader = @"#version 330 core
 layout (location = 0) in vec2 aPosition;
 
@@ -50,7 +52,7 @@ void main()
 {
     FragColor = color;
 }";
-		
+
 		string texturedVertShader = @"#version 330 core
 layout (location = 0) in vec2 aPosition;
 layout (location = 1) in vec2 texCoords;
@@ -79,7 +81,7 @@ void main()
 {
     FragColor = texture(textureSampler, vTexCoords) * tint;
 }";
-		
+
 		string spritesheetFragShader = @"#version 330 core
 out vec4 FragColor;
 
@@ -117,10 +119,42 @@ void main()
 
     FragColor = vec4(1, 1, 1, alpha) * color;
 }";
-		
+
+
+		string batchedQuadVert = @"#version 330 core
+layout (location = 0) in vec2 position;
+layout (location = 1) in vec4 color;
+layout (location = 2) in vec2 uvs;
+layout (location = 3) in float textureId;
+
+uniform mat4 projection;
+uniform mat4 transform;
+
+out vec2 vTexCoords;
+out vec4 vColor;
+
+void main()
+{
+    gl_Position = vec4(position, 0.0, 1.0) * transform * projection;
+	vTexCoords = uvs;
+	vColor = color;
+}";
+
+		string batchedQuadFrag = @"#version 330 core
+out vec4 FragColor;
+
+in vec4 vColor;
+in vec2 vTexCoords;
+
+void main()
+{
+    FragColor = vColor;
+}";
+
 		UntexturedMeshShader = Shader.Create(renderer, untexturedVertShader, untexturedFragShader);
 		TexturedMeshShader = Shader.Create(renderer, texturedVertShader, texturedFragShader);
 		SpritesheetShader = Shader.Create(renderer, texturedVertShader, spritesheetFragShader);
 		TextShader = Shader.Create(renderer, texturedVertShader, fontFragShader);
+		BatchedQuadShader = Shader.Create(renderer, batchedQuadVert, batchedQuadFrag);
 	}
 }

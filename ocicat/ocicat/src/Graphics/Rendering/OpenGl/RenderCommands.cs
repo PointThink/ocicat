@@ -44,7 +44,7 @@ public class RenderCommands : Rendering.RenderCommands
 		vertexArray.Bind();
 		vertexArray.GetVertexBuffer().Bind();
 		vertexArray.GetIndexBuffer().Bind();
-		GL.DrawElements(PrimitiveType.Triangles, (int) vertexArray.GetIndexBuffer().GetIndexCount(), DrawElementsType.UnsignedInt, 0);		
+		GL.DrawElements(PrimitiveType.Triangles, (int) vertexArray.GetIndexBuffer().IndexCount, DrawElementsType.UnsignedInt, 0);		
 	}
 
 	public override void ResizeViewport(int width, int height)

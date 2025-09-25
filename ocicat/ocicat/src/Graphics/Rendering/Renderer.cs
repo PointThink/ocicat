@@ -92,8 +92,8 @@ public class Renderer
 		Matrix4 transform = GenTransform(position, size, rotation, false, false);
 		
 		Primitives.UntexturedMeshShader.Use();
-		Primitives.UntexturedMeshShader.UniformMat4("transform", ref transform);
-		Primitives.UntexturedMeshShader.UniformMat4("projection", ref projection);
+		Primitives.UntexturedMeshShader.UniformMat4("transform", transform);
+		Primitives.UntexturedMeshShader.UniformMat4("projection", projection);
 		Primitives.UntexturedMeshShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 		
 		RenderCommands.DrawIndexed(mesh.VertexArray);
@@ -110,8 +110,8 @@ public class Renderer
 		OrthographicCamera camera = (OrthographicCamera)Camera;
 		
 		Primitives.TexturedMeshShader.Use();
-		Primitives.TexturedMeshShader.UniformMat4("transform", ref transform);
-		Primitives.TexturedMeshShader.UniformMat4("projection", ref projection);;
+		Primitives.TexturedMeshShader.UniformMat4("transform", transform);
+		Primitives.TexturedMeshShader.UniformMat4("projection", projection);;
 		Primitives.TexturedMeshShader.Uniform4f("tint", tint.R, tint.G, tint.B, tint.A);
 
 		texture.Bind(0);
@@ -163,8 +163,8 @@ public class Renderer
 		OrthographicCamera camera = (OrthographicCamera)Camera;
 		
 		Primitives.SpritesheetShader.Use();
-		Primitives.SpritesheetShader.UniformMat4("transform", ref transform);
-		Primitives.SpritesheetShader.UniformMat4("projection", ref projection);;
+		Primitives.SpritesheetShader.UniformMat4("transform", transform);
+		Primitives.SpritesheetShader.UniformMat4("projection", projection);;
 		Primitives.SpritesheetShader.Uniform4f("tint", tint.R, tint.G, tint.B, tint.A);
 
 		sprite.Spritesheet.SpritesheetTexture.Bind(0);
@@ -182,8 +182,8 @@ public class Renderer
 		Matrix4 transform = GenTransform(new Vector2(position.X, position.Y + (glyph.FontSize - glyph.BearingY) * scale), new Vector2(glyph.SizeX  * scale, glyph.SizeY * scale), 0);
 		
 		Primitives.TextShader.Use();
-		Primitives.TextShader.UniformMat4("transform", ref transform);
-		Primitives.TextShader.UniformMat4("projection", ref projection);
+		Primitives.TextShader.UniformMat4("transform", transform);
+		Primitives.TextShader.UniformMat4("projection", projection);
 		Primitives.TextShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 
 		glyph.Texture.Bind(0);
@@ -206,9 +206,9 @@ public class Renderer
 			else
 			{
 				FontGlyph glyph = font.GetGlyph(character);
-				
+
 				DrawFontGlyph(glyph, currentPosition, color, scale);
-				currentPosition.X += glyph.Advance * scale;
+				currentPosition.X += glyph.AdvanceX * scale;
 			}
 		}
 	}
@@ -224,8 +224,8 @@ public class Renderer
 		Matrix4 projection = Camera.CalculateProjection();
 		
 		Primitives.UntexturedMeshShader.Use();
-		Primitives.UntexturedMeshShader.UniformMat4("transform", ref transform);
-		Primitives.UntexturedMeshShader.UniformMat4("projection", ref projection);
+		Primitives.UntexturedMeshShader.UniformMat4("transform", transform);
+		Primitives.UntexturedMeshShader.UniformMat4("projection", projection);
 		Primitives.UntexturedMeshShader.Uniform4f("color", color.R, color.G, color.B, color.A);
 		
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);

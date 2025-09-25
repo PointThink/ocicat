@@ -18,7 +18,7 @@ public abstract class Shader
 	public abstract void Uniform3f(string name, float i1, float i2, float i3);
 	public abstract void Uniform4f(string name, float i1, float i2, float i3, float i4);
 
-	public abstract void UniformMat4(string name, ref Matrix4 matrix4);
+	public abstract void UniformMat4(string name, Matrix4 matrix4);
 
 	public static Shader Create(Renderer renderer, string vertexSoucre, string fragSource)
 	{
