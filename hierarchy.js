@@ -6,6 +6,7 @@ var hierarchy =
     [ "ocicat.Audio.AudioHandle", "classocicat_1_1Audio_1_1AudioHandle.html", [
       [ "ocicat.Audio.AudioHandleSpatial", "classocicat_1_1Audio_1_1AudioHandleSpatial.html", null ]
     ] ],
+    [ "ocicat.BatchedVertex", "structocicat_1_1BatchedVertex.html", null ],
     [ "ocicat.Input.Binding", "classocicat_1_1Input_1_1Binding.html", [
       [ "ocicat.Input.KeyboardBind", "classocicat_1_1Input_1_1KeyboardBind.html", null ],
       [ "ocicat.Input.MouseBind", "classocicat_1_1Input_1_1MouseBind.html", null ]
@@ -55,6 +56,7 @@ var hierarchy =
     [ "ocicat.Graphics.Rendering.Texture", "classocicat_1_1Graphics_1_1Rendering_1_1Texture.html", [
       [ "ocicat.Graphics.Rendering.OpenGl.Texture", "classocicat_1_1Graphics_1_1Rendering_1_1OpenGl_1_1Texture.html", null ]
     ] ],
+    [ "ocicat.TexturedBatch", "classocicat_1_1TexturedBatch.html", null ],
     [ "ocicat.Vector2", "structocicat_1_1Vector2.html", null ],
     [ "ocicat.Graphics.Rendering.VertexArray", "classocicat_1_1Graphics_1_1Rendering_1_1VertexArray.html", [
       [ "ocicat.Graphics.Rendering.OpenGl.VertexArray", "classocicat_1_1Graphics_1_1Rendering_1_1OpenGl_1_1VertexArray.html", null ]

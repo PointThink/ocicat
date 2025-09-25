@@ -5,10 +5,12 @@ var namespaceocicat =
     [ "Hardware", "namespaceocicat_1_1Hardware.html", "namespaceocicat_1_1Hardware" ],
     [ "Input", "namespaceocicat_1_1Input.html", "namespaceocicat_1_1Input" ],
     [ "Physics", "namespaceocicat_1_1Physics.html", "namespaceocicat_1_1Physics" ],
+    [ "BatchedVertex", "structocicat_1_1BatchedVertex.html", null ],
     [ "Game", "classocicat_1_1Game.html", "classocicat_1_1Game" ],
     [ "GameState", "classocicat_1_1GameState.html", null ],
     [ "Logging", "classocicat_1_1Logging.html", null ],
     [ "LogLevelInfo", "structocicat_1_1LogLevelInfo.html", null ],
     [ "RNG", "classocicat_1_1RNG.html", null ],
+    [ "TexturedBatch", "classocicat_1_1TexturedBatch.html", null ],
     [ "Vector2", "structocicat_1_1Vector2.html", null ]
 ];
