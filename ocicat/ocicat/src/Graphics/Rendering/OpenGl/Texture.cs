@@ -66,10 +66,7 @@ public class Texture : Rendering.Texture
 
 	public override void Bind(uint slot)
 	{
-		uint textureUnit = ((uint)TextureUnit.Texture0) + slot;
-		
-		GL.ActiveTexture((TextureUnit) textureUnit);
-		GL.BindTexture(TextureTarget.Texture2D, _handle);
+		GL.BindTextureUnit((int) slot, _handle);
 	}
 
 	public override void Unbind()

@@ -12,6 +12,7 @@ public class Game : Application
     private Texture?[] _textures;
 
     private float _rotation = 0;
+    private Font _font;
 
     public Game() : base("Test game", 800, 600)
     {
@@ -19,6 +20,8 @@ public class Game : Application
             Texture.Create(Renderer, "image.jpg"),
             Texture.Create(Renderer, "image2.png")
         ];
+
+        _font = new Font(Renderer, "fonts/Roboto-Regular.ttf", 32);
     }
 
     public override void Initialize()
@@ -30,23 +33,25 @@ public class Game : Application
     {
         Renderer.ClearScreen(Color.Black);
 
-        for (int i = 0; i < 20000; i++)
+        for (int i = 0; i < 10000; i++)
         {
             Renderer.DrawRectTextured(
                 new Vector2(_rng.GenerateFloat(0, 800), _rng.GenerateFloat(0, 600)),
                 new Vector2(40, 40),
                 _textures[_rng.GenerateInt(0, 2)],
-                Color.CreateFloat(_rng.GenerateFloat(0, 1), _rng.GenerateFloat(0, 1), _rng.GenerateFloat(0, 1), 1),
-                _rng.GenerateFloat(0, 360)
+                Color.White,
+                0
             );
         }
+
+        Renderer.DrawText($"{1 / deltaTime} FPS", _font, new Vector2(10, 10), Color.White);
 
         _rotation += deltaTime * 30;
     }
 
     public override void Update(float deltaTime)
     {
-        // Console.WriteLine($"{1 / deltaTime} FPS");
+        Console.WriteLine($"{1 / deltaTime} FPS");
     }
 
     static void Main(string[] args)

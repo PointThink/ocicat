@@ -41,7 +41,7 @@ public class Renderer
 		Width = window.Width;
 		Height = window.Height;
 
-		_spriteBatch = new TexturedQuadBatch(this, 100_000);
+		_spriteBatch = new TexturedQuadBatch(this, 10_000);
 	}
 
 	public void BeginScene(Camera camera)
@@ -152,6 +152,9 @@ public class Renderer
 
 	public void DrawFontGlyph(FontGlyph glyph, Vector2 position, Color color, float scale = 1, float rotation = 0)
 	{
+		if (_spriteBatch.IsActive)
+			_spriteBatch.Render(this);
+
 		Matrix4 transform = GenTransform(new Vector2(position.X, position.Y + (glyph.FontSize - glyph.BearingY) * scale), new Vector2(glyph.SizeX  * scale, glyph.SizeY * scale), 0);
 		
 		Primitives.TextShader.Use();
@@ -161,12 +164,13 @@ public class Renderer
 
 		glyph.Texture.Bind(0);
 		Primitives.TextShader.Uniform1i("textureSampler", 0);
+		// glyph.Texture.Unbind();
 		
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
 	}
 
 	public void DrawText(string text, Font font, Vector2 position, Color color, float scale = 1, float rotation = 0)
-	{	
+	{
 		byte[] characters = Encoding.ASCII.GetBytes(text);
 		Vector2 currentPosition = position;
 		

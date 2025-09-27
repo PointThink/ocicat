@@ -2,6 +2,7 @@ using ocicat.Graphics.Rendering;
 using OpenTK.Mathematics;
 using ocicat.Graphics;
 using System.Transactions;
+using System.Runtime.InteropServices;
 
 namespace ocicat;
 
@@ -10,6 +11,8 @@ public class TexturedQuadBatch
     private VertexArray _vertexArray;
     private VertexBuffer _vertexBuffer;
     private IndexBuffer _indexBuffer;
+
+    public bool IsActive { get; private set; } = false;
 
     private float[] _verticies;
     private uint[] _indices;
@@ -46,6 +49,8 @@ public class TexturedQuadBatch
 
     public void AddQuad(Vector2 position, Vector2 size, Color color, Texture texture, float rotation = 0)
     {
+        IsActive = true;
+
         Matrix4 transform = Matrix4.CreateTranslation(-position.X - size.X / 2, -position.Y - size.Y / 2, 0) *
             Matrix4.CreateRotationZ(Single.DegreesToRadians(rotation)) *
             Matrix4.CreateTranslation(position.X + size.X / 2, position.Y + size.Y / 2, 0);
@@ -112,6 +117,11 @@ public class TexturedQuadBatch
 
         for (int i = 0; i < _textures.Length; i++)
             _textures[i] = null;
+
+        Array.Clear(_verticies, 0, _verticies.Length);
+        Array.Clear(_indices, 0, _indices.Length);
+
+        IsActive = false;
     }
 
     // returns 0 - not found
