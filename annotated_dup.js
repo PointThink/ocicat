@@ -63,13 +63,13 @@ var annotated_dup =
         [ "CollisionInfo", "structocicat_1_1Physics_1_1CollisionInfo.html", null ],
         [ "RectCollider", "classocicat_1_1Physics_1_1RectCollider.html", null ]
       ] ],
-      [ "BatchedVertex", "structocicat_1_1BatchedVertex.html", null ],
+      [ "Application", "classocicat_1_1Application.html", null ],
       [ "Game", "classocicat_1_1Game.html", "classocicat_1_1Game" ],
       [ "GameState", "classocicat_1_1GameState.html", null ],
       [ "Logging", "classocicat_1_1Logging.html", null ],
       [ "LogLevelInfo", "structocicat_1_1LogLevelInfo.html", null ],
       [ "RNG", "classocicat_1_1RNG.html", null ],
-      [ "TexturedBatch", "classocicat_1_1TexturedBatch.html", null ],
+      [ "TexturedQuadBatch", "classocicat_1_1TexturedQuadBatch.html", null ],
       [ "Vector2", "structocicat_1_1Vector2.html", null ]
     ] ]
 ];

@@ -1,7 +1,9 @@
 <map id="ocicat.Graphics.Rendering.Primitives" name="ocicat.Graphics.Rendering.Primitives">
-<area shape="rect" id="Node000001" title=" " alt="" coords="141,167,337,207"/>
-<area shape="rect" id="Node000002" href="$classocicat_1_1Graphics_1_1Rendering_1_1Mesh.html" title=" " alt="" coords="5,13,236,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,48,227,165,223,168,135,51"/>
-<area shape="rect" id="Node000003" href="$classocicat_1_1Graphics_1_1Rendering_1_1Shader.html" title=" " alt="" coords="260,5,456,45"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="355,60,342,102,331,124,317,144,287,169,283,164,313,141,327,122,337,100,350,58"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="437,102,633,142"/>
+<area shape="rect" id="Node000002" href="$classocicat_1_1Graphics_1_1Rendering_1_1Mesh.html" title=" " alt="" coords="5,5,236,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,16,332,25,414,45,467,70,510,99,507,104,465,75,412,50,331,30,250,21"/>
+<area shape="rect" id="Node000003" href="$classocicat_1_1Graphics_1_1Rendering_1_1Shader.html" title=" " alt="" coords="23,102,219,142"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,119,437,119,437,125,232,125"/>
+<area shape="rect" id="Node000004" href="$classocicat_1_1Graphics_1_1Rendering_1_1Texture.html" title="Image on the GPU." alt="" coords="23,166,219,206"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="232,167,413,139,437,136,438,141,414,145,233,172"/>
 </map>

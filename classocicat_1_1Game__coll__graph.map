@@ -1,6 +1,8 @@
 <map id="ocicat.Game" name="ocicat.Game">
-<area shape="rect" id="Node000001" title="Abstracts all the low level functionality into an easy to use API." alt="" coords="33,185,137,211"/>
-<area shape="rect" id="Node000002" href="$structocicat_1_1Graphics_1_1Color.html" title=" " alt="" coords="5,51,165,77"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,91,88,185,83,185,83,91"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="131,46,172,47,186,53,192,64,185,76,167,82,143,83,117,79,118,74,143,78,166,77,181,72,187,64,183,57,171,52,131,52"/>
+<area shape="rect" id="Node000001" title="Abstracts all the low level functionality into an easy to use API." alt="" coords="94,185,198,211"/>
+<area shape="rect" id="Node000002" href="$classocicat_1_1Graphics_1_1Rendering_1_1Camera.html" title=" " alt="" coords="5,44,201,84"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,96,145,184,140,186,111,98"/>
+<area shape="rect" id="Node000003" href="$structocicat_1_1Graphics_1_1Color.html" title=" " alt="" coords="226,51,386,77"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="285,88,197,163,164,187,161,183,194,159,281,84"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="352,46,393,47,407,53,413,64,405,76,387,82,364,83,338,79,339,74,364,78,386,77,402,72,407,64,403,57,391,52,352,52"/>
 </map>
