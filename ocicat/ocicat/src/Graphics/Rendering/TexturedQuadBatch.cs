@@ -1,17 +1,11 @@
 using ocicat.Graphics.Rendering;
 using OpenTK.Mathematics;
 using ocicat.Graphics;
+using System.Transactions;
 
 namespace ocicat;
 
-public struct BatchedVertex
-{
-    public Vector2 Position;
-    public Color Color;
-    public Vector2 TextureCoords;
-}
-
-public class TexturedBatch
+public class TexturedQuadBatch
 {
     private VertexArray _vertexArray;
     private VertexBuffer _vertexBuffer;
@@ -19,7 +13,7 @@ public class TexturedBatch
 
     private float[] _verticies;
     private uint[] _indices;
-    private Texture?[] _textures;
+    private Texture[] _textures;
 
     private uint _vertexOffset = 0;
     private uint _indexOffset = 0;
@@ -27,7 +21,7 @@ public class TexturedBatch
 
     private uint _textureOffset = 1;
 
-    public TexturedBatch(Renderer renderer, int quadCount)
+    public TexturedQuadBatch(Renderer renderer, int quadCount)
     {
         _vertexBuffer = VertexBuffer.Create(renderer, quadCount * 4 * 9);
         _vertexBuffer.Layout = new BufferLayout([
@@ -46,28 +40,22 @@ public class TexturedBatch
         _verticies = new float[quadCount * 4 * 9];
         _indices = new uint[quadCount * 6];
 
-        _textures = new Texture?[32];
-        _textures[0] = renderer.Primitives.WhiteTexture;
+        _textures = new Texture[32];
     }
 
-    public void AddQuad(BatchedVertex[] quad, Texture? texture = null)
+
+    public void AddQuad(Vector2 position, Vector2 size, Color color, Texture texture, float rotation = 0)
     {
-        uint textureSlot = FindTextureSlotForTexture(texture);
+        Matrix4 transform = Matrix4.CreateTranslation(-position.X - size.X / 2, -position.Y - size.Y / 2, 0) *
+            Matrix4.CreateRotationZ(Single.DegreesToRadians(rotation)) *
+            Matrix4.CreateTranslation(position.X + size.X / 2, position.Y + size.Y / 2, 0);
 
-        foreach (BatchedVertex vert in quad)
-        {
-            _verticies[_vertexOffset] = vert.Position.X;
-            _verticies[_vertexOffset + 1] = vert.Position.Y;
-            _verticies[_vertexOffset + 2] = vert.Color.R;
-            _verticies[_vertexOffset + 3] = vert.Color.G;
-            _verticies[_vertexOffset + 4] = vert.Color.B;
-            _verticies[_vertexOffset + 5] = vert.Color.A;
-            _verticies[_vertexOffset + 6] = vert.TextureCoords.X;
-            _verticies[_vertexOffset + 7] = vert.TextureCoords.Y;
-            _verticies[_vertexOffset + 8] = textureSlot;
+        float textureSlot = FindTextureSlotForTexture(texture);
 
-            _vertexOffset += 9;
-        }
+        WriteVertex(position, color, new Vector2(0, 1), textureSlot, transform);
+        WriteVertex(position + new Vector2(size.X, 0), color, new Vector2(1, 1), textureSlot, transform);
+        WriteVertex(position + new Vector2(size.X, size.Y), color, new Vector2(1, 0), textureSlot, transform);
+        WriteVertex(position + new Vector2(0, size.Y), color, new Vector2(0, 0), textureSlot, transform);
 
         _indices[_indexOffset] = _indexStride;
         _indices[_indexOffset + 1] = _indexStride + 1;
@@ -80,30 +68,24 @@ public class TexturedBatch
         _indexOffset += 6;
     }
 
-    public BatchedVertex[] CreateQuad(Vector2 position, Vector2 size, Color color)
+    private void WriteVertex(Vector2 position, Color color, Vector2 UVs, float textureSlot, Matrix4 transform)
     {
-        BatchedVertex[] quad = new BatchedVertex[4];
+        Vector3 translatedPos = Vector3.TransformPosition(new Vector3(position.X, position.Y, 0), transform);
 
-        quad[0].Position = position;
-        quad[0].Color = color;
-        quad[0].TextureCoords = new Vector2(0, 0);
+        _verticies[_vertexOffset] = translatedPos.X;
+        _verticies[_vertexOffset + 1] = translatedPos.Y;
+        _verticies[_vertexOffset + 2] = color.R;
+        _verticies[_vertexOffset + 3] = color.G;
+        _verticies[_vertexOffset + 4] = color.B;
+        _verticies[_vertexOffset + 5] = color.A;
+        _verticies[_vertexOffset + 6] = UVs.X;
+        _verticies[_vertexOffset + 7] = UVs.Y;
+        _verticies[_vertexOffset + 8] = textureSlot;
 
-        quad[1].Position = position + new Vector2(size.X, 0);
-        quad[1].Color = color;
-        quad[1].TextureCoords = new Vector2(1, 0);
-
-        quad[2].Position = position + new Vector2(size.X, size.Y);
-        quad[2].Color = color;
-        quad[2].TextureCoords = new Vector2(1, 1);
-
-        quad[3].Position = position + new Vector2(0, size.Y);
-        quad[3].Color = color;
-        quad[3].TextureCoords = new Vector2(0, 1);
-
-        return quad;
+        _vertexOffset += 9;
     }
 
-    public void Render(Renderer renderer, Camera camera)
+    public void Render(Renderer renderer)
     {
         _vertexBuffer.ReplaceData(_verticies);
         _indexBuffer.ReplaceData(_indices);
@@ -118,8 +100,8 @@ public class TexturedBatch
 
         renderer.Primitives.BatchedQuadShader.Use();
         renderer.Primitives.BatchedQuadShader.Uniform1iArray("textures[0]", textureSlots);
-        renderer.Primitives.BatchedQuadShader.UniformMat4("projection", camera.CalculateProjection());
-        renderer.Primitives.BatchedQuadShader.UniformMat4("transform", camera.CalculateView());
+        renderer.Primitives.BatchedQuadShader.UniformMat4("projection", renderer.CameraProjection);
+        renderer.Primitives.BatchedQuadShader.UniformMat4("transform", renderer.CameraView);
 
         renderer.RenderCommands.DrawIndexed(_vertexArray);
 
@@ -133,12 +115,9 @@ public class TexturedBatch
     }
 
     // returns 0 - not found
-    private uint FindTextureInBatch(Texture texture)
+    private int FindTextureInBatch(Texture texture)
     {
-        if (texture == null)
-            return 0;
-
-        for (uint i = 1; i < _textures.Length; i++)
+        for (int i = 0; i < _textures.Length; i++)
         {
             if (texture == _textures[i])
                 return i;
@@ -146,22 +125,21 @@ public class TexturedBatch
                 return 0;
         }
 
-        return 0;
+        return -1;
     }
 
-    public uint FindTextureSlotForTexture(Texture? texture)
+    public uint FindTextureSlotForTexture(Texture texture)
     {
-        if (texture == null)
-            return 0;
+        int textureSlot = FindTextureInBatch(texture);
 
-        uint textureSlot = FindTextureInBatch(texture);
-
-        if (textureSlot == 0)
+        if (textureSlot == -1)
         {
             _textures[_textureOffset] = texture;
             _textureOffset++;
+
+            return _textureOffset - 1;
         }
 
-        return textureSlot;
+        return (uint) textureSlot;
     }
 }

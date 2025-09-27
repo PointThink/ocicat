@@ -7,15 +7,14 @@ namespace TestGame;
 
 public class Game : Application
 {
-    private TexturedBatch _texturedQuadBatch;
     private RNG _rng = new RNG();
 
-    private Texture[] _textures;
+    private Texture?[] _textures;
+
+    private float _rotation = 0;
 
     public Game() : base("Test game", 800, 600)
     {
-        _texturedQuadBatch = new TexturedBatch(Renderer, 100);
-
         _textures = [
             Texture.Create(Renderer, "image.jpg"),
             Texture.Create(Renderer, "image2.png")
@@ -31,18 +30,18 @@ public class Game : Application
     {
         Renderer.ClearScreen(Color.Black);
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 10000; i++)
         {
-            BatchedVertex[] batchedVertices = _texturedQuadBatch.CreateQuad(
+            Renderer.DrawRectTextured(
                 new Vector2(_rng.GenerateFloat(0, 800), _rng.GenerateFloat(0, 600)),
                 new Vector2(40, 40),
-                Color.CreateFloat(_rng.GenerateFloat(0, 1), _rng.GenerateFloat(0, 1), _rng.GenerateFloat(0, 1), 1)
+                _textures[_rng.GenerateInt(0, 2)],
+                Color.CreateFloat(_rng.GenerateFloat(0, 1), _rng.GenerateFloat(0, 1), _rng.GenerateFloat(0, 1), 1),
+                _rng.GenerateFloat(0, 360)
             );
-
-            _texturedQuadBatch.AddQuad(batchedVertices, _textures[_rng.GenerateInt(0, 2)]);
         }
 
-        _texturedQuadBatch.Render(Renderer, Renderer.Camera);
+        _rotation += deltaTime * 30;
     }
 
     public override void Update(float deltaTime)

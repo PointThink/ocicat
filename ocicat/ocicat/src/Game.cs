@@ -13,6 +13,7 @@ public static class Game
 	public static Renderer Renderer { get; private set; } = null!;
 	public static AudioEngine AudioEngine { get; private set; } = null!;
 	public static Bindings Bindings { get; private set; } = null!;
+	public static Camera Camera = null!;
 
 	public static double Tickrate = 64;
 	private static double _nextTickTime;
@@ -55,11 +56,13 @@ public static class Game
 	public static void Create(string title, int width, int height, bool fullscreen = false, bool resizeble = false)
 	{
 		Window = Window.Create(title, width, height, fullscreen, resizeble);
-		Renderer = new (Window);
+		Renderer = new(Window);
 		AudioEngine = new AudioEngine();
 		Bindings = new Bindings(Window);
 
 		Window.OnResize += OnResize;
+
+		Camera = new OrthographicCamera(width, height);
 	}
 	
 	/// <summary>
@@ -84,13 +87,13 @@ public static class Game
 				_gameState.Update();
 			}
 			
-			Renderer.BeginDrawing();
+			Renderer.BeginScene(Camera);
 			Renderer.ClearScreen(ClearColor);
 			
 			if (_gameState != null)
 				_gameState.Draw();
 			
-			Renderer.EndDrawing();
+			Renderer.EndScene();
 			Window.Present();
 		}
 	}

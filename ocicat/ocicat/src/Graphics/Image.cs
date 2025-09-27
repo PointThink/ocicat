@@ -16,6 +16,8 @@ public class Image
 
 	public Image(string path)
 	{
+		StbImage.stbi_set_flip_vertically_on_load(1);
+
 		try
 		{
 			ImageResult image = ImageResult.FromStream(File.OpenRead(path), ColorComponents.RedGreenBlueAlpha);

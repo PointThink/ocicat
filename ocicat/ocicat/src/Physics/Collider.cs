@@ -73,7 +73,5 @@ public class CircleCollider : Collider
 
 	public override void DebugDraw(Renderer renderer, Color color)
 	{
-		// renderer.DrawRect(Position - new Vector2(Radius, Radius), new Vector2(Radius, Radius), color);
-		renderer.DrawCircle(Position, Radius, (int) Radius / 3, color);
 	}
 }
