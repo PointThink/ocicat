@@ -30,7 +30,7 @@ public class Game : Application
     {
         Renderer.ClearScreen(Color.Black);
 
-        for (int i = 0; i < 10000; i++)
+        for (int i = 0; i < 20000; i++)
         {
             Renderer.DrawRectTextured(
                 new Vector2(_rng.GenerateFloat(0, 800), _rng.GenerateFloat(0, 600)),

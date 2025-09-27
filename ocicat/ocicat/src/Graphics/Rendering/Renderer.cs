@@ -124,11 +124,17 @@ public class Renderer
 
 	public void DrawRect(Vector2 position, Vector2 size, Color color, float rotation = 0)
 	{
+		if (!_spriteBatch.CanFitNewQuad(Primitives.WhiteTexture))
+			_spriteBatch.Render(this);
+
 		_spriteBatch.AddQuad(position, size, color, Primitives.WhiteTexture, rotation);
 	}
 	
 	public void DrawRectTextured(Vector2 position, Vector2 size, Texture texture, Color tint, float rotation = 0, bool flipVertical = false, bool flipHorizontal = false)
 	{
+		if (!_spriteBatch.CanFitNewQuad(Primitives.WhiteTexture))
+			_spriteBatch.Render(this);
+
 		if (flipVertical)
 		{
 			position.Y += size.Y;

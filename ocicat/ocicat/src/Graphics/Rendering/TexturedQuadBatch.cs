@@ -140,6 +140,17 @@ public class TexturedQuadBatch
             return _textureOffset - 1;
         }
 
-        return (uint) textureSlot;
+        return (uint)textureSlot;
+    }
+
+    public bool CanFitNewQuad(Texture texture)
+    {
+        if (_vertexOffset + 4 > _verticies.Length)
+            return false;
+
+        if (FindTextureInBatch(texture) == -1 && _textures[_textures.Length - 1] != null)
+            return false;
+
+        return true;
     }
 }
