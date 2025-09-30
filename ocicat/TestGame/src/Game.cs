@@ -1,6 +1,7 @@
 ﻿using ocicat;
 using ocicat.Graphics;
 using ocicat.Graphics.Rendering;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using Vector2 = ocicat.Vector2;
 
 namespace TestGame;
@@ -13,6 +14,9 @@ public class Game : Application
 
     private float _rotation = 0;
     private Font _font;
+    private float _averageFps = 0;
+
+    private bool _batch = false;
 
     public Game() : base("Test game", 800, 600)
     {
@@ -33,25 +37,47 @@ public class Game : Application
     {
         Renderer.ClearScreen(Color.Black);
 
-        for (int i = 0; i < 10000; i++)
+        for (int i = 0; i < 1; i++)
         {
-            Renderer.DrawRectTextured(
-                new Vector2(_rng.GenerateFloat(0, 800), _rng.GenerateFloat(0, 600)),
-                new Vector2(40, 40),
-                _textures[_rng.GenerateInt(0, 2)],
-                Color.White,
-                0
-            );
+
+            if (_batch)
+            {
+                /*
+                Renderer.DrawRectTextured(
+                    new Vector2(_rng.GenerateFloat(0, 800), _rng.GenerateFloat(0, 600)),
+                    new Vector2(40, 40),
+                    _textures[_rng.GenerateInt(0, 2)],
+                    Color.White,
+                    0
+                );
+                */
+            }
+            else
+            {
+                Renderer.DrawRectTexturedUnbatched(
+                    new Vector2(_rng.GenerateFloat(0, 800), _rng.GenerateFloat(0, 600)),
+                    new Vector2(40, 40),
+                    _textures[_rng.GenerateInt(0, 2)],
+                    Color.White,
+                    0
+                ); 
+            } 
         }
 
-        Renderer.DrawText($"{1 / deltaTime} FPS", _font, new Vector2(10, 10), Color.White);
+        Renderer.DrawText($"{(int) _averageFps} FPS", _font, new Vector2(10, 10), Color.White);
 
         _rotation += deltaTime * 30;
     }
 
     public override void Update(float deltaTime)
     {
-        Console.WriteLine($"{1 / deltaTime} FPS");
+        if (Window.IsKeyPressed(ocicat.Input.Key.Space))
+            _batch = !_batch;
+
+        if (_averageFps == 0)
+                _averageFps = deltaTime;
+            else
+                _averageFps = (_averageFps + 1 / deltaTime) / 2;
     }
 
     static void Main(string[] args)

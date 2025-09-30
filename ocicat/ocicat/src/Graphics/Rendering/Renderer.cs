@@ -21,6 +21,7 @@ public class Renderer
 	public int Height { get; private set; }
 
 	private TexturedQuadBatch _spriteBatch;
+	private TexturedQuadBatch _textBatch;
 
 	public Matrix4 CameraProjection { get; private set; }
 	public Matrix4 CameraView { get; private set; }
@@ -41,7 +42,8 @@ public class Renderer
 		Width = window.Width;
 		Height = window.Height;
 
-		_spriteBatch = new TexturedQuadBatch(this, 10_000);
+		_spriteBatch = new TexturedQuadBatch(this, 50_000, Primitives.BatchedQuadShader);
+		_textBatch = new TexturedQuadBatch(this, 1000, Primitives.TextShader);
 	}
 
 	public void BeginScene(Camera camera)
@@ -53,6 +55,7 @@ public class Renderer
 	public void EndScene()
 	{
 		_spriteBatch.Render(this);
+		_textBatch.Render(this);
 	}
 
 	public void ClearScreen(Color color)
@@ -122,6 +125,11 @@ public class Renderer
 		RenderCommands.DrawIndexed(mesh.VertexArray);
 	}
 
+	public void DrawRectTexturedUnbatched(Vector2 position, Vector2 size, Texture texture, Color tint, float rotation = 0, bool flipVertical = false, bool flipHorizontal = false)
+	{
+		DrawTexturedMesh(Primitives.RectangleMesh, texture, position, size, tint, rotation, flipVertical, flipHorizontal);
+	}
+
 	public void DrawRect(Vector2 position, Vector2 size, Color color, float rotation = 0)
 	{
 		if (!_spriteBatch.CanFitNewQuad(Primitives.WhiteTexture))
@@ -152,6 +160,7 @@ public class Renderer
 
 	public void DrawFontGlyph(FontGlyph glyph, Vector2 position, Color color, float scale = 1, float rotation = 0)
 	{
+		/*
 		if (_spriteBatch.IsActive)
 			_spriteBatch.Render(this);
 
@@ -167,6 +176,11 @@ public class Renderer
 		// glyph.Texture.Unbind();
 		
 		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
+		*/
+		if (!_textBatch.CanFitNewQuad(glyph.Texture))
+			_textBatch.Render(this);
+
+		_textBatch.AddQuad(new Vector2(position.X, position.Y + (glyph.FontSize - glyph.BearingY) * scale), new Vector2(glyph.SizeX * scale, glyph.SizeY * scale), color, glyph.Texture);
 	}
 
 	public void DrawText(string text, Font font, Vector2 position, Color color, float scale = 1, float rotation = 0)

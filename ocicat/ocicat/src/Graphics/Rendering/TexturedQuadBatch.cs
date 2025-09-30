@@ -16,15 +16,17 @@ public class TexturedQuadBatch
 
     private float[] _verticies;
     private uint[] _indices;
-    private Texture[] _textures;
+    private Texture?[] _textures;
 
     private uint _vertexOffset = 0;
     private uint _indexOffset = 0;
     private uint _indexStride = 0;
 
-    private uint _textureOffset = 1;
+    private uint _textureOffset = 0;
 
-    public TexturedQuadBatch(Renderer renderer, int quadCount)
+    private Shader _shader;
+
+    public TexturedQuadBatch(Renderer renderer, int quadCount, Shader shader)
     {
         _vertexBuffer = VertexBuffer.Create(renderer, quadCount * 4 * 9);
         _vertexBuffer.Layout = new BufferLayout([
@@ -43,7 +45,9 @@ public class TexturedQuadBatch
         _verticies = new float[quadCount * 4 * 9];
         _indices = new uint[quadCount * 6];
 
-        _textures = new Texture[32];
+        _textures = new Texture?[32];
+
+        _shader = shader;
     }
 
 
@@ -55,7 +59,20 @@ public class TexturedQuadBatch
             Matrix4.CreateRotationZ(Single.DegreesToRadians(rotation)) *
             Matrix4.CreateTranslation(position.X + size.X / 2, position.Y + size.Y / 2, 0);
 
-        float textureSlot = FindTextureSlotForTexture(texture);
+        float textureSlot = -1;
+
+        for (uint i = 0; i < _textures.Length; i++)
+        {
+            if (_textures[i] == texture)
+                textureSlot = i;
+        }
+        
+        if (textureSlot == -1)
+        {
+            _textures[_textureOffset] = texture;
+            textureSlot = _textureOffset;
+            _textureOffset++;
+        }
 
         WriteVertex(position, color, new Vector2(0, 1), textureSlot, transform);
         WriteVertex(position + new Vector2(size.X, 0), color, new Vector2(1, 1), textureSlot, transform);
@@ -103,10 +120,10 @@ public class TexturedQuadBatch
             textureSlots[i] = (int)i;
         }
 
-        renderer.Primitives.BatchedQuadShader.Use();
-        renderer.Primitives.BatchedQuadShader.Uniform1iArray("textures[0]", textureSlots);
-        renderer.Primitives.BatchedQuadShader.UniformMat4("projection", renderer.CameraProjection);
-        renderer.Primitives.BatchedQuadShader.UniformMat4("transform", renderer.CameraView);
+        _shader.Use();
+        _shader.Uniform1iArray("textures[0]", textureSlots);
+        _shader.UniformMat4("projection", renderer.CameraProjection);
+        _shader.UniformMat4("transform", renderer.CameraView);
 
         renderer.RenderCommands.DrawIndexed(_vertexArray);
 
@@ -115,50 +132,19 @@ public class TexturedQuadBatch
         _indexStride = 0;
         _textureOffset = 0;
 
-        for (int i = 0; i < _textures.Length; i++)
-            _textures[i] = null;
-
         Array.Clear(_verticies, 0, _verticies.Length);
         Array.Clear(_indices, 0, _indices.Length);
+        Array.Clear(_textures, 0, _textures.Length);
 
         IsActive = false;
     }
 
-    // returns 0 - not found
-    private int FindTextureInBatch(Texture texture)
-    {
-        for (int i = 0; i < _textures.Length; i++)
-        {
-            if (texture == _textures[i])
-                return i;
-            else if (texture == null)
-                return 0;
-        }
-
-        return -1;
-    }
-
-    public uint FindTextureSlotForTexture(Texture texture)
-    {
-        int textureSlot = FindTextureInBatch(texture);
-
-        if (textureSlot == -1)
-        {
-            _textures[_textureOffset] = texture;
-            _textureOffset++;
-
-            return _textureOffset - 1;
-        }
-
-        return (uint)textureSlot;
-    }
-
     public bool CanFitNewQuad(Texture texture)
     {
-        if (_vertexOffset + 4 > _verticies.Length)
+        if (_vertexOffset + 4 * 9 > _verticies.Length)
             return false;
 
-        if (FindTextureInBatch(texture) == -1 && _textures[_textures.Length - 1] != null)
+        if (!_textures.Contains(texture) && _textures[_textures.Length - 1] != null)
             return false;
 
         return true;

@@ -158,6 +158,8 @@ public unsafe class GLFWWindow : Window
 		OpenTK.Graphics.OpenGL.GL.LoadBindings(new GLFWBindingsContext());
 		OpenTK.Graphics.OpenGL4.GL.LoadBindings(new GLFWBindingsContext());
 
+		GLFW.SwapInterval(0);
+
 		_title = title;
 		_width = width;
 		_height = height;

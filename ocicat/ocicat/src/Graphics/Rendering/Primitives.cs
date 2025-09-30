@@ -14,10 +14,10 @@ public class Primitives
 	public Primitives(Renderer renderer)
 	{
 		float[] rectVertices = {
-			0, 0, 0, 0,
-			1, 0, 1, 0,
-			1, 1, 1, 1,
-			0, 1, 0, 1
+			0, 0, 0, 1,
+			1, 0, 1, 1,
+			1, 1, 1, 0,
+			0, 1, 0, 0
 		};
 
 		uint[] rectIndices =
@@ -106,19 +106,21 @@ void main()
 		string fontFragShader = @"#version 450 core
 out vec4 FragColor;
 
-uniform sampler2D textureSampler;
-uniform vec4 color;
+uniform sampler2D textures[32];
 
+in vec4 vColor;
 in vec2 vTexCoords;
+in float vTextureID;
 
 void main()
 {
-	float smpl = texture(textureSampler, vTexCoords).r;
+	int index = int(vTextureID);
+	float smpl = texture(textures[index], vec2(vTexCoords.x, 1 - vTexCoords.y)).r;
 	float sd = smpl - 0.5;
 	float smoothing = fwidth(sd);
 	float alpha = smoothstep(-smoothing, +smoothing, sd);
 
-    FragColor = vec4(1, 1, 1, alpha) * color;
+    FragColor = vec4(1, 1, 1, alpha) * vColor;
 }";
 
 
@@ -161,7 +163,7 @@ void main()
 		UntexturedMeshShader = Shader.Create(renderer, untexturedVertShader, untexturedFragShader);
 		TexturedMeshShader = Shader.Create(renderer, texturedVertShader, texturedFragShader);
 		SpritesheetShader = Shader.Create(renderer, texturedVertShader, spritesheetFragShader);
-		TextShader = Shader.Create(renderer, texturedVertShader, fontFragShader);
+		TextShader = Shader.Create(renderer, batchedQuadVert, fontFragShader);
 		BatchedQuadShader = Shader.Create(renderer, batchedQuadVert, batchedQuadFrag);
 		WhiteTexture = Texture.Create(renderer, Image.GenerateWhitePixel().Data, 1, 1, TextureFilter.Nearest);
 	}
