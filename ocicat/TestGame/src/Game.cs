@@ -37,25 +37,23 @@ public class Game : Application
     {
         Renderer.ClearScreen(Color.Black);
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 10000; i++)
         {
 
             if (_batch)
             {
-                /*
                 Renderer.DrawRectTextured(
-                    new Vector2(_rng.GenerateFloat(0, 800), _rng.GenerateFloat(0, 600)),
+                    new Vector2(_rng.GenerateFloat(-400, 400), _rng.GenerateFloat(-300, 300)),
                     new Vector2(40, 40),
                     _textures[_rng.GenerateInt(0, 2)],
                     Color.White,
                     0
                 );
-                */
             }
             else
             {
                 Renderer.DrawRectTexturedUnbatched(
-                    new Vector2(_rng.GenerateFloat(0, 800), _rng.GenerateFloat(0, 600)),
+                    new Vector2(_rng.GenerateFloat(-400, 400), _rng.GenerateFloat(-300, 300)),
                     new Vector2(40, 40),
                     _textures[_rng.GenerateInt(0, 2)],
                     Color.White,
@@ -64,7 +62,7 @@ public class Game : Application
             } 
         }
 
-        Renderer.DrawText($"{(int) _averageFps} FPS", _font, new Vector2(10, 10), Color.White);
+        Renderer.DrawText($"{(int) _averageFps} FPS", _font, new Vector2(10 - 400, 10 - 300), Color.White);
 
         _rotation += deltaTime * 30;
     }

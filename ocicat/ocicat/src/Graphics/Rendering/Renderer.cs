@@ -135,6 +135,8 @@ public class Renderer
 		if (!_spriteBatch.CanFitNewQuad(Primitives.WhiteTexture))
 			_spriteBatch.Render(this);
 
+
+		position = new Vector2(position.X - size.X / 2, position.Y - size.Y / 2);
 		_spriteBatch.AddQuad(position, size, color, Primitives.WhiteTexture, rotation);
 	}
 	
