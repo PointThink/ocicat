@@ -11,7 +11,9 @@ public class Image
 
 	private Image(byte[] data, int width, int height)
 	{
-
+		Data = data;
+		Width = width;
+		Height = height;
 	}
 
 	public Image(string path)
@@ -54,6 +56,6 @@ public class Image
 
 	public static Image GenerateWhitePixel()
 	{
-		return new Image([0xff, 0xff, 0xff, 0xff], 1, 1);
+		return new Image([(byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff], 1, 1);
 	}
 }

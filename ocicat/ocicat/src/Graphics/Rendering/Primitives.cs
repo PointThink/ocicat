@@ -165,6 +165,8 @@ void main()
 		SpritesheetShader = Shader.Create(renderer, texturedVertShader, spritesheetFragShader);
 		TextShader = Shader.Create(renderer, batchedQuadVert, fontFragShader);
 		BatchedQuadShader = Shader.Create(renderer, batchedQuadVert, batchedQuadFrag);
-		WhiteTexture = Texture.Create(renderer, Image.GenerateWhitePixel().Data, 1, 1, TextureFilter.Nearest);
+
+		Image white = Image.GenerateWhitePixel();
+		WhiteTexture = Texture.Create(renderer, white.Data, white.Width, white.Height, TextureFilter.Nearest);
 	}
 }
