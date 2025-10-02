@@ -42,7 +42,6 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ],
         [ "Properties", "functions_prop.html", null ]
       ] ]
     ] ]
@@ -52,7 +51,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"structocicat_1_1Graphics_1_1Color.html#ae4224e69e5c754dc412919970f205fc2"
+"structocicat_1_1Physics_1_1CollisionInfo.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -64,7 +64,6 @@ var annotated_dup =
         [ "RectCollider", "classocicat_1_1Physics_1_1RectCollider.html", null ]
       ] ],
       [ "Application", "classocicat_1_1Application.html", null ],
-      [ "Game", "classocicat_1_1Game.html", "classocicat_1_1Game" ],
       [ "GameState", "classocicat_1_1GameState.html", null ],
       [ "Logging", "classocicat_1_1Logging.html", null ],
       [ "LogLevelInfo", "structocicat_1_1LogLevelInfo.html", null ],

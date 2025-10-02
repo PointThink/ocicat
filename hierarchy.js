@@ -30,7 +30,6 @@ var hierarchy =
     [ "ocicat.Graphics.Rendering.Framebuffer", "classocicat_1_1Graphics_1_1Rendering_1_1Framebuffer.html", [
       [ "ocicat.Graphics.Rendering.OpenGl.Framebuffer", "classocicat_1_1Graphics_1_1Rendering_1_1OpenGl_1_1Framebuffer.html", null ]
     ] ],
-    [ "ocicat.Game", "classocicat_1_1Game.html", null ],
     [ "ocicat.Input.GamePadState", "structocicat_1_1Input_1_1GamePadState.html", null ],
     [ "ocicat.GameState", "classocicat_1_1GameState.html", null ],
     [ "ocicat.Graphics.Image", "classocicat_1_1Graphics_1_1Image.html", null ],

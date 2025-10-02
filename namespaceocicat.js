@@ -6,7 +6,6 @@ var namespaceocicat =
     [ "Input", "namespaceocicat_1_1Input.html", "namespaceocicat_1_1Input" ],
     [ "Physics", "namespaceocicat_1_1Physics.html", "namespaceocicat_1_1Physics" ],
     [ "Application", "classocicat_1_1Application.html", null ],
-    [ "Game", "classocicat_1_1Game.html", "classocicat_1_1Game" ],
     [ "GameState", "classocicat_1_1GameState.html", null ],
     [ "Logging", "classocicat_1_1Logging.html", null ],
     [ "LogLevelInfo", "structocicat_1_1LogLevelInfo.html", null ],

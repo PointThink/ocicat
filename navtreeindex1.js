@@ -1,15 +1,6 @@
 var NAVTREEINDEX1 =
 {
-"structocicat_1_1Graphics_1_1Color.html#ae4224e69e5c754dc412919970f205fc2":[3,0,0,1,3,1],
-"structocicat_1_1Graphics_1_1Color.html#ae4224e69e5c754dc412919970f205fc2":[4,0,0,1,3,1],
-"structocicat_1_1Hardware_1_1DisplayInfo.html":[3,0,0,2,0],
-"structocicat_1_1Hardware_1_1DisplayInfo.html":[4,0,0,2,0],
-"structocicat_1_1Input_1_1GamePadState.html":[4,0,0,3,2],
-"structocicat_1_1Input_1_1GamePadState.html":[3,0,0,3,2],
-"structocicat_1_1LogLevelInfo.html":[4,0,0,9],
-"structocicat_1_1LogLevelInfo.html":[3,0,0,9],
-"structocicat_1_1Physics_1_1CollisionInfo.html":[4,0,0,4,3],
 "structocicat_1_1Physics_1_1CollisionInfo.html":[3,0,0,4,3],
-"structocicat_1_1Vector2.html":[4,0,0,12],
-"structocicat_1_1Vector2.html":[3,0,0,12]
+"structocicat_1_1Vector2.html":[3,0,0,11],
+"structocicat_1_1Vector2.html":[4,0,0,11]
 };
