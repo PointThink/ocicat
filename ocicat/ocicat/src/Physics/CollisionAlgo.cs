@@ -7,8 +7,8 @@ public class CollisionAlgo
 		// I have no idea what any of this does
 		CollisionInfo collisionInfo = new CollisionInfo();
 
-		Vector2 aCenter = rect1.Position + rect1.Size / new Vector2(2, 2);
-		Vector2 bCenter = rect2.Position + rect2.Size / new Vector2(2, 2);
+		Vector2 aCenter = rect1.Position;
+		Vector2 bCenter = rect2.Position;
 
 		Vector2 n = aCenter - bCenter;
 

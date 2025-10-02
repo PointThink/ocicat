@@ -36,6 +36,11 @@ public struct Vector2
 	{
 		return new Vector2(a.X / b.X, a.Y / b.Y);
 	}
+	
+	public static Vector2 operator *(Vector2 a, float b)
+	{
+		return new Vector2(a.X * b, a.Y * b);
+	}
 
 	public static float GetDistance(Vector2 v1, Vector2 v2)
 	{
@@ -43,7 +48,7 @@ public struct Vector2
 		newVec.X = float.Abs(v1.X - v2.X);
 		newVec.Y = float.Abs(v1.Y - v2.Y);
 
-		return (float) Math.Sqrt(Math.Pow(newVec.X, 2) + Math.Pow(newVec.Y, 2));
+		return (float)Math.Sqrt(Math.Pow(newVec.X, 2) + Math.Pow(newVec.Y, 2));
 	}
 
 	public static float GetDirection(Vector2 v1, Vector2 v2)
