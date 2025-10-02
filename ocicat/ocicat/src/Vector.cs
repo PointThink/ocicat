@@ -42,6 +42,11 @@ public struct Vector2
 		return new Vector2(a.X * b, a.Y * b);
 	}
 
+	public static Vector2 operator /(Vector2 a, float b)
+	{
+		return new Vector2(a.X / b, a.Y / b);
+	}
+
 	public static float GetDistance(Vector2 v1, Vector2 v2)
 	{
 		Vector2 newVec;
