@@ -156,7 +156,8 @@ public class Renderer
 			position.X += size.X;
 			size.X = -size.X;
 		}
-
+		
+		position = new Vector2(position.X - size.X / 2, position.Y - size.Y / 2);
 		_spriteBatch.AddQuad(position, size, tint, texture, rotation);
 	}
 
