@@ -105,7 +105,7 @@ public unsafe class GLFWWindow : Window
 		get
 		{
 			GLFW.GetCursorPos(_window, out double xPos, out double yPos);
-			return new Vector2((float)xPos, (float)yPos);
+			return new Vector2((float)xPos - Width / 2, (float)yPos  - Height / 2);
 		}
 		set => GLFW.SetCursorPos(_window, value.X, value.Y);
 	}
