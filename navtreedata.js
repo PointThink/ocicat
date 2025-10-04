@@ -51,7 +51,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"structocicat_1_1Physics_1_1CollisionInfo.html"
+"structocicat_1_1Input_1_1GamePadState.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -6,6 +6,7 @@ var namespaceocicat_1_1Graphics =
     [ "Color", "structocicat_1_1Graphics_1_1Color.html", "structocicat_1_1Graphics_1_1Color" ],
     [ "Font", "classocicat_1_1Graphics_1_1Font.html", "classocicat_1_1Graphics_1_1Font" ],
     [ "FontGlyph", "classocicat_1_1Graphics_1_1FontGlyph.html", null ],
+    [ "FontGlyphInternal", "classocicat_1_1Graphics_1_1FontGlyphInternal.html", null ],
     [ "GLFWWindow", "classocicat_1_1Graphics_1_1GLFWWindow.html", null ],
     [ "Image", "classocicat_1_1Graphics_1_1Image.html", null ],
     [ "OpenTKWindow", "classocicat_1_1Graphics_1_1OpenTKWindow.html", null ],

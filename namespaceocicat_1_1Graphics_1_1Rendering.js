@@ -11,6 +11,7 @@ var namespaceocicat_1_1Graphics_1_1Rendering =
     [ "Primitives", "classocicat_1_1Graphics_1_1Rendering_1_1Primitives.html", null ],
     [ "RenderCommands", "classocicat_1_1Graphics_1_1Rendering_1_1RenderCommands.html", null ],
     [ "Renderer", "classocicat_1_1Graphics_1_1Rendering_1_1Renderer.html", null ],
+    [ "RenderTarget", "classocicat_1_1Graphics_1_1Rendering_1_1RenderTarget.html", null ],
     [ "Shader", "classocicat_1_1Graphics_1_1Rendering_1_1Shader.html", null ],
     [ "Texture", "classocicat_1_1Graphics_1_1Rendering_1_1Texture.html", null ],
     [ "VertexArray", "classocicat_1_1Graphics_1_1Rendering_1_1VertexArray.html", null ],
