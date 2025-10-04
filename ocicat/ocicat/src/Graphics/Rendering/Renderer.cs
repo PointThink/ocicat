@@ -23,8 +23,46 @@ public class Renderer
 	private TexturedQuadBatch _spriteBatch;
 	private TexturedQuadBatch _textBatch;
 
-	public Matrix4 CameraProjection { get; private set; }
-	public Matrix4 CameraView { get; private set; }
+	private Matrix4 _cameraProjection;
+	private Matrix4 _cameraView;
+
+	private Matrix4 _rtCameraProjection;
+	private Matrix4 _rtCameraView;
+
+	public Matrix4 CameraProjection => RenderTarget != null ? _rtCameraProjection : _cameraProjection;
+	public Matrix4 CameraView  => RenderTarget != null ? _rtCameraView : _cameraView;
+
+	private RenderTarget? _renderTarget = null;
+
+	public RenderTarget? RenderTarget
+	{
+		set
+		{
+			_spriteBatch.Render(this);
+			_textBatch.Render(this);
+
+			if (value == null)
+			{
+				if (_renderTarget != null)
+					_renderTarget.Framebuffer.Unbind();
+
+				RenderCommands.ResizeViewport(Width, Height);
+				_renderTarget = null;
+				return;
+			}
+
+			value.Framebuffer.Bind();
+			RenderCommands.ResizeViewport(value.Width, value.Height);
+
+
+			_rtCameraProjection = value.Camera.CalculateProjection();
+			_rtCameraView = value.Camera.CalculateView();
+
+			_renderTarget = value;
+		}
+
+		get => _renderTarget;
+	}
 
 
 	public Renderer(Window window)
@@ -48,8 +86,8 @@ public class Renderer
 
 	public void BeginScene(Camera camera)
 	{
-		CameraProjection = camera.CalculateProjection();
-		CameraView = camera.CalculateView();
+		_cameraProjection = camera.CalculateProjection();
+		_cameraView = camera.CalculateView();
 	}
 
 	public void EndScene()
@@ -137,7 +175,7 @@ public class Renderer
 
 
 		position = new Vector2(position.X - size.X / 2, position.Y - size.Y / 2);
-		_spriteBatch.AddQuad(position, size, color, Primitives.WhiteTexture, rotation);
+		_spriteBatch.AddQuad(position, size, color, Primitives.WhiteTexture, new Vector2(0, 0), new Vector2(1, 1), rotation);
 	}
 	
 	public void DrawRectTextured(Vector2 position, Vector2 size, Texture texture, Color tint, float rotation = 0, bool flipVertical = false, bool flipHorizontal = false)
@@ -158,32 +196,15 @@ public class Renderer
 		}
 		
 		position = new Vector2(position.X - size.X / 2, position.Y - size.Y / 2);
-		_spriteBatch.AddQuad(position, size, tint, texture, rotation);
+		_spriteBatch.AddQuad(position, size, tint, texture, new Vector2(0, 0), new Vector2(1, 1), rotation);
 	}
 
 	public void DrawFontGlyph(FontGlyph glyph, Vector2 position, Color color, float scale = 1, float rotation = 0)
 	{
-		/*
-		if (_spriteBatch.IsActive)
-			_spriteBatch.Render(this);
-
-		Matrix4 transform = GenTransform(new Vector2(position.X, position.Y + (glyph.FontSize - glyph.BearingY) * scale), new Vector2(glyph.SizeX  * scale, glyph.SizeY * scale), 0);
-		
-		Primitives.TextShader.Use();
-		Primitives.TextShader.UniformMat4("transform", transform);
-		Primitives.TextShader.UniformMat4("projection", CameraProjection);
-		Primitives.TextShader.Uniform4f("color", color.R, color.G, color.B, color.A);
-
-		glyph.Texture.Bind(0);
-		Primitives.TextShader.Uniform1i("textureSampler", 0);
-		// glyph.Texture.Unbind();
-		
-		RenderCommands.DrawIndexed(Primitives.RectangleMesh.VertexArray);
-		*/
 		if (!_textBatch.CanFitNewQuad(glyph.Texture))
 			_textBatch.Render(this);
 
-		_textBatch.AddQuad(new Vector2(position.X, position.Y + (glyph.FontSize - glyph.BearingY) * scale), new Vector2(glyph.SizeX * scale, glyph.SizeY * scale), color, glyph.Texture);
+		_textBatch.AddQuad(new Vector2(position.X, position.Y + (glyph.FontSize - glyph.BearingY) * scale), new Vector2(glyph.SizeX * scale, glyph.SizeY * scale), color, glyph.Texture, glyph.StartUVs, glyph.EndUVs);
 	}
 
 	public void DrawText(string text, Font font, Vector2 position, Color color, float scale = 1, float rotation = 0)

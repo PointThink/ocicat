@@ -51,7 +51,7 @@ public class TexturedQuadBatch
     }
 
 
-    public void AddQuad(Vector2 position, Vector2 size, Color color, Texture texture, float rotation = 0)
+    public void AddQuad(Vector2 position, Vector2 size, Color color, Texture texture, Vector2 startUVs, Vector2 endUVs, float rotation = 0)
     {
         IsActive = true;
 
@@ -74,10 +74,10 @@ public class TexturedQuadBatch
             _textureOffset++;
         }
 
-        WriteVertex(position, color, new Vector2(0, 1), textureSlot, transform);
-        WriteVertex(position + new Vector2(size.X, 0), color, new Vector2(1, 1), textureSlot, transform);
-        WriteVertex(position + new Vector2(size.X, size.Y), color, new Vector2(1, 0), textureSlot, transform);
-        WriteVertex(position + new Vector2(0, size.Y), color, new Vector2(0, 0), textureSlot, transform);
+        WriteVertex(position, color, new Vector2(startUVs.X, endUVs.Y), textureSlot, transform);
+        WriteVertex(position + new Vector2(size.X, 0), color, endUVs, textureSlot, transform);
+        WriteVertex(position + new Vector2(size.X, size.Y), color, new Vector2(endUVs.X, startUVs.Y), textureSlot, transform);
+        WriteVertex(position + new Vector2(0, size.Y), color, startUVs, textureSlot, transform);
 
         _indices[_indexOffset] = _indexStride;
         _indices[_indexOffset + 1] = _indexStride + 1;
